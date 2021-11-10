@@ -19,6 +19,30 @@ async function seed() {
     User.create({ username: 'murphy', password: '123' }),
   ]);
 
+  //Creating products
+  const Product = await Promise.all([
+    Product.create({ title: 'test1', price: 10 }),
+    Product.create({ title: 'test2', price: 10 }),
+    Product.create({ title: 'test3', price: 10 }),
+    Product.create({ title: 'test4', price: 10 }),
+    Product.create({ title: 'test5', price: 10 }),
+    Product.create({ title: 'test6', price: 10 }),
+    Product.create({ title: 'test7', price: 10 }),
+    Product.create({ title: 'test8', price: 10 }),
+    Product.create({ title: 'test9', price: 10 }),
+    Product.create({ title: 'test10', price: 10 }),
+    Product.create({ title: 'test11', price: 10 }),
+    Product.create({ title: 'test12', price: 10 }),
+    Product.create({ title: 'test13', price: 10 }),
+    Product.create({ title: 'test14', price: 10 }),
+    Product.create({ title: 'test15', price: 10 }),
+    Product.create({ title: 'test16', price: 10 }),
+    Product.create({ title: 'test17', price: 10 }),
+    Product.create({ title: 'test18', price: 10 }),
+    Product.create({ title: 'test19', price: 10 }),
+    Product.create({ title: 'test20', price: 10 }),
+  ]);
+
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
   return {
