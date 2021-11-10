@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { fetchProducts } from '../store/products';
 import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
-import { Paper, Grid } from '@mui/material';
+import { Paper, Grid, Button } from '@mui/material';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -25,13 +25,22 @@ export class AllProducts extends React.Component {
           {products.length > 0 ? (
             products.map((product) => {
               return (
-                <div key={product.id}>
+                <div key={product.id} id="products-view">
                   <Item>
-                    <Link to={`/products/${product.id}`}>
+                    <Link
+                      to={`/products/${product.id}`}
+                      style={{ textDecoration: 'none', color: 'black' }}
+                    >
                       <img src={product.imageURL} />
                       <h3>Title: {product.title}</h3>
                     </Link>
                     <h4>Price: ${product.price}</h4>
+                    <Button
+                      // onClick={() => } // add logic to dispatch thunk creator to add item to cart
+                      variant="contained"
+                    >
+                      Add To Cart
+                    </Button>
                   </Item>
                 </div>
               );
