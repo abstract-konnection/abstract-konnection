@@ -13,7 +13,7 @@ const Item = styled(Paper)(({ theme }) => ({
   margin: 10,
 }));
 
-export class AllProjects extends React.Component {
+export class AllProducts extends React.Component {
   componentDidMount() {
     this.props.fetchProducts();
   }
@@ -28,10 +28,10 @@ export class AllProjects extends React.Component {
                 <div key={product.id}>
                   <Item>
                     <Link to={`/products/${product.id}`}>
-                      <img src={product.imageUrl} />
+                      <img src={product.imageURL} />
                       <h3>Title: {product.title}</h3>
                     </Link>
-                    <h4>Price: {product.price}</h4>
+                    <h4>Price: ${product.price}</h4>
                   </Item>
                 </div>
               );
