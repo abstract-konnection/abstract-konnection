@@ -20,7 +20,7 @@ async function seed() {
   ]);
 
   //Creating products
-  const Product = await Promise.all([
+  const product = await Promise.all([
     Product.create({ title: 'test1', price: 10 }),
     Product.create({ title: 'test2', price: 10 }),
     Product.create({ title: 'test3', price: 10 }),
