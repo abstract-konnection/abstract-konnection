@@ -7,6 +7,7 @@ class SingleProduct extends Component {
 		super();
 		this.state = {
 			qty: 1,
+			quantity: 0,
 		};
 		this.addToCart = this.addToCart.bind(this);
 	}
@@ -19,8 +20,11 @@ class SingleProduct extends Component {
 		}
 	}
 
-	addToCart() {
+	async addToCart() {
 		const id = this.props.match.params.id;
+		this.setState({
+			quantity: this.props.product.quantity - this.state.qty,
+		});
 		this.props.history.push(`/cart/${id}?qty=${this.state.qty}`);
 	}
 
