@@ -14,6 +14,7 @@ const requireToken = async (req, res, next) => {
   }
 };
 
+//isAdmin could be used later on for editing products on page once that route is set up!
 const isAdmin = (req, res, next) => {
   if (!req.user.isAdmin) {
     res.status(403).send("You aren't authorized for this dawg");
