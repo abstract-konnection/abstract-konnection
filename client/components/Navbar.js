@@ -24,22 +24,22 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
 						<Link to="/">Home</Link>
 						<Link to="/cart">
 							Cart
-							{/* {cartItems.length > 1 ? (
+							{cartItems.length > 1 ? (
 								<div>
 									<span> {cartItems.length} Items In Cart</span>
 								</div>
 							) : cartItems.length === 0 ? (
-                <div>
-								<span>No Items In Cart</span>
-               </div>
+								<div>
+									<span>No Items In Cart</span>
+								</div>
 							) : (
 								cartItems.length ===
 								1(
 									<div>
 										<span>1 Item In Cart</span>
 									</div>
-                )
-							)} */}
+								)
+							)}
 						</Link>
 						<Link to="/login">Login</Link>
 						<Link to="/signup">Sign Up</Link>
