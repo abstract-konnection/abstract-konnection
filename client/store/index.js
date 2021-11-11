@@ -5,11 +5,19 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import auth from './auth';
 import products from './products';
 import productReducer from './product';
+import { cartReducer } from './cart';
+
+const initialState = {
+	cart: {
+		cartItems: localStorage.getItem('cartItem') ? JSON.parse(localStorage.getItem('cartItem')): [],
+	},
+};
 
 const reducer = combineReducers({
 	auth,
 	allProducts: products,
 	product: productReducer,
+	cartItem: cartReducer,
 });
 
 const middleware = composeWithDevTools(

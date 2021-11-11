@@ -3,8 +3,11 @@ import { connect } from 'react-redux';
 import { setProducts } from '../store/product';
 
 class SingleProduct extends Component {
-	constructor() {
+	constructor(props) {
 		super();
+		this.state = {
+			qty: 1,
+		};
 		this.addToCart = this.addToCart.bind(this);
 	}
 	async componentDidMount() {
@@ -17,7 +20,8 @@ class SingleProduct extends Component {
 	}
 
 	addToCart() {
-		console.log('not yet');
+		const id = this.props.match.params.id;
+		this.props.history.push(`/cart/${id}?qty=${this.state.qty}`);
 	}
 
 	render() {
@@ -29,9 +33,40 @@ class SingleProduct extends Component {
 					<h1>{product.title}</h1>
 					<p>{product.description}</p>
 					<h3>${product.price}</h3>
-					<button type="button" name="Add to Cart" onClick={this.addToCart}>
-						Add to Cart
-					</button>
+					<div>
+						<div>Status:</div>
+						<div>
+							{product.quantity > 0 ? (
+								<span>In Stock</span>
+							) : (
+								<span>Unavailable</span>
+							)}
+						</div>
+						{product.quantity > 0 && (
+							<>
+								<div>
+									<div> Qty</div>
+									<div>
+										<select
+											value={this.state.qty}
+											onChange={(e) => this.setState({ qty: e.target.value })}>
+											{[...Array(product.quantity).keys()].map((e) => (
+												<option key={e + 1} value={e + 1}>
+													{e + 1}
+												</option>
+											))}
+										</select>
+									</div>
+								</div>
+								<button
+									type="button"
+									name="Add to Cart"
+									onClick={this.addToCart}>
+									Add to Cart
+								</button>
+							</>
+						)}
+					</div>
 				</main>
 			</div>
 		);
