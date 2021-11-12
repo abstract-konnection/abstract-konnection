@@ -5,6 +5,9 @@ const Order = db.define('order', {
   totalPrice: {
     type: Sequelize.INTEGER,
     allowNull: false,
+    validate: {
+      min: 0,
+    },
   },
   status: {
     type: Sequelize.ENUM('in-cart', 'pending', 'processed'),
