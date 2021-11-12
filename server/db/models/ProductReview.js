@@ -3,7 +3,7 @@ const db = require('../db');
 
 const today = new Date();
 
-const ProductReview = db.define('product-review', {
+const ProductReview = db.define('product_review', {
   title: {
     type: Sequelize.STRING,
   },
