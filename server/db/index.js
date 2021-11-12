@@ -7,10 +7,11 @@ const Product = require('./models/Product');
 const Review = require('./models/Review');
 const Address = require('./models/Address');
 const CreditCard = require('./models/CreditCard');
+const Order = require('./models/Order');
 
 //associations could go here!
 
-module.exports = {
+
 	db,
 	models: {
 		User,
@@ -18,5 +19,6 @@ module.exports = {
 		Review,
 		Address,
 		CreditCard,
+    Order,
 	},
 };
