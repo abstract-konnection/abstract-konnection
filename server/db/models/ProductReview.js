@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
+const today = new Date();
+
 const ProductReview = db.define('product-review', {
   title: {
     type: Sequelize.STRING,
@@ -10,6 +12,12 @@ const ProductReview = db.define('product-review', {
   },
   publishedAt: {
     type: Sequelize.DATEONLY,
+    defaultValue:
+      today.getFullYear() +
+      '-' +
+      (today.getMonth() + 1) +
+      '-' +
+      today.getDate(),
   },
 });
 
