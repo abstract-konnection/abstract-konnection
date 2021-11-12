@@ -14,6 +14,7 @@ const Product = db.define('product', {
     allowNull: false,
     validate: {
       notEmpty: true,
+      min: 0,
     },
   },
   description: {
@@ -23,6 +24,9 @@ const Product = db.define('product', {
   quantity: {
     type: Sequelize.INTEGER,
     defaultValue: 2,
+    validate: {
+      min: 0,
+    },
   },
   imageURL: {
     type: Sequelize.TEXT,
