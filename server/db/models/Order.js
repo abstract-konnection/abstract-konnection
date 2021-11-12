@@ -10,8 +10,8 @@ const Order = db.define('order', {
     },
   },
   status: {
-    type: Sequelize.ENUM('in-cart', 'processed'),
-    defaultValue: 'in-cart',
+    type: Sequelize.ENUM('open', 'close'),
+    defaultValue: 'open',
   },
   email: {
     type: Sequelize.STRING,
