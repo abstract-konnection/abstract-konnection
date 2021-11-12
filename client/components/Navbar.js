@@ -26,17 +26,17 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
 							Cart
 							{cartItems.length > 1 ? (
 								<div>
-									<span> {cartItems.length} Items In Cart</span>
+									<span> {cartItems.length} Paintings In Cart</span>
 								</div>
 							) : cartItems.length === 0 ? (
 								<div>
-									<span>No Items In Cart</span>
+									<span>No Paintings In Cart</span>
 								</div>
 							) : (
 								cartItems.length ===
 								1(
 									<div>
-										<span>1 Item In Cart</span>
+										<span>1 Painting In Cart</span>
 									</div>
 								)
 							)}
