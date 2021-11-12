@@ -20,5 +20,5 @@ const Order = require('./models/Order');
 		Address,
 		CreditCard,
     Order,
-	},
+	}
 };
