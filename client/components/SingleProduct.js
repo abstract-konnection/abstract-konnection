@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setProducts } from '../store/product';
-
+import { addCartItems } from '../store/cart';
 class SingleProduct extends Component {
 	constructor(props) {
 		super();
 		this.state = {
 			qty: 1,
-			quantity: 0,
+			quantity: 2,
 		};
 		this.addToCart = this.addToCart.bind(this);
 	}
@@ -21,11 +21,14 @@ class SingleProduct extends Component {
 	}
 
 	async addToCart() {
-		const id = this.props.match.params.id;
-		this.setState({
-			quantity: this.props.product.quantity - this.state.qty,
-		});
-		this.props.history.push(`/cart/${id}?qty=${this.state.qty}`);
+		try {
+			const id = this.props.match.params.id;
+			const qty = this.state.qty;
+			await this.props.addCart(id, qty);
+			// this.props.history.push(`/cart/${id}?qty=${this.state.qty}`);
+		} catch (error) {
+			console.log('addCart', error);
+		}
 	}
 
 	render() {
@@ -83,6 +86,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 	loadSingleProduct: (id) => dispatch(setProducts(id)),
+	addCart: (id, qty) => dispatch(addCartItems(id, qty)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct);
