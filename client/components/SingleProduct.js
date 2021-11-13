@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { setProducts } from '../store/product';
 import { styled } from '@mui/material/styles';
 import { Paper, Grid, Button } from '@mui/material';
+import AdminUpdateProduct from './AdminUpdateProduct';
 
 const Item = styled(Paper)(({ theme }) => ({
 	...theme.typography.body,
@@ -47,6 +48,7 @@ class SingleProduct extends Component {
 						</Item>
 					</main>
 				</div>
+				<AdminUpdateProduct />
 			</Grid>
 		);
 	}
