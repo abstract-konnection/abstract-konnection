@@ -15,35 +15,193 @@ async function seed() {
 
   // Creating Users
   const users = await Promise.all([
-    User.create({ username: 'cody', password: '123' }),
-    User.create({ username: 'murphy', password: '123' }),
+    User.create({
+      username: 'cody',
+      password: '123',
+      email: 'cody@cody.com',
+      firstName: 'Cody',
+      lastName: 'Smith',
+      admin: false,
+    }),
+    User.create({
+      username: 'murphy',
+      password: '123',
+      email: 'murphy@murphy.com',
+      firstName: 'Murphy',
+      lastName: 'Smith',
+      admin: true,
+    }),
+    User.create({
+      username: 'weston',
+      password: '123',
+      email: 'weston@weston.com',
+      firstName: 'Weston',
+      lastName: 'Kai',
+      admin: false,
+    }),
+    User.create({
+      username: 'grace',
+      password: '123',
+      email: 'grace@grace.com',
+      firstName: 'Grace',
+      lastName: 'Shopper',
+      admin: true,
+    }),
+    User.create({
+      username: 'tanner',
+      password: '123',
+      email: 'tanner@tanner.com',
+      firstName: 'Tanner',
+      lastName: 'Goods',
+      admin: false,
+    }),
   ]);
 
   //Creating products
   const product = await Promise.all([
-    Product.create({ title: 'test1', price: 10 }),
-    Product.create({ title: 'test2', price: 10 }),
-    Product.create({ title: 'test3', price: 10 }),
-    Product.create({ title: 'test4', price: 10 }),
-    Product.create({ title: 'test5', price: 10 }),
-    Product.create({ title: 'test6', price: 10 }),
-    Product.create({ title: 'test7', price: 10 }),
-    Product.create({ title: 'test8', price: 10 }),
-    Product.create({ title: 'test9', price: 10 }),
-    Product.create({ title: 'test10', price: 10 }),
-    Product.create({ title: 'test11', price: 10 }),
-    Product.create({ title: 'test12', price: 10 }),
-    Product.create({ title: 'test13', price: 10 }),
-    Product.create({ title: 'test14', price: 10 }),
-    Product.create({ title: 'test15', price: 10 }),
-    Product.create({ title: 'test16', price: 10 }),
-    Product.create({ title: 'test17', price: 10 }),
-    Product.create({ title: 'test18', price: 10 }),
-    Product.create({ title: 'test19', price: 10 }),
-    Product.create({ title: 'test20', price: 10 }),
+    Product.create({
+      title: 'Helio',
+      description: 'Sam Francis',
+      price: 10,
+      imageURL:
+        'https://d2h3d42vkj4fuu.cloudfront.net/f5e1593211bd6acf1ea5768bd4a7bfad',
+    }),
+    Product.create({
+      title: 'A Tree in Naples',
+      description: 'Willem De Kooning',
+      price: 10,
+      imageURL:
+        'https://d2h3d42vkj4fuu.cloudfront.net/3c6381be20d627424dbd220ff617562c',
+    }),
+    Product.create({
+      title: 'Untitled',
+      description: 'Toddler',
+      price: 10,
+      imageURL:
+        'https://d2h3d42vkj4fuu.cloudfront.net/429090dbb913f0a5cc41cf3ec0a0d162',
+    }),
+    Product.create({
+      title: 'Untitled',
+      description: 'Toddler',
+      price: 10,
+      imageURL:
+        'https://d2h3d42vkj4fuu.cloudfront.net/d0465b9555844595fcede97a0ce8bd2a',
+    }),
+    Product.create({
+      title: 'Woods',
+      description: 'Gerhard Richter',
+      price: 10,
+      imageURL:
+        'https://d2h3d42vkj4fuu.cloudfront.net/3518f6e39fbef2b9193854d70e821606',
+    }),
+    Product.create({
+      title: 'Untitled',
+      description: 'Toddler',
+      price: 10,
+      imageURL:
+        'https://d2h3d42vkj4fuu.cloudfront.net/e8d9a9da30f988beb74a37baf2fef67f',
+    }),
+    Product.create({
+      title: 'Composition',
+      description: 'Willem de Kooning',
+      price: 10,
+      imageURL:
+        'https://d2h3d42vkj4fuu.cloudfront.net/d38c51f59de752d61c41647562ecd46b',
+    }),
+    Product.create({
+      title: 'Untitled',
+      description: 'Toddler',
+      price: 10,
+      imageURL:
+        'https://d2h3d42vkj4fuu.cloudfront.net/f4da06e6c9bbee001df0067353668d44',
+    }),
+    Product.create({
+      title: 'Ferragosto IV',
+      description: 'Cy Twombly',
+      price: 10,
+      imageURL:
+        'https://d2h3d42vkj4fuu.cloudfront.net/1d8ce2a9fbe31d57c8745e843992f99b',
+    }),
+    Product.create({
+      title: 'Untitled',
+      description: 'Toddler',
+      price: 10,
+      imageURL:
+        'https://d2h3d42vkj4fuu.cloudfront.net/fd967d2c84310aca4f88f6730887f570',
+    }),
+    Product.create({
+      title: 'Untitled',
+      description: 'Toddler',
+      price: 10,
+      imageURL:
+        'https://d2h3d42vkj4fuu.cloudfront.net/a6e5119d29d7c26fc7c3c323328ed80b',
+    }),
+    Product.create({
+      title: 'Fifty Days at Iliam. Ilians in Battle',
+      description: 'Cy Twombly',
+      price: 10,
+      imageURL:
+        'https://d2h3d42vkj4fuu.cloudfront.net/7cd5e95ba9d5ad6fe23e216b74b87d83',
+    }),
+    Product.create({
+      title: 'Composition bleue, taches rouge et jaune',
+      description: 'Olivier Debre',
+      price: 10,
+      imageURL:
+        'https://d2h3d42vkj4fuu.cloudfront.net/09c2a1f9ba8a1f1d18bd15d916f1fc72',
+    }),
+    Product.create({
+      title: 'Untitled',
+      description: 'Toddler',
+      price: 10,
+      imageURL:
+        'https://d2h3d42vkj4fuu.cloudfront.net/dfc25c43c9402f6f92fcfa45089d17fc',
+    }),
+    Product.create({
+      title: 'Untitled',
+      description: 'Toddler',
+      price: 10,
+      imageURL:
+        'https://d2h3d42vkj4fuu.cloudfront.net/f6a463410d89e985c5ff0aed7d82ddc8',
+    }),
+    Product.create({
+      title: 'Untitled',
+      description: 'Toddler',
+      price: 10,
+      imageURL:
+        'https://d2h3d42vkj4fuu.cloudfront.net/1b819f94a7c037bf861d2e3463e9f51e',
+    }),
+    Product.create({
+      title: 'Untitled',
+      description: 'Cy Twombly',
+      price: 10,
+      imageURL:
+        'https://d2h3d42vkj4fuu.cloudfront.net/c626a0dd73af77ca520b178b3a8fcc98',
+    }),
+    Product.create({
+      title: 'Untitled XX',
+      description: 'Willem de Kooning',
+      price: 10,
+      imageURL:
+        'https://d2h3d42vkj4fuu.cloudfront.net/9e40152d7e380891b12dbed8d2424e92',
+    }),
+    Product.create({
+      title: 'Laburnum',
+      description: 'Hans Hoffman',
+      price: 10,
+      imageURL:
+        'https://d2h3d42vkj4fuu.cloudfront.net/abfabde1be533babd2c8f7d9586eaca9',
+    }),
+    Product.create({
+      title: 'Coffee Thyme',
+      description: 'Sam Gilliam',
+      price: 10,
+      imageURL:
+        'https://d2h3d42vkj4fuu.cloudfront.net/f5e1593211bd6acf1ea5768bd4a7bfad',
+    }),
   ]);
 
-  console.log(`seeded ${users.length} users`);
+  console.log(`seeded ${users.length} users and ${product.length} products`);
   console.log(`seeded successfully`);
   return {
     users: {
