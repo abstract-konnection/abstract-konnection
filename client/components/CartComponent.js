@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCartItems, removeCartItems } from '../store/cart';
 import { Link } from 'react-router-dom';
-import Typography from '@mui/material/Typography';
-import Toolbar from '@mui/material/Toolbar';
 
 export default function Cart(props) {
   const id = props.match.params.id;
@@ -28,11 +26,6 @@ export default function Cart(props) {
   };
   return (
     <div>
-      <Toolbar>
-        <Typography variant="h6" color="inherit" noWrap>
-          Abstract Konnection
-        </Typography>
-      </Toolbar>
       <div>
         <h1>Your Cart</h1>
         {cartItems.length === 0 ? (
