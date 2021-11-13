@@ -10,11 +10,11 @@ export default function Cart(props) {
 	const cart = useSelector((state) => state.cartItem);
 	const { cartItems } = cart;
 	const dispatch = useDispatch();
-	useEffect(() => {
-		if (id) {
-			dispatch(addCartItems(id, qty));
-		}
-	}, [dispatch, id, qty]);
+	// useEffect(() => {
+	// 	if (id) {
+	// 		dispatch(addCartItems(id, qty));
+	// 	}
+	// }, [dispatch, id, qty]);
 
 	const removeFromCart = (id) => {
 		console.log('remove not yet implemented');

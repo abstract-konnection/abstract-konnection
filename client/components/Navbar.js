@@ -24,7 +24,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
 						<Link to="/">Home</Link>
 						<Link to="/cart">
 							Cart
-							{/* {cartItems.length > 1 ? (
+							{cartItems.length > 1 ? (
 								<div>
 									<span> {cartItems.length} Paintings In Cart</span>
 								</div>
@@ -39,7 +39,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
 										<span>1 Painting In Cart</span>
 									</div>
 								)
-							)} */}
+							)}
 						</Link>
 						<Link to="/login">Login</Link>
 						<Link to="/signup">Sign Up</Link>
