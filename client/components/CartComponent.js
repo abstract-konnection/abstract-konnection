@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addCartItems } from '../store/cart';
+import { addCartItems, removeCartItems } from '../store/cart';
 import { Link } from 'react-router-dom';
+
 export default function Cart(props) {
   const id = props.match.params.id;
   const qty = props.location.search
@@ -17,7 +18,7 @@ export default function Cart(props) {
   // }, [dispatch, id, qty]);
 
   const removeFromCart = (id) => {
-    console.log('remove not yet implemented');
+    dispatch(removeCartItems(id));
   };
 
   const checkOutItems = () => {
