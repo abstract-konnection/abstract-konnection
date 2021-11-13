@@ -39,11 +39,6 @@ export class AllProducts extends React.Component {
 		return (
 			<div>
 				<ThemeProvider theme={theme}>
-					<Toolbar>
-						<Typography variant="h6" color="inherit" noWrap>
-							Abstract Konnection
-						</Typography>
-					</Toolbar>
 					<Grid
 						container
 						spacing={0}
