@@ -5,7 +5,6 @@ const {
 module.exports = router;
 const { requireToken, isAdmin } = require('./gatekeeping');
 
-//curently no isAdmin on User model so THIS WILL NOT WORK
 router.get('/', requireToken, isAdmin, async (req, res, next) => {
   try {
     const users = await User.findAll({
