@@ -31,7 +31,7 @@ const removeCartItem = (product) => {
       imageURL: product.imageURL,
       price: product.price,
       quantity: product.quantity,
-      productId: product.id,
+      product: product.id,
     },
   };
 };
@@ -91,8 +91,12 @@ export const cartReducer = (state = initialState, action) => {
       }
     case REMOVE_CART_ITEM:
       const product = action.payload;
-      console.log('i am the state cart items', state.cartItems);
-    // return state.cartItems.filter((item) => item.id !== product.productId);
+      return {
+        ...state,
+        cartItems: [
+          ...state.cartItems.filter((item) => item.product !== product.product),
+        ],
+      };
 
     default:
       return state;

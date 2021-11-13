@@ -8,7 +8,6 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
   const { cartItems } = cartItem;
   return (
     <div>
-      <h1>FS-App-Template</h1>
       <nav>
         {isLoggedIn ? (
           <div>
