@@ -94,6 +94,7 @@ import PaymentForm from './PaymentForm';
 import Review from './Review';
 import { saveAddress } from '../store/checkout';
 import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 
 function Copyright() {
 	return (
@@ -129,7 +130,6 @@ export default function Checkout() {
 	// 	//if not logged in user redirect to log in screen else they can view the Checkout screen
 	// 	//if there are no items in cart redirect to all products or cart
 	const [activeStep, setActiveStep] = React.useState(0);
-	const dispatch = useDispatch();
 
 	const handleNext = (event) => {
 		setActiveStep(activeStep + 1);

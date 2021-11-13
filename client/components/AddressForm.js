@@ -8,7 +8,7 @@ import { saveAddress } from '../store/checkout';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-export default function AddressForm() {
+export default function AddressForm(props) {
 	const [name, setName] = useState('');
 	const [address, setAddress] = useState('');
 	const [city, setCity] = useState('');
