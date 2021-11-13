@@ -6,22 +6,26 @@ import auth from './auth';
 import products from './products';
 import productReducer from './product';
 import { cartReducer } from './cart';
+import checkOutReducer from './checkout';
 
 const initialState = {
-	cart: {
-		cartItems: localStorage.getItem('cartItem') ? JSON.parse(localStorage.getItem('cartItem')): [],
-	},
+  cart: {
+    cartItems: localStorage.getItem('cartItem')
+      ? JSON.parse(localStorage.getItem('cartItem'))
+      : [],
+  },
 };
 
 const reducer = combineReducers({
-	auth,
-	allProducts: products,
-	product: productReducer,
-	cartItem: cartReducer,
+  auth,
+  allProducts: products,
+  product: productReducer,
+  cartItem: cartReducer,
+  checkout: checkOutReducer,
 });
 
 const middleware = composeWithDevTools(
-	applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
+  applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );
 const store = createStore(reducer, middleware);
 
