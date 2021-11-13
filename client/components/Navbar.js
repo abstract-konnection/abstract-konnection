@@ -17,6 +17,25 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
 						<a href="#" onClick={handleClick}>
 							Logout
 						</a>
+						<Link to="/cart">
+							Cart
+							{cartItems.length > 1 ? (
+								<div>
+									<span> {cartItems.length} Paintings In Cart</span>
+								</div>
+							) : cartItems.length === 0 ? (
+								<div>
+									<span>No Paintings In Cart</span>
+								</div>
+							) : (
+								cartItems.length ===
+								1(
+									<div>
+										<span>1 Painting In Cart</span>
+									</div>
+								)
+							)}
+						</Link>
 					</div>
 				) : (
 					<div>
