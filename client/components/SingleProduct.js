@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setProducts } from '../store/product';
+import { styled } from '@mui/material/styles';
+import { Paper, Grid, Button } from '@mui/material';
+
+const Item = styled(Paper)(({ theme }) => ({
+	...theme.typography.body,
+	padding: theme.spacing(7),
+	textAlign: 'center',
+	color: theme.palette.text.primary,
+	margin: 50,
+}));
 
 class SingleProduct extends Component {
 	constructor() {
@@ -23,17 +33,21 @@ class SingleProduct extends Component {
 	render() {
 		const product = this.props.product || {};
 		return (
-			<div>
-				<main>
-					<img src={product.imageURL} />
-					<h1>{product.title}</h1>
-					<p>{product.description}</p>
-					<h3>${product.price}</h3>
-					<button type="button" name="Add to Cart" onClick={this.addToCart}>
-						Add to Cart
-					</button>
-				</main>
-			</div>
+			<Grid container spacing={0} alignItems="center" justifyContent="center">
+				<div>
+					<main>
+						<Item>
+							<img src={product.imageURL} />
+							<h1>{product.title}</h1>
+							<p>{product.description}</p>
+							<h3>${product.price}</h3>
+							<Button variant="contained" size="large" onClick={this.addToCart}>
+								Add to Cart
+							</Button>
+						</Item>
+					</main>
+				</div>
+			</Grid>
 		);
 	}
 }

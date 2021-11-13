@@ -24,6 +24,7 @@
     "@emotion/styled": "^11.3.0",
     "@mui/material": "^5.1.0",
     "@mui/styles": "^5.1.0",
+    "@paypal/react-paypal-js": "^7.4.2",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.0",
     "compression": "^1.7.3",
