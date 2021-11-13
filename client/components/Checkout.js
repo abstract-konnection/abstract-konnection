@@ -23,7 +23,10 @@ function Copyright() {
 	return (
 		<Typography variant="body2" color="text.secondary" align="center">
 			{'Copyright © '}
-			<Link color="inherit" href="https://abstract-konnection.herokuapp.com/">
+			<Link
+				color="inherit"
+				href="https://abstract-konnection.herokuapp.com/"
+				target="_blank">
 				Abstract Konnection
 			</Link>{' '}
 			{new Date().getFullYear()}
