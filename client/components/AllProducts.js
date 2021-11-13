@@ -5,13 +5,13 @@ import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import { Paper, Grid, Button } from '@mui/material';
 
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-  margin: 10,
-}));
+// const Item = styled(Paper)(({ theme }) => ({
+//   ...theme.typography.body2,
+//   padding: theme.spacing(1),
+//   textAlign: 'center',
+//   color: theme.palette.text.secondary,
+//   margin: 10,
+// }));
 
 export class AllProducts extends React.Component {
   componentDidMount() {
@@ -26,22 +26,22 @@ export class AllProducts extends React.Component {
             products.map((product) => {
               return (
                 <div key={product.id} id="products-view">
-                  <Item>
-                    <Link
-                      to={`/products/${product.id}`}
-                      style={{ textDecoration: 'none', color: 'black' }}
-                    >
-                      <img src={product.imageURL} />
-                      <h3>Title: {product.title}</h3>
-                    </Link>
-                    <h4>Price: ${product.price}</h4>
-                    <Button
+                  {/* <Item> */}
+                  <Link
+                    to={`/products/${product.id}`}
+                    style={{ textDecoration: 'none', color: 'black' }}
+                  >
+                    <img src={product.imageURL} />
+                    {/* <h3>Title: {product.title}</h3> */}
+                  </Link>
+                  {/* <h4>Price: ${product.price}</h4> */}
+                  {/* <Button
                       // onClick={() => } // add logic to dispatch thunk creator to add item to cart
                       variant="contained"
                     >
                       Add To Cart
-                    </Button>
-                  </Item>
+                    </Button> */}
+                  {/* </Item> */}
                 </div>
               );
             })
