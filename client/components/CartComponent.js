@@ -9,7 +9,6 @@ export default function Cart(props) {
     : 1;
   const cart = useSelector((state) => state.cartItem);
   const { cartItems } = cart;
-  console.log('i am the cartItems', cartItems);
   const dispatch = useDispatch();
   // useEffect(() => {
   // 	if (id) {
