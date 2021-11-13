@@ -4,6 +4,9 @@ import { fetchProducts } from '../store/products';
 import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import { Paper, Grid, Button } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
+import Toolbar from '@mui/material/Toolbar';
 
 // const Item = styled(Paper)(({ theme }) => ({
 //   ...theme.typography.body2,
@@ -13,6 +16,19 @@ import { Paper, Grid, Button } from '@mui/material';
 //   margin: 10,
 // }));
 
+function Copyright() {
+  return (
+    <Typography variant="body2" color="text.secondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="https://abstract-konnection.herokuapp.com/">
+        Abstract Konnection
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
+const theme = createTheme();
 export class AllProducts extends React.Component {
   componentDidMount() {
     this.props.fetchProducts();
@@ -21,34 +37,47 @@ export class AllProducts extends React.Component {
     const products = this.props.allProducts || [];
     return (
       <div>
-        <Grid container spacing={0} alignItems="center" justifyContent="center">
-          {products.length > 0 ? (
-            products.map((product) => {
-              return (
-                <div key={product.id} id="products-view">
-                  {/* <Item> */}
-                  <Link
-                    to={`/products/${product.id}`}
-                    style={{ textDecoration: 'none', color: 'black' }}
-                  >
-                    <img src={product.imageURL} />
-                    {/* <h3>Title: {product.title}</h3> */}
-                  </Link>
-                  {/* <h4>Price: ${product.price}</h4> */}
-                  {/* <Button
+        <ThemeProvider theme={theme}>
+          <Toolbar>
+            <Typography variant="h6" color="inherit" noWrap>
+              Abstract Konnection
+            </Typography>
+          </Toolbar>
+          <Grid
+            container
+            spacing={0}
+            alignItems="center"
+            justifyContent="center"
+          >
+            {products.length > 0 ? (
+              products.map((product) => {
+                return (
+                  <div key={product.id} id="products-view">
+                    {/* <Item> */}
+                    <Link
+                      to={`/products/${product.id}`}
+                      style={{ textDecoration: 'none', color: 'black' }}
+                    >
+                      <img src={product.imageURL} />
+                      {/* <h3>Title: {product.title}</h3> */}
+                    </Link>
+                    {/* <h4>Price: ${product.price}</h4> */}
+                    {/* <Button
                       // onClick={() => } // add logic to dispatch thunk creator to add item to cart
                       variant="contained"
                     >
                       Add To Cart
                     </Button> */}
-                  {/* </Item> */}
-                </div>
-              );
-            })
-          ) : (
-            <h3>No Products currently exist</h3>
-          )}
-        </Grid>
+                    {/* </Item> */}
+                  </div>
+                );
+              })
+            ) : (
+              <h3>No Products currently exist</h3>
+            )}
+          </Grid>
+          <Copyright />
+        </ThemeProvider>
       </div>
     );
   }
