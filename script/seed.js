@@ -81,7 +81,7 @@ async function seed() {
     Product.create({ title: 'test20', price: 10 }),
   ]);
 
-  console.log(`seeded ${users.length} users`);
+  console.log(`seeded ${users.length} users and ${product.length} products`);
   console.log(`seeded successfully`);
   return {
     users: {
