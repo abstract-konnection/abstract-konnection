@@ -1,11 +1,11 @@
+/* eslint-disable jsx-quotes */
 import React, { Component } from 'react';
+import { createProducts } from '../store/products';
 import { connect } from 'react-redux';
-import { deleteProducts, updateProduct } from '../store/products';
-import { setProducts } from '../store/product';
 
-class UpdateProduct extends Component {
-	constructor(props) {
-		super(props);
+class CreateProduct extends Component {
+	constructor() {
+		super();
 		this.state = {
 			title: '',
 			description: '',
@@ -13,20 +13,9 @@ class UpdateProduct extends Component {
 			quantity: 0,
 			imageURL: '',
 		};
+
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
-	}
-
-	componentDidUpdate(prevProps) {
-		if (prevProps.product.id !== this.props.product.id) {
-			this.setState({
-				title: this.props.product.title || '',
-				description: this.props.product.description || '',
-				price: this.props.product.price || '',
-				quantity: this.props.product.quantity || '',
-				imageURL: this.props.product.imageURL || '',
-			});
-		}
 	}
 
 	handleChange(evt) {
@@ -35,23 +24,20 @@ class UpdateProduct extends Component {
 		});
 	}
 
-	async handleSubmit(evt) {
-		try {
-			evt.preventDefault();
-			await this.props.updateProduct({ ...this.props.product, ...this.state });
-			this.props.loadSingleProduct(this.props.product.id);
-		} catch (error) {
-			console.log(error);
-		}
+	handleSubmit(evt) {
+		evt.preventDefault();
+		this.props.createProducts({ ...this.state });
 	}
+
 	render() {
 		const { title, description, price, quantity, imageURL } = this.state;
 		const { handleSubmit, handleChange } = this;
+
 		return (
 			<div>
 				<main>
 					<div>
-						<h3>Update Product:</h3>
+						<h3>Add A New Product</h3>
 					</div>
 					<form onSubmit={handleSubmit}>
 						<div>
@@ -91,9 +77,9 @@ class UpdateProduct extends Component {
 							/>
 						</div>
 						<div>
-							<label htmlFor="completed">Image Url:</label>
+							<label htmlFor="imageURL">Image Url:</label>
 							<input
-								name="completed"
+								name="imageURL"
 								onChange={handleChange}
 								value={imageURL}
 								required
@@ -103,27 +89,14 @@ class UpdateProduct extends Component {
 							<button type="submit">Submit</button>
 						</div>
 					</form>
-                    <button
-                      type='button'
-                      className='remove'
-                      onClick={() => this.props.deleteProduct(this.props.product.id)}>
-                      Delete Product
-                    </button>
 				</main>
 			</div>
 		);
 	}
 }
-const mapStateToProps = (state) => ({
-	product: state.product,
-});
 
 const mapDispatchToProps = (dispatch) => ({
-    loadSingleProduct: (id) => dispatch(setProducts(id)),
-	updateProduct: (product) => dispatch(updateProduct(product)),
-    deleteProduct: (product) => dispatch(deleteProducts(product)),
-
-	
+	createProducts: (product) => dispatch(createProducts(product)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateProduct);
+export default connect(null, mapDispatchToProps)(CreateProduct);
