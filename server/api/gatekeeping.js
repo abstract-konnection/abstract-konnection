@@ -16,18 +16,11 @@ const requireToken = async (req, res, next) => {
 
 //isAdmin could be used later on for editing products on page once that route is set up!
 const isAdmin = async (req, res, next) => {
-	try {
-		const token = req.headers.authorization;
-		const user = await User.findByToken(token);
-		req.user = user;
-		if (!req.user.admin) {
-			res.status(403).send("You aren't authorized for this dawg");
-		} else {
-			//if a user is an admin, we move on to the next middleware
-			next();
-		}
-	} catch (error) {
-		console.log('isAdmin', error);
+	if (!req.user.admin) {
+		res.status(403).send("You aren't authorized for this dawg");
+	} else {
+		//if a user is an admin, we move on to the next middleware
+		next();
 	}
 };
 
