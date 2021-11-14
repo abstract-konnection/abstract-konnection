@@ -12,6 +12,7 @@ const Order = db.define('order', {
   status: {
     type: Sequelize.ENUM('open', 'close'),
     defaultValue: 'open',
+    allowNull: false,
   },
   email: {
     type: Sequelize.STRING,
