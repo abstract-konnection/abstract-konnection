@@ -66,6 +66,13 @@ export const removeCartItems = (id) => {
     try {
       const { data } = await axios.get(`/api/products/${id}`);
       dispatch(removeCartItem(data));
+      //get current items in localStorage and splice out product to remove
+      let cartItems = JSON.parse(localStorage.getItem('cartItems'));
+      cartItems = cartItems.filter((product) => product.product !== id);
+      localStorage.setItem(
+        'cartItems',
+        JSON.stringify(getState().cartItem.cartItems)
+      );
     } catch (error) {
       console.log('Delete to cart thunk:', error);
     }

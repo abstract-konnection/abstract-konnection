@@ -29,7 +29,6 @@ router.post('/users/:userId', async (req, res, next) => {
       },
       attributes: ['email'],
     });
-
     if (!openOrder) {
       const order = await Order.create({
         status: 'open',

@@ -52,16 +52,7 @@ export class AllProducts extends React.Component {
                       style={{ textDecoration: 'none', color: 'black' }}
                     >
                       <img src={product.imageURL} />
-                      {/* <h3>Title: {product.title}</h3> */}
                     </Link>
-                    {/* <h4>Price: ${product.price}</h4> */}
-                    {/* <Button
-                      // onClick={() => } // add logic to dispatch thunk creator to add item to cart
-                      variant="contained"
-                    >
-                      Add To Cart
-                    </Button> */}
-                    {/* </Item> */}
                   </div>
                 );
               })
