@@ -48,7 +48,6 @@ class SingleProduct extends Component {
 						</Item>
 					</main>
 				</div>
-				<AdminUpdateProduct />
 			</Grid>
 		);
 	}

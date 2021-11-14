@@ -6,7 +6,7 @@ import auth from './auth';
 import products from './products';
 import productReducer from './product';
 import checkOutReducer from './checkout';
-import usersReducer from './user';
+import usersReducer from './users';
 import ordersReducer from './order';
 
 const reducer = combineReducers({
