@@ -3,19 +3,9 @@ import { connect } from 'react-redux';
 import { fetchProducts } from '../store/products';
 import { createOpenOrder } from '../store/order';
 import { Link } from 'react-router-dom';
-import { styled } from '@mui/material/styles';
-import { Paper, Grid, Button } from '@mui/material';
+import { Grid } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import Toolbar from '@mui/material/Toolbar';
-
-// const Item = styled(Paper)(({ theme }) => ({
-//   ...theme.typography.body2,
-//   padding: theme.spacing(1),
-//   textAlign: 'center',
-//   color: theme.palette.text.secondary,
-//   margin: 10,
-// }));
 
 function Copyright() {
   return (
@@ -40,7 +30,7 @@ export class AllProducts extends React.Component {
     const products = this.props.allProducts || [];
     const { isLoggedIn } = this.props;
     //automatically opens an order for loggedIn users
-    if (this.props.isLoggedIn) {
+    if (isLoggedIn) {
       this.props.createOpenOrder(this.props.userObject.id);
     }
     return (
