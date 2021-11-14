@@ -1,22 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchProducts } from '../store/products';
 // import Link from '@mui/material/Link';
 import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import { Paper, Grid, Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import Toolbar from '@mui/material/Toolbar';
-import AdminPostProduct from './AdminPostProduct';
+import { fetchUsers } from '../store/users';
 
-// const Item = styled(Paper)(({ theme }) => ({
-//   ...theme.typography.body2,
-//   padding: theme.spacing(1),
-//   textAlign: 'center',
-//   color: theme.palette.text.secondary,
-//   margin: 10,
-// }));
+const Item = styled(Paper)(({ theme }) => ({
+	...theme.typography.body2,
+	padding: theme.spacing(1),
+	textAlign: 'center',
+	color: theme.palette.text.secondary,
+	margin: 10,
+}));
 
 function Copyright() {
 	return (
@@ -31,12 +29,12 @@ function Copyright() {
 	);
 }
 const theme = createTheme();
-export class AdminAllProducts extends React.Component {
+export class AdminViewUsers extends React.Component {
 	componentDidMount() {
-		this.props.fetchProducts();
+		this.props.fetchUsers();
 	}
 	render() {
-		const products = this.props.allProducts || [];
+		const users = this.props.users || [];
 		return (
 			<div>
 				<Typography
@@ -48,23 +46,19 @@ export class AdminAllProducts extends React.Component {
 					Administrator View
 				</Typography>
 				<ThemeProvider theme={theme}>
-					<AdminPostProduct />
 					<Grid
 						container
 						spacing={0}
 						alignItems="center"
 						justifyContent="center">
-						{products.length > 0 ? (
-							products.map((product) => {
+						{users.length > 0 ? (
+							users.map((user) => {
 								return (
-									<div key={product.id} id="products-view">
-										{/* <Item> */}
-										<Link
-											to={`/admin/products/${product.id}`}
-											style={{ textDecoration: 'none', color: 'black' }}>
-											<img src={product.imageURL} />
-											{/* <h3>Title: {product.title}</h3> */}
-										</Link>
+									<div key={user.id} id="products-view">
+										<Item>
+											<h6>{user.id}</h6>
+											<h6>{user.username}</h6>
+										</Item>
 										{/* <h4>Price: ${product.price}</h4> */}
 										{/* <Button
                       // onClick={() => } // add logic to dispatch thunk creator to add item to cart
@@ -77,7 +71,7 @@ export class AdminAllProducts extends React.Component {
 								);
 							})
 						) : (
-							<h3>No Products currently exist</h3>
+							<h3>You are not authorized to view this page.</h3>
 						)}
 					</Grid>
 					<Copyright />
@@ -87,12 +81,12 @@ export class AdminAllProducts extends React.Component {
 	}
 }
 
-const mapState = ({ allProducts }) => ({
-	allProducts,
+const mapState = ({ users }) => ({
+	users,
 });
 
 const mapDispatch = (dispatch) => ({
-	fetchProducts: () => dispatch(fetchProducts()),
+	fetchUsers: () => dispatch(fetchUsers()),
 });
 
-export default connect(mapState, mapDispatch)(AdminAllProducts);
+export default connect(mapState, mapDispatch)(AdminViewUsers);

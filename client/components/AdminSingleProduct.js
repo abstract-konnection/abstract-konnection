@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setProducts } from '../store/product';
 import { styled } from '@mui/material/styles';
-import { Paper, Grid, Button } from '@mui/material';
+import { Paper, Grid, Button, Typography } from '@mui/material';
 import AdminUpdateProduct from './AdminUpdateProduct';
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -32,6 +32,14 @@ class AdminSingleProduct extends Component {
 			<Grid container spacing={0} alignItems="center" justifyContent="center">
 				<div>
 					<main>
+						<Typography
+							component="h1"
+							variant="h3"
+							align="center"
+							color="text.primary"
+							gutterBottom>
+							Administrator View
+						</Typography>
 						<Item>
 							<img src={product.imageURL} />
 							<h1>{product.title}</h1>

@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { createProducts } from '../store/products';
 import { connect } from 'react-redux';
+import { Button } from '@mui/material';
 
 class CreateProduct extends Component {
 	constructor() {
@@ -86,7 +87,9 @@ class CreateProduct extends Component {
 							/>
 						</div>
 						<div>
-							<button type="submit">Submit</button>
+							<Button variant="contained" type="submit">
+								Submit
+							</Button>
 						</div>
 					</form>
 				</main>

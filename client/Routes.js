@@ -7,7 +7,10 @@ import { me } from './store';
 import AllProducts from './components/AllProducts';
 import SingleProduct from './components/SingleProduct';
 import Checkout from './components/Checkout';
-import { AdminAllProducts } from './components/AdminAllProducts';
+import AdminMainView from './components/AdminMainView';
+import AdminAllProducts from './components/AdminAllProducts';
+import AdminSingleProduct from './components/AdminSingleProduct';
+import AdminViewUsers from './components/AdminViewUsers';
 
 /**
  * COMPONENT
@@ -27,7 +30,15 @@ class Routes extends Component {
 						<Route exact path="/" exact component={AllProducts} />
 						<Route exact path="/products/:id" component={SingleProduct} />
 						<Route exact path="/checkout" component={Checkout} />
-            <Route exact path="/admin" component={AdminAllProducts} />
+						{/* Have to check if loggedin and admin to view admin routes */}
+						<Route exact path="/admin" component={AdminMainView} />
+						<Route exact path="/admin/products" component={AdminAllProducts} />
+						<Route exact path="/admin/users" component={AdminViewUsers} />
+						<Route
+							exact
+							path="/admin/products/:id"
+							component={AdminSingleProduct}
+						/>
 						<Redirect to="/" />
 					</Switch>
 				) : (
