@@ -62,7 +62,7 @@ export const updateProduct = (product) => {
 				`/api/admin/products/${product.id}`,
 				product
 			);
-			dispatch(updateProduct(updated));
+			dispatch(updateProducts(updated));
 		} catch (error) {
 			console.log('Update Products thunk: ', error);
 		}
