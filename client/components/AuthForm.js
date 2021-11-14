@@ -1,6 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {authenticate} from '../store'
+import { FormControl, InputLabel, Button, Box, TextField, CustomInput, formGroupClasses, Input, Label } from '@mui/material';
+import '../../public/Forms.css'
 
 /**
  * COMPONENT
@@ -8,23 +10,58 @@ import {authenticate} from '../store'
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
+
   return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
+    <div className="Form-Container">
+      <form className="Login-Form" onSubmit={handleSubmit} name={name}>
+        <TextField label="username" name="username" variant="filled" required />
+        <TextField label="Password" name="password" variant="filled" type="password" required />
+        <Button variant="contained" type="submit" color="primary" onClick={handleSubmit}>
+        {displayName}
+        </Button>
+      </form>
+    </div>
+  )
+}
+
+const SignUpForm = props => {
+  const {name, displayName, handleSubmit, error} = props
+
+  return (
+    <div className="Form-Container">
+      <form className="Signup-Form" onSubmit={handleSubmit} name={name}>
         <div>
-          <label htmlFor="username">
-            <small>Username</small>
-          </label>
-          <input name="username" type="text" />
+          <InputLabel htmlFor="username">
+            Username
+          </InputLabel>
+          <Input name="username" type="text" required />
         </div>
         <div>
-          <label htmlFor="password">
+          <InputLabel htmlFor="password">
             <small>Password</small>
-          </label>
-          <input name="password" type="password" />
+          </InputLabel>
+          <Input name="password" type="password" required />
         </div>
         <div>
-          <button type="submit">{displayName}</button>
+          <InputLabel htmlFor="email">
+            Email
+          </InputLabel>
+          <Input name="email" type="text" required />
+        </div>
+        <div>
+          <InputLabel htmlFor="firstName">
+            First Name
+          </InputLabel>
+          <Input name="firstName" type="text" required />
+        </div>
+        <div>
+          <InputLabel htmlFor="lastName">
+            Last Name
+          </InputLabel>
+          <Input name="lastName" type="text" required />
+        </div>
+        <div>
+          <Button type="submit" variant="contained" color="primary" onClick={handleSubmit}>{displayName}</Button>
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
@@ -59,13 +96,29 @@ const mapDispatch = dispatch => {
   return {
     handleSubmit(evt) {
       evt.preventDefault()
-      const formName = evt.target.name
-      const username = evt.target.username.value
-      const password = evt.target.password.value
-      dispatch(authenticate(username, password, formName))
+
+      const method =  evt.target.name;
+
+      let formData = {
+        username: evt.target.username,
+        password: evt.target.password,
+      };
+      // I received errors of 'evt.target.email.value is undef
+      // if a user tries logging and sending one large formData.
+      // I tried setting the values to || '', also tried || null.
+      if (method === 'signup') {
+        formData = {
+          ...formData,
+          email: evt.target.email.value,
+          firstName: evt.target.firstName.value,
+          lastName: evt.target.lastName.value
+        };
+      }
+
+      dispatch(authenticate(formData, method))
     }
   }
 }
 
 export const Login = connect(mapLogin, mapDispatch)(AuthForm)
-export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
+export const Signup = connect(mapSignup, mapDispatch)(SignUpForm)
