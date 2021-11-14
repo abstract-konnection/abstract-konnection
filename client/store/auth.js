@@ -28,11 +28,14 @@ export const me = () => async dispatch => {
   }
 }
 
-export const authenticate = (username, password, method) => async dispatch => {
+export const authenticate = (formData, method) => async dispatch => {
   try {
-    const res = await axios.post(`/auth/${method}`, {username, password})
+    console.log('Form data inside thunk: ', formData);
+    const res = await axios.post(`/auth/${method}`, formData)
+    console.log('Res inside thunk: ', res);
     window.localStorage.setItem(TOKEN, res.data.token)
     dispatch(me())
+    history.push('/')
   } catch (authError) {
     return dispatch(setAuth({error: authError}))
   }
