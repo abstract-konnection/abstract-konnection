@@ -7,6 +7,7 @@ import products from './products';
 import productReducer from './product';
 import { cartReducer } from './cart';
 import checkOutReducer from './checkout';
+import orderReducer from './order';
 
 const initialState = {
   cart: {
@@ -22,6 +23,7 @@ const reducer = combineReducers({
   product: productReducer,
   cartItem: cartReducer,
   checkout: checkOutReducer,
+  openOrder: orderReducer,
 });
 
 const middleware = composeWithDevTools(
