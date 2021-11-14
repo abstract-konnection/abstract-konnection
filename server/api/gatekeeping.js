@@ -5,7 +5,7 @@ const {
 //checks to see if a user is logged in and who they say they are
 const requireToken = async (req, res, next) => {
 	try {
-		const token = req.headers.authorization;
+		token = req.headers.authorization;
 		const user = await User.findByToken(token);
 		req.user = user;
 		next();

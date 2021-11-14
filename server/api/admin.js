@@ -31,7 +31,7 @@ router.delete(
 		try {
 			const product = await Product.findByPk(req.params.id);
 			await product.destroy();
-			res.send(project);
+			res.send(product);
 		} catch (error) {
 			next(error);
 		}
@@ -45,5 +45,3 @@ router.get('/orders', requireToken, isAdmin, async (req, res, next) => {
 		next(error);
 	}
 });
-
-

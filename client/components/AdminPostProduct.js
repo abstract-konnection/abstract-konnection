@@ -3,6 +3,10 @@ import React, { Component } from 'react';
 import { createProducts } from '../store/products';
 import { connect } from 'react-redux';
 import { Button } from '@mui/material';
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
 
 class CreateProduct extends Component {
 	constructor() {

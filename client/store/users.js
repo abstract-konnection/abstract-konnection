@@ -7,15 +7,38 @@ const getAllUsers = (users) => ({
 	users,
 });
 
-export const fetchUsers = () => {
-	return async (dispatch) => {
-		try {
-			const { data } = await axios.get('/api/users');
-			dispatch(getAllUsers(data));
-		} catch (error) {
-			console.log('Fetch All Users thunk: ', error);
+// export const fetchUsers = () => {
+// 	return async (dispatch) => {
+// 		try {
+// 			const token = window.localStorage.getItem('token');
+// 			if (token) {
+// 				const { data } = await axios.get('/api/users', {
+// 					headers: {
+// 						authorization: token,
+// 					},
+// 				});
+// 				dispatch(getAllUsers(data));
+// 			}
+// 		} catch (error) {
+// 			console.log('Fetch All Users thunk: ', error);
+// 		}
+// 	};
+// };
+
+export const fetchUsers = () => async (dispatch) => {
+	try {
+		const token = window.localStorage.getItem('token');
+		if (token) {
+			const res = await axios.get('/api/users', {
+				headers: {
+					authorization: token,
+				},
+			});
+			return dispatch(getAllUsers(res.data));
 		}
-	};
+	} catch (error) {
+		console.log('Fetch All Users thunk: ', error);
+	}
 };
 
 export default function usersReducer(state = [], action) {

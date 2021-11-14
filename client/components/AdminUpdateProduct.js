@@ -15,6 +15,7 @@ class UpdateProduct extends Component {
 		};
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleDelete = this.handleDelete.bind(this);
 	}
 
 	componentDidUpdate(prevProps) {
@@ -44,6 +45,16 @@ class UpdateProduct extends Component {
 			console.log(error);
 		}
 	}
+
+	async handleDelete(evt) {
+		try {
+			evt.preventDefault();
+			this.props.deleteProduct(this.props.product.id);
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
 	render() {
 		const { title, description, price, quantity, imageURL } = this.state;
 		const { handleSubmit, handleChange } = this;
@@ -103,12 +114,9 @@ class UpdateProduct extends Component {
 							<button type="submit">Submit</button>
 						</div>
 					</form>
-                    <button
-                      type='button'
-                      className='remove'
-                      onClick={() => this.props.deleteProduct(this.props.product.id)}>
-                      Delete Product
-                    </button>
+					<button type="button" className="remove" onClick={this.handleDelete}>
+						Delete Product
+					</button>
 				</main>
 			</div>
 		);
@@ -119,11 +127,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    loadSingleProduct: (id) => dispatch(setProducts(id)),
+	loadSingleProduct: (id) => dispatch(setProducts(id)),
 	updateProduct: (product) => dispatch(updateProduct(product)),
-    deleteProduct: (product) => dispatch(deleteProducts(product)),
-
-	
+	deleteProduct: (product) => dispatch(deleteProducts(product)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UpdateProduct);

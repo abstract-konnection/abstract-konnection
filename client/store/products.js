@@ -47,8 +47,18 @@ export const fetchProducts = () => {
 export const deleteProducts = (id) => {
 	return async (dispatch) => {
 		try {
-			const { data: product } = await axios.delete(`/api/admin/products/${id}`);
-			dispatch(deleteProduct(product));
+			const token = window.localStorage.getItem('token');
+			if (token) {
+				const { data: product } = await axios.delete(
+					`/api/admin/products/${id}`,
+					{
+						headers: {
+							authorization: token,
+						},
+					}
+				);
+				dispatch(deleteProduct(product));
+			}
 		} catch (error) {
 			console.log('Delete Products thunk: ', error);
 		}
@@ -58,11 +68,19 @@ export const deleteProducts = (id) => {
 export const updateProduct = (product) => {
 	return async (dispatch) => {
 		try {
-			const { data: updated } = await axios.put(
-				`/api/admin/products/${product.id}`,
-				product
-			);
-			dispatch(updateProducts(updated));
+			const token = window.localStorage.getItem('token');
+			if (token) {
+				const { data: updated } = await axios.put(
+					`/api/admin/products/${product.id}`,
+					product,
+					{
+						headers: {
+							authorization: token,
+						},
+					}
+				);
+				dispatch(updateProducts(updated));
+			}
 		} catch (error) {
 			console.log('Update Products thunk: ', error);
 		}
@@ -72,11 +90,19 @@ export const updateProduct = (product) => {
 export const createProducts = (product) => {
 	return async (dispatch) => {
 		try {
-			const { data: created } = await axios.post(
-				'/api/admin/products',
-				product
-			);
-			dispatch(createProduct(created));
+			const token = window.localStorage.getItem('token');
+			if (token) {
+				const { data: created } = await axios.post(
+					'/api/admin/products',
+					product,
+					{
+						headers: {
+							authorization: token,
+						},
+					}
+				);
+				dispatch(createProduct(created));
+			}
 		} catch (error) {
 			console.log('Create product thunk: ', error);
 		}

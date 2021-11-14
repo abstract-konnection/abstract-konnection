@@ -59,14 +59,6 @@ export class AdminViewUsers extends React.Component {
 											<h6>{user.id}</h6>
 											<h6>{user.username}</h6>
 										</Item>
-										{/* <h4>Price: ${product.price}</h4> */}
-										{/* <Button
-                      // onClick={() => } // add logic to dispatch thunk creator to add item to cart
-                      variant="contained"
-                    >
-                      Add To Cart
-                    </Button> */}
-										{/* </Item> */}
 									</div>
 								);
 							})
