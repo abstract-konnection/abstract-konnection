@@ -16,11 +16,12 @@ export const populateOpenOrder = (order, cartItems) => {
   return async (dispatch) => {
     try {
       if (cartItems.length) {
+        console.log(cartItems);
         const res = await Promise.all([
           cartItems.map((product) => {
             axios.post(`/api/cart/${order.id}/${product.product}`, {
               quantity: product.qty,
-              totalPrice: product.price * product.qty,
+              totalPrice: product.price * Number(product.qty),
               orderId: order.id,
               productId: product.product,
             });
@@ -49,7 +50,7 @@ export const createOpenOrder = (userId) => {
 export default (state = {}, action) => {
   switch (action.type) {
     case CREATE_OPEN_ORDER:
-      //populate open order if there are items on localStorage
+      //returning back open order, NOT the order_products table.
       return action.cart;
     default:
       return state;
