@@ -16,7 +16,7 @@ export const populateOpenOrder = (order, cartItems) => {
   return async (dispatch) => {
     try {
       if (cartItems.length) {
-        await Promise.all([
+        const res = await Promise.all([
           cartItems.map((product) => {
             axios.post(`/api/cart/${order.id}/${product.product}`, {
               quantity: product.qty,
@@ -26,7 +26,7 @@ export const populateOpenOrder = (order, cartItems) => {
             });
           }),
         ]);
-
+        const data = res.map((res) => res.data);
         dispatch(_createOpenOrder(order));
       }
     } catch (err) {
