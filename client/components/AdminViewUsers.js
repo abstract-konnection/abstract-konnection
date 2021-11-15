@@ -12,7 +12,7 @@ const Item = styled(Paper)(({ theme }) => ({
 	...theme.typography.body2,
 	padding: theme.spacing(1),
 	textAlign: 'center',
-	color: theme.palette.text.secondary,
+	color: theme.palette.text.primary,
 	margin: 10,
 }));
 
@@ -54,10 +54,17 @@ export class AdminViewUsers extends React.Component {
 						{users.length > 0 ? (
 							users.map((user) => {
 								return (
-									<div key={user.id} id="products-view">
+									<div key={user.id}>
 										<Item>
-											<h6>{user.id}</h6>
-											<h6>{user.username}</h6>
+											<Typography
+												component="h1"
+												variant="body2"
+												align="center"
+												color="text.primary"
+												gutterBottom>
+												Username:
+											</Typography>
+											<h4>{user.username}</h4>
 										</Item>
 									</div>
 								);
