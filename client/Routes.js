@@ -11,6 +11,7 @@ import AdminMainView from './components/AdminMainView';
 import AdminAllProducts from './components/AdminAllProducts';
 import AdminSingleProduct from './components/AdminSingleProduct';
 import AdminViewUsers from './components/AdminViewUsers';
+import NotFound from './components/NotFound';
 
 /**
  * COMPONENT
@@ -46,7 +47,7 @@ class Routes extends Component {
 						<Route exact path="/" exact component={AllProducts} />
 						<Route exact path="/products/:id" component={SingleProduct} />
 						<Route exact path="/checkout" component={Checkout} />
-						<Redirect to="/" />
+						<Route component={NotFound} />
 					</Switch>
 				) : (
 					<Switch>
@@ -55,6 +56,7 @@ class Routes extends Component {
 						<Route exact path="/signup" component={Signup} />
 						<Route exact path="/products/:id" component={SingleProduct} />
 						<Route exact path="/checkout" component={Checkout} />
+						<Route component={NotFound} />
 					</Switch>
 				)}
 			</div>
