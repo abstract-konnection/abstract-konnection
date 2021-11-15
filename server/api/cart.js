@@ -39,11 +39,20 @@ router.post('/:orderId/:productId', async (req, res, next) => {
         productId: req.params.productId,
       },
     });
+    const order = await Order.findByPk(req.params.orderId);
     if (!alreadyInCart) {
       const orderProduct = await Order_Products.create(req.body);
+      order.update({ totalPrice: order.totalPrice + orderProduct.totalPrice });
       res.send(orderProduct);
     } else {
+      //to calculate the updated totalPrice in the order model
+      //i need to get the price of an existing product before amount gets updated
+      const oldProductTotalPrice = alreadyInCart.totalPrice;
       await alreadyInCart.update(req.body);
+      order.update({
+        totalPrice:
+          order.totalPrice + alreadyInCart.totalPrice - oldProductTotalPrice,
+      });
       res.send(alreadyInCart);
     }
   } catch (err) {
