@@ -30,9 +30,7 @@ export const me = () => async dispatch => {
 
 export const authenticate = (formData, method) => async dispatch => {
   try {
-    console.log('Form data inside thunk: ', formData);
     const res = await axios.post(`/auth/${method}`, formData)
-    console.log('Res inside thunk: ', res);
     window.localStorage.setItem(TOKEN, res.data.token)
     dispatch(me())
     history.push('/')

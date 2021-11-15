@@ -16,7 +16,7 @@ const AuthForm = props => {
       <form className="Login-Form" onSubmit={handleSubmit} name={name}>
         <TextField label="username" name="username" variant="filled" required />
         <TextField label="Password" name="password" variant="filled" type="password" required />
-        <Button variant="contained" type="submit" color="primary" onClick={handleSubmit}>
+        <Button variant="contained" type="submit" color="primary">
         {displayName}
         </Button>
       </form>
@@ -61,7 +61,7 @@ const SignUpForm = props => {
           <Input name="lastName" type="text" required />
         </div>
         <div>
-          <Button type="submit" variant="contained" color="primary" onClick={handleSubmit}>{displayName}</Button>
+          <Button type="submit" variant="contained" color="primary">{displayName}</Button>
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
@@ -100,12 +100,10 @@ const mapDispatch = dispatch => {
       const method =  evt.target.name;
 
       let formData = {
-        username: evt.target.username,
-        password: evt.target.password,
+        username: evt.target.username.value,
+        password: evt.target.password.value,
       };
-      // I received errors of 'evt.target.email.value is undef
-      // if a user tries logging and sending one large formData.
-      // I tried setting the values to || '', also tried || null.
+
       if (method === 'signup') {
         formData = {
           ...formData,
