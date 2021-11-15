@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { deleteProducts, updateProduct } from '../store/products';
 import { setProducts } from '../store/product';
+import { Button, Grid, Box, Typography } from '@mui/material';
 
 class UpdateProduct extends Component {
 	constructor(props) {
@@ -9,8 +10,8 @@ class UpdateProduct extends Component {
 		this.state = {
 			title: '',
 			description: '',
-			price: 0,
-			quantity: 0,
+			price: '',
+			quantity: '',
 			imageURL: '',
 		};
 		this.handleChange = this.handleChange.bind(this);
@@ -61,62 +62,71 @@ class UpdateProduct extends Component {
 		return (
 			<div>
 				<main>
-					<div>
-						<h3>Update Product:</h3>
-					</div>
-					<form onSubmit={handleSubmit}>
+					<Grid>
 						<div>
-							<label htmlFor="title">Product Title:</label>
-							<input
-								name="title"
-								onChange={handleChange}
-								value={title}
-								required
-							/>
+							<Box textAlign="center">
+								<Button
+									variant="contained"
+									type="button"
+									className="remove"
+									onClick={this.handleDelete}>
+									Delete Product
+								</Button>
+							</Box>
 						</div>
-						<div>
-							<label htmlFor="description">Description:</label>
-							<input
-								name="description"
-								onChange={handleChange}
-								value={description}
-								required
-							/>
-						</div>
-						<div>
-							<label htmlFor="price">Price:</label>
-							<input
-								name="price"
-								onChange={handleChange}
-								value={price}
-								required
-							/>
-						</div>
-						<div>
-							<label htmlFor="quantity">Quantity:</label>
-							<input
-								name="quantity"
-								onChange={handleChange}
-								value={quantity}
-								required
-							/>
-						</div>
-						<div>
-							<label htmlFor="completed">Image Url:</label>
-							<input
-								name="completed"
-								onChange={handleChange}
-								value={imageURL}
-								required
-							/>
-						</div>
-						<div>
-							<button type="submit">Submit</button>
-						</div>
-					</form>
-					<button type="button" className="remove" onClick={this.handleDelete}>
-						Delete Product
-					</button>
+						<form onSubmit={handleSubmit}>
+							<div>
+								<label htmlFor="title">Product Title:</label>
+								<input
+									name="title"
+									onChange={handleChange}
+									value={title}
+									required
+								/>
+							</div>
+							<div>
+								<label htmlFor="description">Description:</label>
+								<input
+									name="description"
+									onChange={handleChange}
+									value={description}
+									required
+								/>
+							</div>
+							<div>
+								<label htmlFor="price">Price:</label>
+								<input
+									name="price"
+									onChange={handleChange}
+									value={price}
+									required
+								/>
+							</div>
+							<div>
+								<label htmlFor="quantity">Quantity:</label>
+								<input
+									name="quantity"
+									onChange={handleChange}
+									value={quantity}
+									required
+								/>
+							</div>
+							<div>
+								<label htmlFor="completed">Image Url:</label>
+								<input
+									name="completed"
+									onChange={handleChange}
+									value={imageURL}
+									required
+								/>
+							</div>
+							<div>
+								<Button variant="contained" type="submit">
+									Update this Product
+								</Button>
+							</div>
+						</form>
+					</Grid>
 				</main>
 			</div>
 		);

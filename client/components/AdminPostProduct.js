@@ -4,6 +4,7 @@ import { createProducts } from '../store/products';
 import { connect } from 'react-redux';
 import { Button } from '@mui/material';
 import FormControl from '@mui/material/FormControl';
+import { Grid, Typography } from '@mui/material';
 
 class CreateProduct extends Component {
 	constructor() {
@@ -11,8 +12,8 @@ class CreateProduct extends Component {
 		this.state = {
 			title: '',
 			description: '',
-			price: 0,
-			quantity: 0,
+			price: '',
+			quantity: '',
 			imageURL: '',
 		};
 
@@ -38,61 +39,72 @@ class CreateProduct extends Component {
 		return (
 			<div>
 				<main>
-					<div>
-						<h3>Add A New Product</h3>
-					</div>
-					<form onSubmit={handleSubmit}>
-						<div>
-							<label htmlFor="title">Product Title:</label>
-							<input
-								name="title"
-								onChange={handleChange}
-								value={title}
-								required
-							/>
-						</div>
-						<div>
-							<label htmlFor="description">Description:</label>
-							<input
-								name="description"
-								onChange={handleChange}
-								value={description}
-								required
-							/>
-						</div>
-						<div>
-							<label htmlFor="price">Price:</label>
-							<input
-								name="price"
-								onChange={handleChange}
-								value={price}
-								required
-							/>
-						</div>
-						<div>
-							<label htmlFor="quantity">Quantity:</label>
-							<input
-								name="quantity"
-								onChange={handleChange}
-								value={quantity}
-								required
-							/>
-						</div>
-						<div>
-							<label htmlFor="imageURL">Image Url:</label>
-							<input
-								name="imageURL"
-								onChange={handleChange}
-								value={imageURL}
-								required
-							/>
-						</div>
-						<div>
-							<Button variant="contained" type="submit">
-								Submit
-							</Button>
-						</div>
-					</form>
+					<Typography
+						component="h1"
+						variant="h6"
+						align="center"
+						color="text.primary"
+						gutterBottom>
+						Add a product
+					</Typography>
+					<Grid
+						container
+						spacing={0}
+						alignItems="center"
+						justifyContent="center">
+						<form onSubmit={handleSubmit}>
+							<div>
+								<label htmlFor="title">Product Title:</label>
+								<input
+									name="title"
+									onChange={handleChange}
+									value={title}
+									required
+								/>
+							</div>
+							<div>
+								<label htmlFor="description">Description:</label>
+								<input
+									name="description"
+									onChange={handleChange}
+									value={description}
+									required
+								/>
+							</div>
+							<div>
+								<label htmlFor="price">Price:</label>
+								<input
+									name="price"
+									onChange={handleChange}
+									value={price}
+									required
+								/>
+							</div>
+							<div>
+								<label htmlFor="quantity">Quantity:</label>
+								<input
+									name="quantity"
+									onChange={handleChange}
+									value={quantity}
+									required
+								/>
+							</div>
+							<div>
+								<label htmlFor="imageURL">Image Url:</label>
+								<input
+									name="imageURL"
+									onChange={handleChange}
+									value={imageURL}
+									required
+								/>
+							</div>
+							<div>
+								<Button variant="contained" type="submit">
+									Submit
+								</Button>
+							</div>
+						</form>
+					</Grid>
 				</main>
 			</div>
 		);
