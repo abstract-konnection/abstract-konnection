@@ -30,12 +30,7 @@ export class AllProducts extends React.Component {
   }
   render() {
     const products = this.props.allProducts || [];
-    const { isLoggedIn } = this.props;
-    //automatically opens an order for loggedIn users
-    //maybe check to see if an order is already open?
-    // if (isLoggedIn) {
-    //   this.props.createOpenOrder(this.props.userObject.id);
-    // }
+
     return (
       <div>
         <ThemeProvider theme={theme}>
