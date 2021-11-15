@@ -1,0 +1,11 @@
+.Form-Container {
+  display: flex;
+  flex-flow: column wrap;
+  align-content: center;
+}
+.Login-Form {
+  width: 300px;
+}
+.Signup-Form {
+  width: 500px;
+}
