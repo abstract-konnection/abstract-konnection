@@ -9,14 +9,6 @@ import { cartReducer } from './cart';
 import checkOutReducer from './checkout';
 import orderReducer from './order';
 
-const initialState = {
-  cart: {
-    cartItems: localStorage.getItem('cartItem')
-      ? JSON.parse(localStorage.getItem('cartItem'))
-      : [],
-  },
-};
-
 const reducer = combineReducers({
   auth,
   allProducts: products,

@@ -1,10 +1,5 @@
 const axios = require('axios');
 
-//get cartItems currently in localStorage to populate open order
-const cartItems = localStorage.getItem('cartItems')
-  ? JSON.parse(localStorage.getItem('cartItems'))
-  : [];
-
 const CREATE_OPEN_ORDER = 'CREATE_OPEN_ORDER';
 
 const _createOpenOrder = (cart) => ({
@@ -12,9 +7,13 @@ const _createOpenOrder = (cart) => ({
   cart,
 });
 
-export const populateOpenOrder = (order, cartItems) => {
+export const populateOpenOrder = (order) => {
   return async (dispatch) => {
     try {
+      //get cartItems currently in localStorage to populate open order
+      const cartItems = localStorage.getItem('cartItems')
+        ? JSON.parse(localStorage.getItem('cartItems'))
+        : [];
       if (cartItems.length) {
         console.log(cartItems);
         const res = await Promise.all([
@@ -27,7 +26,7 @@ export const populateOpenOrder = (order, cartItems) => {
             });
           }),
         ]);
-        const data = res.map((res) => res.data);
+        // const data = res.map((res) => res.data);
         dispatch(_createOpenOrder(order));
       }
     } catch (err) {
@@ -40,10 +39,17 @@ export const createOpenOrder = (userId) => {
   return async (dispatch) => {
     try {
       const { data: order } = await axios.post(`api/orders/users/${userId}`);
-      dispatch(populateOpenOrder(order, cartItems));
+      dispatch(populateOpenOrder(order));
     } catch (err) {
       console.error('Could not get an open order:', err);
     }
+  };
+};
+
+export const clearOpenOrder = () => {
+  return {
+    type: CREATE_OPEN_ORDER,
+    cart: {},
   };
 };
 
