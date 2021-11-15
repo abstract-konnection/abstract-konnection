@@ -11,18 +11,9 @@ export default function Cart(props) {
 	const cart = useSelector((state) => state.cartItem);
 	const { cartItems } = cart;
 	const dispatch = useDispatch();
-	// useEffect(() => {
-	// 	if (id) {
-	// 		dispatch(addCartItems(id, qty));
-	// 	}
-	// }, [dispatch, id, qty]);
 
 	const removeFromCart = (id) => {
 		dispatch(removeCartItems(id));
-	};
-
-	const checkOutItems = () => {
-		props.history.push('/login?redirect=checkout');
 	};
 	return (
 		<div>
@@ -80,10 +71,7 @@ export default function Cart(props) {
 						</li>
 						<li>
 							<Link to={'/checkout'}>
-								<button
-									type="button"
-									onClick={checkOutItems}
-									disabled={cartItems.length === 0}>
+								<button type="button" disabled={cartItems.length === 0}>
 									Proceed to Checkout
 								</button>
 							</Link>
