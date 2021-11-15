@@ -3,6 +3,7 @@ const {
   models: { Product, Order_Products, User, Order },
 } = require('../db');
 module.exports = router;
+const { requireToken } = require('./gatekeeping');
 
 router.get('/:id', async (req, res, next) => {
   try {
@@ -13,7 +14,7 @@ router.get('/:id', async (req, res, next) => {
 });
 
 //checks to see if user already has an open Order. If not, create one!
-router.post('/users/:userId', async (req, res, next) => {
+router.post('/users/:userId', requireToken, async (req, res, next) => {
   try {
     const openOrder = await Order.findOne({
       //find the open order that matches with user id and status is open
@@ -22,23 +23,29 @@ router.post('/users/:userId', async (req, res, next) => {
         userId: req.params.userId,
       },
     });
-    //only get back id and email of user to set in the order object
-    const user = await User.findOne({
-      where: {
-        id: req.params.userId,
-      },
-      attributes: ['email'],
-    });
-    if (!openOrder) {
-      const order = await Order.create({
-        status: 'open',
-        totalPrice: 0,
-        email: user.email,
-      });
-      order.setUser(req.params.userId);
-      res.send(order);
+    /* checks if the user on token matches the user param before
+    creating cart */
+    if (req.user.id === Number(req.params.userId)) {
+      if (!openOrder) {
+        //only get back email of user to associate with order
+        const user = await User.findOne({
+          where: {
+            id: req.params.userId,
+          },
+          attributes: ['email'],
+        });
+        const order = await Order.create({
+          status: 'open',
+          totalPrice: 0,
+          email: user.email,
+        });
+        order.setUser(req.params.userId);
+        res.send(order);
+      } else {
+        res.send(openOrder);
+      }
     } else {
-      res.send(openOrder);
+      res.status(403).send('You are not the user associated with this cart');
     }
   } catch (err) {
     next(err);

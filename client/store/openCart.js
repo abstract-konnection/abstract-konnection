@@ -38,7 +38,18 @@ export const populateOpenOrder = (order) => {
 export const createOpenOrder = (userId) => {
   return async (dispatch) => {
     try {
-      const { data: order } = await axios.post(`api/orders/users/${userId}`);
+      const token = localStorage.getItem('token');
+      /* sending post data with user token on header to make sure 
+      the right order is being matched with the right user */
+      const { data: order } = await axios.post(
+        `api/orders/users/${userId}`,
+        {},
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      );
       dispatch(populateOpenOrder(order));
     } catch (err) {
       console.error('Could not get an open order:', err);
