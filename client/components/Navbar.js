@@ -10,7 +10,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 
-const Navbar = ({ handleClick, isLoggedIn }) => (
+const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
 	<Box sx={{ flexGrow: 1 }}>
 		<AppBar position="static">
 			<Toolbar>
@@ -19,7 +19,22 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
 						AK(c)
 					</Link>
 				</Typography>
-				{isLoggedIn ? (
+				{isLoggedIn && isAdmin ? (
+					<div>
+						<Link to="/admin" style={{ color: '#FFF' }}>
+							<Button color="inherit">Admin</Button>
+						</Link>
+						<Link to="/" style={{ color: '#FFF' }}>
+							<Button color="inherit">Home</Button>
+						</Link>
+						<Link to="/cart" style={{ color: '#FFF' }}>
+							<Button color="inherit">Cart</Button>
+						</Link>
+						<Button color="inherit" onClick={handleClick}>
+							Logout
+						</Button>
+					</div>
+				) : isLoggedIn ? (
 					<div>
 						<Link to="/" style={{ color: '#FFF' }}>
 							<Button color="inherit">Home</Button>
@@ -66,6 +81,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
 const mapState = (state) => {
 	return {
 		isLoggedIn: !!state.auth.id,
+		isAdmin: !!state.auth.id,
 	};
 };
 
