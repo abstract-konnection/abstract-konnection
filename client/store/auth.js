@@ -1,6 +1,5 @@
 import axios from 'axios';
 import history from '../history';
-import { clearOpenOrder } from './openCart';
 
 const TOKEN = 'token';
 
@@ -8,6 +7,7 @@ const TOKEN = 'token';
  * ACTION TYPES
  */
 const SET_AUTH = 'SET_AUTH';
+export const CLEAR_AFTER_LOGOUT = 'CLEAR_AFTER_LOGOUT';
 
 /**
  * ACTION CREATORS
@@ -42,10 +42,9 @@ export const authenticate =
 
 export const logout = () => {
   window.localStorage.removeItem(TOKEN);
-  clearOpenOrder();
   history.push('/login');
   return {
-    type: SET_AUTH,
+    type: CLEAR_AFTER_LOGOUT,
     auth: {},
   };
 };
@@ -56,6 +55,8 @@ export const logout = () => {
 export default function (state = {}, action) {
   switch (action.type) {
     case SET_AUTH:
+      return action.auth;
+    case CLEAR_AFTER_LOGOUT:
       return action.auth;
     default:
       return state;

@@ -1,5 +1,6 @@
 const axios = require('axios');
 
+import { CLEAR_AFTER_LOGOUT } from '.';
 const CREATE_OPEN_ORDER = 'CREATE_OPEN_ORDER';
 
 const _createOpenOrder = (cart) => ({
@@ -46,18 +47,13 @@ export const createOpenOrder = (userId) => {
   };
 };
 
-export const clearOpenOrder = () => {
-  return {
-    type: CREATE_OPEN_ORDER,
-    cart: {},
-  };
-};
-
 export default (state = {}, action) => {
   switch (action.type) {
     case CREATE_OPEN_ORDER:
       //returning back open order, NOT the order_products table.
       return action.cart;
+    case CLEAR_AFTER_LOGOUT:
+      return {};
     default:
       return state;
   }
