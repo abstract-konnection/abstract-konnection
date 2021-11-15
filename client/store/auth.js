@@ -34,7 +34,7 @@ export const authenticate = (formData, method) => async (dispatch) => {
     const res = await axios.post(`/auth/${method}`, formData);
     window.localStorage.setItem(TOKEN, res.data.token);
     dispatch(me());
-    history.push('/');
+    // history.push('/');
   } catch (authError) {
     return dispatch(setAuth({ error: authError }));
   }
