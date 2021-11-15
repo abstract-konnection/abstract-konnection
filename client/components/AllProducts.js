@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchProducts } from '../store/products';
-import { createOpenOrder } from '../store/order';
+import { createOpenOrder } from '../store/openCart';
 import { Link } from 'react-router-dom';
 import { Grid } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';

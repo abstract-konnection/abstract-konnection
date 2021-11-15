@@ -7,15 +7,19 @@ import products from './products';
 import productReducer from './product';
 import { cartReducer } from './cart';
 import checkOutReducer from './checkout';
-import orderReducer from './order';
+import openCartReducer from './openCart';
+import usersReducer from './users';
+import ordersReducer from './order';
 
 const reducer = combineReducers({
   auth,
   allProducts: products,
   product: productReducer,
-  cartItem: cartReducer,
   checkout: checkOutReducer,
-  openOrder: orderReducer,
+  users: usersReducer,
+  orders: ordersReducer,
+  openOrder: openCartReducer,
+  cartItem: cartReducer,
 });
 
 const middleware = composeWithDevTools(

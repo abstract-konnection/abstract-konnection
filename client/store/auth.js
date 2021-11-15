@@ -1,6 +1,6 @@
 import axios from 'axios';
 import history from '../history';
-import { clearOpenOrder } from './order';
+import { clearOpenOrder } from './openCart';
 
 const TOKEN = 'token';
 

@@ -4,6 +4,7 @@ import { setProducts } from '../store/product';
 import { addCartItems } from '../store/cart';
 import { styled } from '@mui/material/styles';
 import { Paper, Grid, Button } from '@mui/material';
+import AdminUpdateProduct from './AdminUpdateProduct';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body,
