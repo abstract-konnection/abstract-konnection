@@ -4,30 +4,14 @@ const {
 } = require('../db');
 module.exports = router;
 
-// router.put('/', async (req, res, next) => {
-//     try {
-//       const orderProduct = await Order_Products.findOne({
-//         where: {
-//           productId: req.body.productId,
-//           orderId: req.body.orderId
-//         }
-//       })
-
-//     //   const  product = await Product.findByPk({
-//     //     where: {
-//     //       id: req.body.productId
-//     //     }
-//     //   })
-
-//     //   await productOrder.update({
-//     //     quantity: req.body.quantity
-//     //   })
-
-//       res.json({productOrder, product})
-//     } catch (err) {
-//       next(err)
-//     }
-//   })
+//return the items in the cart so logged in user can
+//have a cart that persists regardless of browser
+router.get('/:orderId', async (req, res, next) => {
+  try {
+  } catch (err) {
+    next(err);
+  }
+});
 
 //pair product to the right cart
 router.post('/:orderId/:productId', async (req, res, next) => {

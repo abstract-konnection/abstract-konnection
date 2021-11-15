@@ -15,7 +15,7 @@ export const populateOpenOrder = (order) => {
       const cartItems = localStorage.getItem('cartItems')
         ? JSON.parse(localStorage.getItem('cartItems'))
         : [];
-      if (cartItems.length) {
+      if (cartItems && cartItems.length) {
         const res = await Promise.all([
           cartItems.map((product) => {
             axios.post(`/api/cart/${order.id}/${product.product}`, {
@@ -26,8 +26,9 @@ export const populateOpenOrder = (order) => {
             });
           }),
         ]);
-        // const data = res.map((res) => res.data);
         dispatch(_createOpenOrder(order));
+        //remove the items on localStorage because items should be
+        //populated in db now?
       }
     } catch (err) {
       console.error('Could not update cart', err);
