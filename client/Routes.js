@@ -22,15 +22,12 @@ class Routes extends Component {
 
 	render() {
 		const { isLoggedIn } = this.props;
+		const { isAdmin } = this.props;
 
 		return (
 			<div>
-				{isLoggedIn ? (
+				{isLoggedIn && isAdmin ? (
 					<Switch>
-						<Route exact path="/" exact component={AllProducts} />
-						<Route exact path="/products/:id" component={SingleProduct} />
-						<Route exact path="/checkout" component={Checkout} />
-						{/* Have to check if loggedin and admin to view admin routes */}
 						<Route exact path="/admin" component={AdminMainView} />
 						<Route exact path="/admin/products" component={AdminAllProducts} />
 						<Route exact path="/admin/users" component={AdminViewUsers} />
@@ -39,6 +36,16 @@ class Routes extends Component {
 							path="/admin/products/:id"
 							component={AdminSingleProduct}
 						/>
+						<Route exact path="/" exact component={AllProducts} />
+						<Route exact path="/products/:id" component={SingleProduct} />
+						<Route exact path="/checkout" component={Checkout} />
+						<Redirect to="/" />
+					</Switch>
+				) : isLoggedIn ? (
+					<Switch>
+						<Route exact path="/" exact component={AllProducts} />
+						<Route exact path="/products/:id" component={SingleProduct} />
+						<Route exact path="/checkout" component={Checkout} />
 						<Redirect to="/" />
 					</Switch>
 				) : (
@@ -63,6 +70,7 @@ const mapState = (state) => {
 		// Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
 		// Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
 		isLoggedIn: !!state.auth.id,
+		isAdmin: !!state.auth.admin,
 	};
 };
 
