@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setProducts } from '../store/product';
 import { styled } from '@mui/material/styles';
-import { Paper, Grid, Button } from '@mui/material';
+import { Paper, Grid, Button, Typography } from '@mui/material';
 import AdminUpdateProduct from './AdminUpdateProduct';
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -13,10 +13,9 @@ const Item = styled(Paper)(({ theme }) => ({
 	margin: 50,
 }));
 
-class SingleProduct extends Component {
+class AdminSingleProduct extends Component {
 	constructor() {
 		super();
-		this.addToCart = this.addToCart.bind(this);
 	}
 	async componentDidMount() {
 		try {
@@ -27,25 +26,27 @@ class SingleProduct extends Component {
 		}
 	}
 
-	addToCart() {
-		console.log('not yet');
-	}
-
 	render() {
 		const product = this.props.product || {};
 		return (
 			<Grid container spacing={0} alignItems="center" justifyContent="center">
 				<div>
 					<main>
+						<Typography
+							component="h1"
+							variant="h3"
+							align="center"
+							color="text.primary"
+							gutterBottom>
+							Administrator View
+						</Typography>
 						<Item>
 							<img src={product.imageURL} />
 							<h1>{product.title}</h1>
 							<p>{product.description}</p>
 							<h3>${product.price}</h3>
-							<Button variant="contained" size="large" onClick={this.addToCart}>
-								Add to Cart
-							</Button>
 						</Item>
+						<AdminUpdateProduct />
 					</main>
 				</div>
 			</Grid>
@@ -61,4 +62,4 @@ const mapDispatchToProps = (dispatch) => ({
 	loadSingleProduct: (id) => dispatch(setProducts(id)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct);
+export default connect(mapStateToProps, mapDispatchToProps)(AdminSingleProduct);
