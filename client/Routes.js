@@ -47,7 +47,7 @@ class Routes extends Component {
 						<Route exact path="/" exact component={AllProducts} />
 						<Route exact path="/products/:id" component={SingleProduct} />
 						<Route exact path="/checkout" component={Checkout} />
-						<Route component={NotFound} />
+						<Redirect to="/" />
 					</Switch>
 				) : (
 					<Switch>
@@ -56,7 +56,7 @@ class Routes extends Component {
 						<Route exact path="/signup" component={Signup} />
 						<Route exact path="/products/:id" component={SingleProduct} />
 						<Route exact path="/checkout" component={Checkout} />
-						<Route component={NotFound} />
+						<Redirect to="/" />
 					</Switch>
 				)}
 			</div>

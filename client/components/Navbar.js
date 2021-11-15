@@ -81,7 +81,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
 const mapState = (state) => {
 	return {
 		isLoggedIn: !!state.auth.id,
-		isAdmin: !!state.auth.id,
+		isAdmin: !!state.auth.admin,
 	};
 };
 
