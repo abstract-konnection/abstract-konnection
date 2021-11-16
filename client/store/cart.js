@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+import { CLEAR_AFTER_LOGOUT } from '.';
 const initialState = {
   cartItems: localStorage.getItem('cartItems')
     ? JSON.parse(localStorage.getItem('cartItems'))
@@ -104,7 +105,10 @@ export const cartReducer = (state = initialState, action) => {
           ...state.cartItems.filter((item) => item.product !== product.product),
         ],
       };
-
+    case CLEAR_AFTER_LOGOUT:
+      return {
+        cartItems: [],
+      };
     default:
       return state;
   }

@@ -8,6 +8,13 @@ module.exports = router;
 //have a cart that persists regardless of browser
 router.get('/:orderId', async (req, res, next) => {
   try {
+    const dbCartItems = await Order_Products.findAll({
+      where: {
+        orderId: req.params.orderId,
+      },
+    });
+    console.log('i am getting all cart items from cart.js', dbCartItems);
+    res.send(dbCartItems);
   } catch (err) {
     next(err);
   }

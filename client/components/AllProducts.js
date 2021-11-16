@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchProducts } from '../store/products';
+import { fetchOpenCartItems } from '../store/dbCartItems';
 import { createOpenOrder } from '../store/openCart';
 import { Link } from 'react-router-dom';
 import { Grid } from '@mui/material';
@@ -24,8 +25,17 @@ const theme = createTheme();
 export class AllProducts extends React.Component {
   componentDidMount() {
     this.props.fetchProducts();
+    console.log('i am logged in', this.props.isLoggedIn);
     if (this.props.isLoggedIn) {
       this.props.createOpenOrder(this.props.userObject.id);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    console.log('in update');
+    if (prevProps.openOrder.id !== this.props.openOrder.id) {
+      console.log('should be getting stuff here');
+      this.props.fetchOpenCartItems(this.props.openOrder.id);
     }
   }
   render() {
@@ -69,11 +79,13 @@ const mapState = (state) => ({
   allProducts: state.allProducts,
   userObject: state.auth,
   isLoggedIn: !!state.auth.id,
+  openOrder: state.openOrder,
 });
 
 const mapDispatch = (dispatch) => ({
   fetchProducts: () => dispatch(fetchProducts()),
   createOpenOrder: (userId) => dispatch(createOpenOrder(userId)),
+  fetchOpenCartItems: (order) => dispatch(fetchOpenCartItems(order)),
 });
 
 export default connect(mapState, mapDispatch)(AllProducts);
