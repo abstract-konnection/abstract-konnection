@@ -12,16 +12,31 @@ const AuthForm = props => {
 
 
   return (
-    <div className="Form-Container">
-      <form className="Login-Form" onSubmit={handleSubmit} name={name}>
-        <TextField label="username" name="username" variant="filled" required />
-        <TextField label="Password" name="password" variant="filled" type="password" required />
-        <Button variant="contained" type="submit" color="primary">
-        {displayName}
-        </Button>
+      <Box
+        className="Form-Container"
+        component="form"
+        sx={{
+          '& .MuiTextField-root': { m: 1, width: '25ch' },
+        }}
+        noValidate
+        autoComplete="off"
+        onSubmit={handleSubmit} name={name}
+      >
+        <TextField id="outlined-basic" label="Username" type="username" name="username" />
+        <TextField
+          id="outlined-password-input"
+          label="Password"
+          type="password"
+          autoComplete="current-password"
+          name="password"
+        />
+        <div>
+          <Button type="submit" variant="contained" color="primary">
+            {displayName}
+          </Button>
+        </div>
         {error && error.response && <div> {error.response.data} </div>}
-      </form>
-    </div>
+      </Box>
   )
 }
 
@@ -29,44 +44,32 @@ const SignUpForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <div className="Form-Container">
-      <form className="Signup-Form" onSubmit={handleSubmit} name={name}>
-        <div>
-          <InputLabel htmlFor="username">
-            Username
-          </InputLabel>
-          <Input name="username" type="text" required />
-        </div>
-        <div>
-          <InputLabel htmlFor="password">
-            <small>Password</small>
-          </InputLabel>
-          <Input name="password" type="password" required />
-        </div>
-        <div>
-          <InputLabel htmlFor="email">
-            Email
-          </InputLabel>
-          <Input name="email" type="text" required />
-        </div>
-        <div>
-          <InputLabel htmlFor="firstName">
-            First Name
-          </InputLabel>
-          <Input name="firstName" type="text" required />
-        </div>
-        <div>
-          <InputLabel htmlFor="lastName">
-            Last Name
-          </InputLabel>
-          <Input name="lastName" type="text" required />
-        </div>
-        <div>
-          <Button type="submit" variant="contained" color="primary">{displayName}</Button>
-        </div>
+      <Box
+        className="Form-Container"
+        component="form"
+        sx={{
+          '& .MuiTextField-root': { m: 1, width: '25ch' },
+        }}
+        noValidate
+        autoComplete="off"
+        onSubmit={handleSubmit} name={name}
+      >
+        <TextField label="Username" type="username" name="username" />
+        <TextField
+          id="outlined-password-input"
+          label="Password"
+          type="password"
+          autoComplete="current-password"
+          name="password"
+        />
+        <TextField label="email" type="email" name="email" />
+        <TextField label="First Name" type="text" name="firstName" />
+        <TextField label="Last Name" type="textg" name="lastName" />
+
+        <Button type="submit" variant="contained" color="primary">{displayName}</Button>
+
         {error && error.response && <div> {error.response.data} </div>}
-      </form>
-    </div>
+      </Box>
   )
 }
 
