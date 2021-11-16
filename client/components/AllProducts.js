@@ -30,7 +30,7 @@ export class AllProducts extends React.Component {
   }
   render() {
     const products = this.props.allProducts || [];
-
+    console.log(products);
     return (
       <div>
         <ThemeProvider theme={theme}>
