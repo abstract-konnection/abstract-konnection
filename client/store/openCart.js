@@ -1,8 +1,15 @@
 const axios = require('axios');
+const TOKEN = 'token';
+
+/**
+ * ACTION TYPES
+ */
+const SET_AUTH = 'SET_AUTH';
 
 import { CLEAR_AFTER_LOGOUT } from '.';
 const CREATE_OPEN_ORDER = 'CREATE_OPEN_ORDER';
-const POPULATE_OPEN_ORDER = 'POPULATE_OPEN_ORDER';
+
+const setAuth = (auth) => ({ type: SET_AUTH, auth });
 
 const _createOpenOrder = (cart) => ({
 	type: CREATE_OPEN_ORDER,
@@ -14,6 +21,17 @@ const _fetOpenOrder = (cart) => ({
 	cart,
 });
 
+export const me = () => async (dispatch) => {
+	const token = window.localStorage.getItem(TOKEN);
+	if (token) {
+		const res = await axios.get('/auth/me', {
+			headers: {
+				authorization: token,
+			},
+		});
+		return dispatch(setAuth(res.data));
+	}
+};
 
 export const populateOpenOrder = (order) => {
 	return async (dispatch) => {
@@ -71,7 +89,9 @@ export default (state = {}, action) => {
 		case CREATE_OPEN_ORDER:
 			//returning back open order, NOT the order_products table.
 			return action.cart;
-			//returning back open order, NOT the order_products table.
+		//returning back open order, NOT the order_products table.
+		case SET_AUTH:
+			return action.auth;
 		case CLEAR_AFTER_LOGOUT:
 			return {};
 		default:

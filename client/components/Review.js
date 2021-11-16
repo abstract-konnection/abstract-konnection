@@ -14,11 +14,11 @@ function Review(props) {
 	const auth = useSelector((state) => state.auth);
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		if (auth.id) {
-			dispatch(closeOrder(auth.id));
-		}
-	});
+	// useEffect(() => {
+	// 	if (auth.id) {
+	// 		dispatch(closeOrder(auth.id));
+	// 	}
+	// });
 	return (
 		<React.Fragment>
 			<Typography variant="h6" gutterBottom>

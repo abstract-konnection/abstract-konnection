@@ -5,6 +5,7 @@ import dbCartItems, { fetchOpenCartItems } from '../store/dbCartItems';
 import { createOpenOrder } from '../store/openCart';
 import { populateOpenOrder } from '../store/openCart';
 import { Link } from 'react-router-dom';
+import { me } from '../store/openCart';
 
 export default function Cart(props) {
 	const id = props.match.params.id;
@@ -20,11 +21,12 @@ export default function Cart(props) {
 	const isLoggedIn = !!auth.id;
 	const productData = dbCart.length ? dbCart : cartItems;
 
-	const handleChange = (itemId, qty) => {
+	const handleChange = async (itemId, qty) => {
 		if (isLoggedIn) {
-			dispatch(addCartItems(itemId, qty));
-			dispatch(createOpenOrder(auth.id));
-			dispatch(fetchOpenCartItems(auth.id));
+			await dispatch(addCartItems(itemId, qty));
+			await dispatch(createOpenOrder(auth.id));
+			await dispatch(fetchOpenCartItems(auth.id));
+			await dispatch(me());
 			// dispatch(populateOpenOrder(OrderID?)) or some other way to get the browser to update without refresh;
 		} else {
 			dispatch(addCartItems(itemId, qty));
@@ -55,6 +57,7 @@ export default function Cart(props) {
 	};
 	useEffect(() => {
 		if (auth.id) {
+			dispatch(fetchOpenCartItems(auth.id));
 			dispatch(createOpenOrder(auth.id));
 		}
 	}, [auth, cartItems, dbCartItems]);
