@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {authenticate} from '../store'
-import { FormControl, InputLabel, Button, Box, TextField, CustomInput, formGroupClasses, Input, Label } from '@mui/material';
+import { Button, Box, TextField } from '@mui/material'
+import { Link } from 'react-router-dom'
 import '../../public/Forms.css'
 
 /**
@@ -34,7 +35,15 @@ const AuthForm = props => {
           <Button type="submit" variant="contained" color="primary">
             {displayName}
           </Button>
+
+          <Button component={Link} to="/signup"
+          variant="contained" color="primary" sx={{
+            marginLeft: 5
+          }}>
+            Sign Up
+          </Button>
         </div>
+
         {error && error.response && <div> {error.response.data} </div>}
       </Box>
   )
