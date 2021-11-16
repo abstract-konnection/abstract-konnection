@@ -8,6 +8,20 @@ const _fetchOpenCartItems = (orders) => ({
   orders,
 });
 
+// export const addToDatabase = (productId, qty) => {
+//   return async (dispatch) => {
+//     try{
+//       const token = localStorage.getItem('token');
+//       const {data: updated} = await axios.put(`/api/users/${userId}/cart`, qty,{
+//         headers: {
+//           authorization: token,
+//         })
+//     }
+//   }
+// }
+  
+  // item.productId, Number(e.target.value))
+
 export const fetchOpenCartItems = (userId) => {
   return async (dispatch) => {
     try {
