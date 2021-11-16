@@ -18,7 +18,7 @@ const addCartItem = (product, qty) => {
       imageURL: product.imageURL,
       price: product.price,
       quantity: product.quantity,
-      product: product.id,
+      productId: product.id,
       qty,
     },
   };
@@ -32,7 +32,7 @@ const removeCartItem = (product) => {
       imageURL: product.imageURL,
       price: product.price,
       quantity: product.quantity,
-      product: product.id,
+      productId: product.id,
     },
   };
 };
@@ -69,7 +69,7 @@ export const removeCartItems = (id) => {
       dispatch(removeCartItem(data));
       //get current items in localStorage and splice out product to remove
       let cartItems = JSON.parse(localStorage.getItem('cartItems'));
-      cartItems = cartItems.filter((product) => product.product !== id);
+      cartItems = cartItems.filter((product) => product.productId !== id);
       localStorage.setItem(
         'cartItems',
         JSON.stringify(getState().cartItem.cartItems)
@@ -85,13 +85,13 @@ export const cartReducer = (state = initialState, action) => {
     case ADD_CART_ITEM:
       const item = action.payload;
       const existingItem = state.cartItems.find(
-        (e) => e.product === item.product
+        (e) => e.productId === item.productId
       );
       if (existingItem) {
         return {
           ...state,
           cartItems: state.cartItems.map((e) =>
-            e.product === existingItem.product ? item : e
+            e.productId === existingItem.productId ? item : e
           ),
         };
       } else {
@@ -102,7 +102,9 @@ export const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         cartItems: [
-          ...state.cartItems.filter((item) => item.product !== product.product),
+          ...state.cartItems.filter(
+            (item) => item.productId !== product.productId
+          ),
         ],
       };
     case CLEAR_AFTER_LOGOUT:

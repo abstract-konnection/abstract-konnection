@@ -6,11 +6,17 @@ module.exports = router;
 
 //return the items in the cart so logged in user can
 //have a cart that persists regardless of browser
-router.get('/:orderId', async (req, res, next) => {
+router.get('/:userId', async (req, res, next) => {
   try {
+    const openOrder = await Order.findOne({
+      where: {
+        userId: req.params.userId,
+        status: 'open',
+      },
+    });
     const dbCartItems = await Order_Products.findAll({
       where: {
-        orderId: req.params.orderId,
+        orderId: openOrder.id,
       },
     });
     console.log('i am getting all cart items from cart.js', dbCartItems);

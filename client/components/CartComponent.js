@@ -11,7 +11,7 @@ export default function Cart(props) {
     : 1;
   const cart = useSelector((state) => state.cartItem);
   const dbCart = useSelector((state) => state.dbCartItems);
-  const openOrder = useSelector((state) => state.openOrder);
+  const auth = useSelector((state) => state.auth);
   const { cartItems } = cart;
   const dispatch = useDispatch();
 
@@ -19,15 +19,15 @@ export default function Cart(props) {
     dispatch(removeCartItems(id));
   };
   useEffect(() => {
-    dispatch(fetchOpenCartItems(openOrder.id));
-  }, []);
+    if (auth.id) {
+      dispatch(fetchOpenCartItems(auth.id));
+    }
+  }, [auth]);
 
   const productData = dbCart.length ? dbCart : cartItems;
   /* the productId on cartItems is assigned to the key product 
 	and assigned productId on dbCart. Ne need to standardize it 
 	here to generalize it in code */
-  const productId = dbCart.length ? 'productId' : 'product';
-  console.log('i am the product', productData[0].productId);
 
   return (
     <div>
@@ -80,8 +80,13 @@ export default function Cart(props) {
           <ul>
             <li>
               <h2>
-                Subtotal ({productData.reduce((a, c) => a + Number(c.qty), 0)}{' '}
-                items) : ${productData.reduce((a, c) => a + c.price * c.qty, 0)}
+                Subtotal ( {productData.length}
+                {/* {productData.reduce((a, c) => a + Number(c.qty), 0)}{' '} */}
+                {productData.length === 1 ? ' item' : ' items'}) : $
+                {productData.reduce(
+                  (a, c) => a + Number(c.price) * Number(c.qty),
+                  0
+                )}
               </h2>
             </li>
             <li>

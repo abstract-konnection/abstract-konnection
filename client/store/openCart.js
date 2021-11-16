@@ -19,11 +19,11 @@ export const populateOpenOrder = (order) => {
       if (cartItems.length) {
         const res = await Promise.all([
           cartItems.map((product) => {
-            axios.post(`/api/cart/${order.id}/${product.product}`, {
+            axios.post(`/api/cart/${order.id}/${product.productId}`, {
               quantity: product.qty,
               totalPrice: product.price * Number(product.qty),
               orderId: order.id,
-              productId: product.product,
+              productId: product.productId,
             });
           }),
         ]);
