@@ -20,17 +20,29 @@ export default function Cart(props) {
 	const isLoggedIn = !!auth.id;
 	const productData = dbCart.length ? dbCart : cartItems;
 
-	const handleChange = (e, itemId) => {
+	const handleChange = (itemId, qty) => {
 		if (isLoggedIn) {
 			dispatch(createOpenOrder(auth.id));
-			dispatch(addCartItems(itemId, Number(e.target.value)));
+			dispatch(addCartItems(itemId, qty));
 			dispatch(createOpenOrder(auth.id));
 			dispatch(fetchOpenCartItems(auth.id));
 			// dispatch(populateOpenOrder(OrderID?)) or some other way to get the browser to update without refresh;
 		} else {
-			dispatch(addCartItems(itemId, Number(e.target.value)));
+			dispatch(addCartItems(itemId, qty));
 		}
 	};
+
+	// const handleChange = (e, itemId) => {
+	// 	if (isLoggedIn) {
+	// 		dispatch(createOpenOrder(auth.id));
+	// 		dispatch(addCartItems(itemId, Number(e.target.value)));
+	// 		dispatch(createOpenOrder(auth.id));
+	// 		dispatch(fetchOpenCartItems(auth.id));
+	// 		// dispatch(populateOpenOrder(OrderID?)) or some other way to get the browser to update without refresh;
+	// 	} else {
+	// 		dispatch(addCartItems(itemId, Number(e.target.value)));
+	// 	}
+	// };
 
 	const removeFromCart = (id) => {
 		if (isLoggedIn) {
@@ -70,7 +82,20 @@ export default function Cart(props) {
 										<Link to={`/products/${item.productId}`}>{item.title}</Link>
 									</div>
 									<div>
-										<select
+										<button
+											onClick={() =>
+												handleChange(item.productId, Number(--item.qty))
+											}>
+											-
+										</button>
+										<h3>{item.qty}</h3>
+										<button
+											onClick={() =>
+												handleChange(item.productId, Number(++item.qty))
+											}>
+											+
+										</button>
+										{/* <select
 											value={item.qty}
 											onChange={(e) => handleChange(e, item.productId)}>
 											{[...Array(item.quantity).keys()].map((e) => (
@@ -78,7 +103,7 @@ export default function Cart(props) {
 													{e + 1}
 												</option>
 											))}
-										</select>
+										</select> */}
 									</div>
 									<div>Price: ${item.price}</div>
 									<button onClick={() => removeFromCart(item.productId)}>
