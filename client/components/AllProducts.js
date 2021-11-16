@@ -29,13 +29,20 @@ export class AllProducts extends React.Component {
       this.props.createOpenOrder(this.props.userObject.id);
     }
   }
-  componentDidUpdate(prevProps) {
-    if (prevProps.isLoading !== this.props.isLoading) {
-      if (this.props.isLoggedIn) {
-        this.props.fetchOpenCartItems(this.props.userObject.id);
-      }
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   // console.log('i am in the update component');
+  //   // console.log('prev props', prevProps);
+  //   // console.log('curr props', this.props);
+  //   // if (prevProps.isLoading !== this.props.isLoading && this.props.isLoggedIn) {
+  //   //   console.log('done loading');
+  //   //   this.props.createOpenOrder(this.props.userObject.id);
+  //   //   this.props.fetchOpenCartItems(this.props.userObject.id);
+  //   // }
+  //   console.log('i am the user object', this.props.userObject);
+  //   if (prevProps.isLoggedIn !== this.props.isLoggedIn) {
+  //     this.props.createOpenOrder(this.props.userObject.id);
+  //   }
+  // }
   render() {
     const products = this.props.allProducts || [];
 
