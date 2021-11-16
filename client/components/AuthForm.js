@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {authenticate} from '../store'
-import { FormControl, InputLabel, Button, Box, TextField, CustomInput, formGroupClasses, Input, Label } from '@mui/material';
+import { Button, Box, TextField } from '@mui/material'
+import { Link } from 'react-router-dom'
 import '../../public/Forms.css'
 
 /**
@@ -12,16 +13,40 @@ const AuthForm = props => {
 
 
   return (
-    <div className="Form-Container">
-      <form className="Login-Form" onSubmit={handleSubmit} name={name}>
-        <TextField label="username" name="username" variant="filled" required />
-        <TextField label="Password" name="password" variant="filled" type="password" required />
-        <Button variant="contained" type="submit" color="primary">
-        {displayName}
-        </Button>
+      <Box
+        component="form"
+        className="Form-Container"
+        sx={{
+          '& .MuiTextField-root': { m: 1, width: '25ch' },
+        }}
+        noValidate
+        autoComplete="off"
+        onSubmit={handleSubmit} name={name}
+      >
+        <TextField id="outlined-basic" label="Username" type="username" name="username" />
+        <TextField
+          id="outlined-password-input"
+          label="Password"
+          type="password"
+          autoComplete="current-password"
+          name="password"
+        />
+        <div>
+          <Button type="submit" variant="contained" color="primary">
+            {displayName}
+          </Button>
+
+          <Button component={Link} to="/signup"
+          variant="contained" color="primary" sx={{
+            marginLeft: 6.5
+          }}>
+            Sign Up
+          </Button>
+        </div>
+
         {error && error.response && <div> {error.response.data} </div>}
-      </form>
-    </div>
+      </Box>
+
   )
 }
 
@@ -30,42 +55,42 @@ const SignUpForm = props => {
 
   return (
     <div className="Form-Container">
-      <form className="Signup-Form" onSubmit={handleSubmit} name={name}>
-        <div>
-          <InputLabel htmlFor="username">
-            Username
-          </InputLabel>
-          <Input name="username" type="text" required />
+      <Box
+        component="form"
+        sx={{
+          '& .MuiTextField-root': { m: 1, width: '25ch' },
+        }}
+        noValidate
+        autoComplete="off"
+        onSubmit={handleSubmit} name={name}
+      >
+        <div className="row">
+          <div className="column">
+            <TextField label="Username" type="username" name="username" />
+            <TextField label="Email" type="email" name="email" />
+          </div>
+          <div className="column">
+            <TextField
+                id="outlined-password-input"
+                label="Password"
+                type="password"
+                autoComplete="current-password"
+                name="password"
+              />
+          </div>
         </div>
-        <div>
-          <InputLabel htmlFor="password">
-            <small>Password</small>
-          </InputLabel>
-          <Input name="password" type="password" required />
+        <div className="row">
+          <div className="column">
+            <TextField label="First Name" type="text" name="firstName" />
+          </div>
+          <div className="column">
+            <TextField label="Last Name" type="textg" name="lastName" />
+          </div>
         </div>
-        <div>
-          <InputLabel htmlFor="email">
-            Email
-          </InputLabel>
-          <Input name="email" type="text" required />
-        </div>
-        <div>
-          <InputLabel htmlFor="firstName">
-            First Name
-          </InputLabel>
-          <Input name="firstName" type="text" required />
-        </div>
-        <div>
-          <InputLabel htmlFor="lastName">
-            Last Name
-          </InputLabel>
-          <Input name="lastName" type="text" required />
-        </div>
-        <div>
-          <Button type="submit" variant="contained" color="primary">{displayName}</Button>
-        </div>
+        <Button type="submit" variant="contained" color="primary">{displayName}</Button>
+
         {error && error.response && <div> {error.response.data} </div>}
-      </form>
+      </Box>
     </div>
   )
 }
