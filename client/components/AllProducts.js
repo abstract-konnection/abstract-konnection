@@ -25,19 +25,11 @@ const theme = createTheme();
 export class AllProducts extends React.Component {
   componentDidMount() {
     this.props.fetchProducts();
-    console.log('i am logged in', this.props.isLoggedIn);
     if (this.props.isLoggedIn) {
       this.props.createOpenOrder(this.props.userObject.id);
     }
   }
 
-  componentDidUpdate(prevProps) {
-    console.log('in update');
-    if (prevProps.openOrder.id !== this.props.openOrder.id) {
-      console.log('should be getting stuff here');
-      this.props.fetchOpenCartItems(this.props.openOrder.id);
-    }
-  }
   render() {
     const products = this.props.allProducts || [];
 

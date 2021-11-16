@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCartItems, removeCartItems } from '../store/cart';
+import { fetchOpenCartItems } from '../store/dbCartItems';
 import { Link } from 'react-router-dom';
 
 export default function Cart(props) {
@@ -10,18 +11,23 @@ export default function Cart(props) {
     : 1;
   const cart = useSelector((state) => state.cartItem);
   const dbCart = useSelector((state) => state.dbCartItems);
+  const openOrder = useSelector((state) => state.openOrder);
   const { cartItems } = cart;
   const dispatch = useDispatch();
 
   const removeFromCart = (id) => {
     dispatch(removeCartItems(id));
   };
+  useEffect(() => {
+    dispatch(fetchOpenCartItems(openOrder.id));
+  }, []);
 
   const productData = dbCart.length ? dbCart : cartItems;
   /* the productId on cartItems is assigned to the key product 
 	and assigned productId on dbCart. Ne need to standardize it 
 	here to generalize it in code */
   const productId = dbCart.length ? 'productId' : 'product';
+  console.log('i am the product', productData[0].productId);
 
   return (
     <div>
@@ -35,22 +41,20 @@ export default function Cart(props) {
         ) : (
           <ul>
             {productData.map((item) => (
-              <li key={item[productId]}>
+              <li key={item.productId}>
                 <div>
                   <div>
                     <img src={item.imageURL} alt={item.title}></img>
                   </div>
                   <div>
-                    <Link to={`/products/${item[productId]}`}>
-                      {item.title}
-                    </Link>
+                    <Link to={`/products/${item.productId}`}>{item.title}</Link>
                   </div>
                   <div>
                     <select
                       value={item.qty}
                       onChange={(e) =>
                         dispatch(
-                          addCartItems(item[productId], Number(e.target.value))
+                          addCartItems(item.productId, Number(e.target.value))
                         )
                       }
                     >
@@ -62,7 +66,7 @@ export default function Cart(props) {
                     </select>
                   </div>
                   <div>Price: ${item.price}</div>
-                  <button onClick={() => removeFromCart(item[productId])}>
+                  <button onClick={() => removeFromCart(item.productId)}>
                     Remove From Cart
                   </button>
                 </div>

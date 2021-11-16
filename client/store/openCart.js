@@ -15,8 +15,8 @@ export const populateOpenOrder = (order) => {
       const cartItems = localStorage.getItem('cartItems')
         ? JSON.parse(localStorage.getItem('cartItems'))
         : [];
-      console.log('i am the cartItems', cartItems);
-      if (cartItems.length > 0) {
+
+      if (cartItems.length) {
         const res = await Promise.all([
           cartItems.map((product) => {
             axios.post(`/api/cart/${order.id}/${product.product}`, {
