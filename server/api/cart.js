@@ -26,7 +26,7 @@ router.post('/:orderId/:productId', async (req, res, next) => {
       await alreadyInCart.update(req.body);
       order.update({
         totalPrice:
-          order.totalPrice + alreadyInCart.totalPrice - oldProductTotalPrice,
+          order.totalPrice + (alreadyInCart.totalPrice - oldProductTotalPrice),
       });
       res.send(alreadyInCart);
     }

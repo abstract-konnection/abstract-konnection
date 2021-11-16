@@ -22,12 +22,13 @@ export default function Cart(props) {
     if (auth.id) {
       dispatch(fetchOpenCartItems(auth.id));
     }
-  }, [auth]);
+  }, [auth, cartItems]);
 
   const productData = dbCart.length ? dbCart : cartItems;
   /* the productId on cartItems is assigned to the key product 
 	and assigned productId on dbCart. Ne need to standardize it 
 	here to generalize it in code */
+  const isLoggedIn = !!auth.id;
 
   return (
     <div>
