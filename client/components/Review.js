@@ -17,14 +17,18 @@ function Review(props) {
 				{props.cartItems.map((product) => (
 					<ListItem key={product.id} sx={{ py: 1, px: 0 }}>
 						<ListItemText primary={product.title} />
-						<Typography variant="body2">{product.price}</Typography>
+						<Typography variant="body2">
+							${product.price} * {product.qty}(items) = $
+							{product.price * product.qty}
+						</Typography>
 					</ListItem>
 				))}
 
 				<ListItem sx={{ py: 1, px: 0 }}>
 					<ListItemText primary="Total" />
 					<Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-						$Pending
+						({props.cartItems.reduce((a, c) => a + Number(c.qty), 0)} items) : $
+						{props.cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
 					</Typography>
 				</ListItem>
 			</List>
@@ -33,7 +37,7 @@ function Review(props) {
 }
 
 const mapStateToProps = (state) => ({
-	cartItems: state.checkout.cartItems,
+	cartItems: state.cartItem.cartItems,
 });
 
 export default connect(mapStateToProps)(Review);
