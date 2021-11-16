@@ -63,18 +63,29 @@ const SignUpForm = props => {
         autoComplete="off"
         onSubmit={handleSubmit} name={name}
       >
-        <TextField label="Username" type="username" name="username" />
-        <TextField
-          id="outlined-password-input"
-          label="Password"
-          type="password"
-          autoComplete="current-password"
-          name="password"
-        />
-        <TextField label="email" type="email" name="email" />
-        <TextField label="First Name" type="text" name="firstName" />
-        <TextField label="Last Name" type="textg" name="lastName" />
-
+        <div className="row">
+          <div className="column">
+            <TextField label="Username" type="username" name="username" />
+            <TextField label="email" type="email" name="email" />
+          </div>
+          <div className="column">
+            <TextField
+                id="outlined-password-input"
+                label="Password"
+                type="password"
+                autoComplete="current-password"
+                name="password"
+              />
+          </div>
+        </div>
+        <div className="row">
+          <div className="column">
+            <TextField label="First Name" type="text" name="firstName" />
+          </div>
+          <div className="column">
+            <TextField label="Last Name" type="textg" name="lastName" />
+          </div>
+        </div>
         <Button type="submit" variant="contained" color="primary">{displayName}</Button>
 
         {error && error.response && <div> {error.response.data} </div>}
