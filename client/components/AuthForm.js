@@ -14,8 +14,8 @@ const AuthForm = props => {
 
   return (
       <Box
-        className="Form-Container"
         component="form"
+        className="Form-Container"
         sx={{
           '& .MuiTextField-root': { m: 1, width: '25ch' },
         }}
@@ -38,7 +38,7 @@ const AuthForm = props => {
 
           <Button component={Link} to="/signup"
           variant="contained" color="primary" sx={{
-            marginLeft: 5
+            marginLeft: 6.5
           }}>
             Sign Up
           </Button>
@@ -46,6 +46,7 @@ const AuthForm = props => {
 
         {error && error.response && <div> {error.response.data} </div>}
       </Box>
+
   )
 }
 
@@ -53,8 +54,8 @@ const SignUpForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
+    <div className="Form-Container">
       <Box
-        className="Form-Container"
         component="form"
         sx={{
           '& .MuiTextField-root': { m: 1, width: '25ch' },
@@ -66,7 +67,7 @@ const SignUpForm = props => {
         <div className="row">
           <div className="column">
             <TextField label="Username" type="username" name="username" />
-            <TextField label="email" type="email" name="email" />
+            <TextField label="Email" type="email" name="email" />
           </div>
           <div className="column">
             <TextField
@@ -90,6 +91,7 @@ const SignUpForm = props => {
 
         {error && error.response && <div> {error.response.data} </div>}
       </Box>
+    </div>
   )
 }
 

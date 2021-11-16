@@ -3,13 +3,15 @@
   flex-flow: column wrap;
   align-content: center;
 }
-.Login-Form {
-  width: 300px;
-}
-.Signup-Form {
-  width: 500px;
+
+.Form-Container div {
+  margin: 0;
+  padding: 0;
 }
 
+.Form-Container Button {
+  margin-left: 10px;
+}
 .row {
   display: flex;
   flex-direction: row;
