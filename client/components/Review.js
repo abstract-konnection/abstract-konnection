@@ -15,10 +15,10 @@ function Review(props) {
 			</Typography>
 			<List disablePadding>
 				{props.cartItems.map((product) => (
-					<ListItem key={product.id} sx={{ py: 1, px: 0 }}>
+					<ListItem key={product.product} sx={{ py: 1, px: 0 }}>
 						<ListItemText primary={product.title} />
 						<Typography variant="body2">
-							${product.price} * {product.qty}(items) = $
+							${product.price} x {product.qty}(items) = $
 							{product.price * product.qty}
 						</Typography>
 					</ListItem>
