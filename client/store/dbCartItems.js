@@ -12,12 +12,22 @@ export const fetchOpenCartItems = (userId) => {
   return async (dispatch) => {
     try {
       const token = localStorage.getItem('token');
-      const { data: orders } = await axios.get(`/api/cart/${userId}`, {
+      const { data: orders } = await axios.get(`/api/users/${userId}/cart`, {
         headers: {
           authorization: token,
         },
       });
-      dispatch(_fetchOpenCartItems(orders));
+      const orderWithProducts = orders.map((order) => {
+        return {
+          title: order.product.title,
+          imageURL: order.product.imageURL,
+          price: order.product.price,
+          quantity: order.product.quantity,
+          productId: order.product.id,
+          qty: order.quantity,
+        };
+      });
+      dispatch(_fetchOpenCartItems(orderWithProducts));
     } catch (err) {
       console.error('Could not fetch cart items', err);
     }
