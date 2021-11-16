@@ -9,8 +9,15 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import Badge from '@mui/material/Badge';
 
-const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
+const Navbar = ({
+  handleClick,
+  isLoggedIn,
+  isAdmin,
+  dbCartItems,
+  localStorageCart,
+}) => (
   <Box sx={{ flexGrow: 1 }}>
     <AppBar position="static">
       <Toolbar>
@@ -40,7 +47,9 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
               <Button color="inherit">Home</Button>
             </Link>
             <Link to="/cart" style={{ color: '#FFF' }}>
-              <Button color="inherit">Cart</Button>
+              <Badge badgeContent={dbCartItems.length} color="secondary">
+                <Button color="inherit">Cart</Button>
+              </Badge>
             </Link>
             <Button color="inherit" onClick={handleClick}>
               Logout
@@ -64,9 +73,11 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
               </Button>
             </Link>
             <Link to="/cart">
-              <Button color="inherit" style={{ color: '#FFF' }}>
-                Cart
-              </Button>
+              <Badge badgeContent={localStorageCart.length} color="secondary">
+                <Button color="inherit" style={{ color: '#FFF' }}>
+                  Cart
+                </Button>
+              </Badge>
             </Link>
           </div>
         )}
@@ -82,6 +93,8 @@ const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
     isAdmin: !!state.auth.admin,
+    dbCartItems: state.dbCartItems,
+    localStorageCart: state.cartItem.cartItems,
   };
 };
 

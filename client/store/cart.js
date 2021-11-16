@@ -36,16 +36,6 @@ const removeCartItem = (product) => {
     },
   };
 };
-// export const updateCartItems = (id, qty) => {
-// 	return async (dispatch, getState) => {
-// 		try {
-// 			const { data: updated } = await axios.put(`/api/products/${id}`);
-// 			dispatch(updateCartItem(data, qty));
-// 		} catch (error) {
-// 			console.log('Add to cart thunk:', error);
-// 		}
-// 	};
-// };
 
 export const addCartItems = (id, qty) => {
   return async (dispatch, getState) => {
