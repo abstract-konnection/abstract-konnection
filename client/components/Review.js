@@ -18,7 +18,7 @@ function Review(props) {
 					<ListItem key={product.product} sx={{ py: 1, px: 0 }}>
 						<ListItemText primary={product.title} />
 						<Typography variant="body2">
-							${product.price} * {product.qty}(items) = $
+							${product.price} x {product.qty}(items) = $
 							{product.price * product.qty}
 						</Typography>
 					</ListItem>
