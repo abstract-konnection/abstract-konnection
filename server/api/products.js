@@ -4,11 +4,31 @@ const {
 } = require('../db');
 module.exports = router;
 
+const getPagination = (page, size) => {
+	const limit = size ? + size : 3;
+	const offset = page ? page * limit : 0;
+
+	return { limit, offset };
+}
+
+//
+const getPagingData = (data, page, limit) => {
+  const { count: totalItems, rows: products } = data;
+  const currentPage = page ? + page : 0;
+  const totalPages = Math.ceil(totalItems / limit);
+
+  return { totalItems, products, totalPages, currentPage };
+};
 
 router.get('/', async (req, res, next) => {
 	try {
-		const products = await Product.findAndCountAll();
-		res.json(products);
+		const { page, size, title } = req.query;
+		const { limit, offset } = getPagination(page, size);
+
+
+		const products = await Product.findAndCountAll({limit, offset});
+		const response = getPagingData(products, page, limit);
+		res.json(response);
 	} catch (err) {
 		next(err);
 	}
