@@ -22,7 +22,6 @@ export default function Cart(props) {
 
 	const handleChange = (itemId, qty) => {
 		if (isLoggedIn) {
-			dispatch(createOpenOrder(auth.id));
 			dispatch(addCartItems(itemId, qty));
 			dispatch(createOpenOrder(auth.id));
 			dispatch(fetchOpenCartItems(auth.id));
@@ -56,7 +55,6 @@ export default function Cart(props) {
 	};
 	useEffect(() => {
 		if (auth.id) {
-			console.log(productData);
 			dispatch(createOpenOrder(auth.id));
 		}
 	}, [auth, cartItems, dbCartItems]);
