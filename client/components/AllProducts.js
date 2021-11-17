@@ -4,12 +4,12 @@ import { fetchProducts } from '../store/products';
 import { fetchOpenCartItems } from '../store/dbCartItems';
 import { createOpenOrder } from '../store/openCart';
 import { Link } from 'react-router-dom';
-import { Grid, Pagination } from '@mui/material';
+import { Grid, Pagination, CircularProgress } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import store from '../store';
 import '../../public/AllProducts.css'
-
+import Mission from './Mission';
 
 function Copyright() {
   return (
@@ -34,16 +34,25 @@ export class AllProducts extends React.Component {
 
       page: 1,
       count: 0,
-      pageSize: 5
+      pageSize: 5,
+
+      isLoading: false,
     };
 
     this.setupFetchProductsDispatch = this.setupFetchProductsDispatch.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
   }
 
-  componentDidMount() {
+
+  async componentDidMount() {
+    this.setState({ isLoading: true });
+
     // Setup the product dispatch
-    this.setupFetchProductsDispatch();
+    await this.setupFetchProductsDispatch();
+
+    //await this.props.fetchProducts();
+
+    this.setState({ isLoading: false });
     if (this.props.isLoggedIn) {
       this.props.createOpenOrder(this.props.userObject.id);
     }
@@ -97,55 +106,65 @@ export class AllProducts extends React.Component {
     return (
 
       <div>
-
-
-        <ThemeProvider theme={theme}>
-        <div className="parent">
-          <Pagination
-          className="child"
-            count={totalPages}
-            page={page}
-            siblingCount={1}
-            boundaryCount={1}
-            variant="outlined"
-            shape="rounded"
-            onChange={this.handlePageChange}
-            sx={{
-              margin: 0
-            }}
-          />
-        </div>
-          <Grid
-            container
-            spacing={0}
-            alignItems="center"
-            justifyContent="center"
-          >
-
-
-            {products.length > 0 ? (
-              products.map((product) => {
-                return (
-                  <div key={product.id} id="products-view">
-                    {/* <Item> */}
-                    <Link
-                      to={`/products/${product.id}`}
-                      style={{ textDecoration: 'none', color: 'black' }}
-                    >
-                      <img src={product.imageURL} />
-                    </Link>
-                  </div>
-                );
-              })
-            ) : (
-              <h3>No Products currently exist</h3>
-            )}
-
-          </Grid>
-          <Copyright />
-
-        </ThemeProvider>
-
+        {this.state.isLoading === true ? (
+          <div>
+            <Mission />
+            <main>
+              <Grid
+                container
+                spacing={0}
+                alignItems="center"
+                justifyContent="center"
+              >
+                <CircularProgress color="secondary" />
+              </Grid>
+            </main>
+          </div>
+        ) : (
+          <ThemeProvider theme={theme}>
+            <Mission />
+            <div className="parent">
+              <Pagination
+                className="child"
+                  count={totalPages}
+                  page={page}
+                  siblingCount={1}
+                  boundaryCount={1}
+                  variant="outlined"
+                  shape="rounded"
+                  onChange={this.handlePageChange}
+                  sx={{
+                    margin: 0
+                  }}
+              />
+             </div>
+            <Grid
+              container
+              spacing={0}
+              alignItems="center"
+              justifyContent="center"
+            >
+              {products.length > 0 ? (
+                products.map((product) => {
+                  return (
+                    <div key={product.id} id="products-view">
+                      {/* <Item> */}
+                      <Link
+                        to={`/products/${product.id}`}
+                        style={{ textDecoration: 'none', color: 'black' }}
+                      >
+                        <img src={product.imageURL} />
+                      </Link>
+                    </div>
+                  );
+                })
+              ) : (
+                <h3>No Products currently exist</h3>
+              )}
+            </Grid>
+            <Copyright />
+          </ThemeProvider>
+        )}
       </div>
     );
   }
