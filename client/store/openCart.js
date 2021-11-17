@@ -8,11 +8,17 @@ const SET_AUTH = 'SET_AUTH';
 
 import { CLEAR_AFTER_LOGOUT } from '.';
 const CREATE_OPEN_ORDER = 'CREATE_OPEN_ORDER';
+const DELETE_FROM_OPEN_ORDER = 'DELETE_FROM_OPEN_ORDER';
 
 const setAuth = (auth) => ({ type: SET_AUTH, auth });
 
 const _createOpenOrder = (cart) => ({
   type: CREATE_OPEN_ORDER,
+  cart,
+});
+
+const _deleteFromOpenOrder = (cart) => ({
+  type: EDIT_OPEN_ORDER,
   cart,
 });
 
@@ -82,12 +88,27 @@ export const createOpenOrder = (userId) => {
   };
 };
 
+export const deleteFromOpenOrder = (order, productId) => {
+  return async (dispatch) => {
+    try {
+      await axios.delete(`/api/cart/${order.id}/${productId}`);
+      dispatch(_deleteFromOpenOrder(order));
+    } catch (err) {
+      console.error('Could not get an open order:', err);
+    }
+  };
+};
+
+//HOW TO EDIT CART
+
 export default (state = {}, action) => {
   switch (action.type) {
     case CREATE_OPEN_ORDER:
       //returning back open order, NOT the order_products table.
       return action.cart;
     //returning back open order, NOT the order_products table.
+    case DELETE_FROM_OPEN_ORDER:
+      return action.cart;
     case SET_AUTH:
       return {};
     case CLEAR_AFTER_LOGOUT:

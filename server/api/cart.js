@@ -14,6 +14,7 @@ router.post('/:orderId/:productId', async (req, res, next) => {
         productId: req.params.productId,
       },
     });
+
     const order = await Order.findByPk(req.params.orderId);
     if (!alreadyInCart) {
       const orderProduct = await Order_Products.create(req.body);
@@ -30,6 +31,19 @@ router.post('/:orderId/:productId', async (req, res, next) => {
       });
       res.send(alreadyInCart);
     }
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.delete('/:orderId/:productId', async (req, res, next) => {
+  try {
+    const order = await Order.findOne({
+      where: {
+        id: req.params.orderId,
+      },
+    });
+    order.removeProduct(Number(req.params.productId));
   } catch (err) {
     next(err);
   }

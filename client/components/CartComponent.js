@@ -2,8 +2,11 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCartItems, removeCartItems } from '../store/cart';
 import dbCartItems, { fetchOpenCartItems } from '../store/dbCartItems';
-import { createOpenOrder } from '../store/openCart';
-import { populateOpenOrder } from '../store/openCart';
+import {
+  createOpenOrder,
+  populateOpenOrder,
+  deleteFromOpenOrder,
+} from '../store/openCart';
 import { Link } from 'react-router-dom';
 import { me } from '../store/openCart';
 
@@ -45,13 +48,14 @@ export default function Cart(props) {
   // 	}
   // };
 
-  const removeFromCart = (id) => {
+  const removeFromCart = async (id) => {
     if (isLoggedIn) {
-      dispatch(removeCartItems(id));
-      dispatch(fetchOpenCartItems(auth.id));
-      dispatch(createOpenOrder(auth.id));
+      await dispatch(removeCartItems(id));
+      await dispatch(deleteFromOpenOrder(order, id));
+      await dispatch(fetchOpenCartItems(auth.id));
+      await dispatch(me());
     } else {
-      dispatch(removeCartItems(id));
+      await dispatch(removeCartItems(id));
     }
   };
   useEffect(() => {
