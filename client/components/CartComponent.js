@@ -87,6 +87,7 @@ export default function Cart(props) {
                   </div>
                   <div>
                     <button
+                      disabled={item.qty <= 1}
                       onClick={() =>
                         handleChange(item.productId, Number(--item.qty))
                       }
@@ -95,6 +96,7 @@ export default function Cart(props) {
                     </button>
                     <h3>{item.qty}</h3>
                     <button
+                      disabled={item.qty >= item.quantity}
                       onClick={() =>
                         handleChange(item.productId, Number(++item.qty))
                       }
