@@ -45,12 +45,13 @@ export default function Cart(props) {
 	// 	}
 	// };
 
-	const removeFromCart = (id) => {
+	const removeFromCart = async (id) => {
 		if (isLoggedIn) {
-			dispatch(addCartItems(id, 0));
-			dispatch(removeCartItems(id));
-			dispatch(fetchOpenCartItems(auth.id));
-			dispatch(createOpenOrder(auth.id));
+			await dispatch(removeCartItems(id));
+            //remove the order_product with the orderid and userid matching the user and order
+			await dispatch(createOpenOrder(auth.id));
+			await dispatch(fetchOpenCartItems(auth.id));
+			await dispatch(me());
 		} else {
 			dispatch(removeCartItems(id));
 		}
