@@ -31,3 +31,7 @@ div#products-view img:hover {
   transition: transform 0.5s ease;
   transform: scale(1.5);
 }
+
+div#home-component {
+  background-image: 'https://wallpaperaccess.com/full/402810.jpg';
+}
