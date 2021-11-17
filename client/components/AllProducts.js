@@ -40,7 +40,9 @@ export class AllProducts extends React.Component {
     this.setupFetchProductsDispatch = this.setupFetchProductsDispatch.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
   }
+
   componentDidMount() {
+    // Setup the product dispatch
     this.setupFetchProductsDispatch();
     if (this.props.isLoggedIn) {
       this.props.createOpenOrder(this.props.userObject.id);
@@ -92,9 +94,6 @@ export class AllProducts extends React.Component {
     const products = this.props.allProducts.products || [];
     console.log("Returned AllProducts Dispatch: ", this.props.allProducts);
     const {totalPages, page} = this.props.allProducts;
-
-    console.log("page: ", page);
-
     return (
 
       <div>
