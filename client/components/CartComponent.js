@@ -9,7 +9,18 @@ import {
 } from '../store/openCart';
 import { Link } from 'react-router-dom';
 import { me } from '../store/openCart';
-import { Paper, Grid, Button, Box, Stack, Typography } from '@mui/material';
+import {
+	Paper,
+	Grid,
+	Button,
+	Box,
+	Stack,
+	Typography,
+	MenuItem,
+	InputLabel,
+	Select,
+} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/delete';
 
 export default function Cart(props) {
 	const id = props.match.params.id;
@@ -109,17 +120,55 @@ export default function Cart(props) {
 															to={`/products/${item.productId}`}
 															color="inherit"
 															style={{
-																color: '#FFF',
 																justifyContent: 'center',
 															}}>
-															{item.title}
+															<Typography variant="h5" align="center">
+																{item.title}
+															</Typography>
 														</Link>
 													</div>
 													<div>
-														<Grid>
-															<Stack sx={{ pt: 4 }} direction="row" spacing={1}>
-																<Box direction="row">
-																	<Button
+														<Typography variant="body1" align="center">
+															Price: ${item.price}
+														</Typography>
+														<Stack
+															sx={{ pt: 4 }}
+															direction="row"
+															spacing={2}
+															justifyContent="center">
+															<InputLabel
+																color="success"
+																variant="standard"
+																htmlFor="uncontrolled-native">
+																Quantity
+															</InputLabel>
+															<Select
+																size="small"
+																sx={{ width: '7ch', height: '3ch' }}
+																value={item.qty}
+																onChange={(e) =>
+																	handleChange(
+																		item.productId,
+																		Number(e.target.value)
+																	)
+																}>
+																{[...Array(item.quantity).keys()].map((e) => (
+																	<MenuItem
+																		size="small"
+																		key={e + 1}
+																		value={e + 1}>
+																		{e + 1}
+																	</MenuItem>
+																))}
+															</Select>
+															<Button
+																variant="contained"
+																startIcon={<DeleteIcon />}
+																onClick={() => removeFromCart(item.productId)}>
+																Remove From Cart
+															</Button>
+														</Stack>
+														{/* <Button
 																		variant="contained"
 																		size="small"
 																		disabled={item.qty <= 1}
@@ -143,25 +192,8 @@ export default function Cart(props) {
 																			)
 																		}>
 																		+
-																	</Button>
-																</Box>
-															</Stack>
-														</Grid>
-														{/* <select
-											value={item.qty}
-											onChange={(e) => handleChange(e, item.productId)}>
-											{[...Array(item.quantity).keys()].map((e) => (
-												<option key={e + 1} value={e + 1}>
-													{e + 1}
-												</option>
-											))}
-										</select> */}
+																	</Button> */}
 													</div>
-													<div>Price: ${item.price}</div>
-													<button
-														onClick={() => removeFromCart(item.productId)}>
-														Remove From Cart
-													</button>
 												</div>
 											</li>
 										))}
@@ -169,30 +201,35 @@ export default function Cart(props) {
 								</ul>
 							)}
 						</div>
-						<div>
-							<div>
-								<ul>
-									<li>
-										<h2>
-											Subtotal ( {productData.length}
-											{/* {productData.reduce((a, c) => a + Number(c.qty), 0)}{' '} */}
-											{productData.length === 1 ? ' item' : ' items'}) : $
-											{productData.reduce(
-												(a, c) => a + Number(c.price) * Number(c.qty),
-												0
-											)}
-										</h2>
-									</li>
-									<li>
-										<Link to={'/checkout'}>
-											<button type="button" disabled={productData.length === 0}>
-												Proceed to Checkout
-											</button>
-										</Link>
-									</li>
-								</ul>
-							</div>
-						</div>
+						<Stack
+							sx={{ pt: 4 }}
+							direction="row"
+							spacing={2}
+							justifyContent="center">
+							<ul>
+								<li>
+									<h2>
+										Subtotal ( {productData.length}
+										{/* {productData.reduce((a, c) => a + Number(c.qty), 0)}{' '} */}
+										{productData.length === 1 ? ' item' : ' items'}) : $
+										{productData.reduce(
+											(a, c) => a + Number(c.price) * Number(c.qty),
+											0
+										)}
+									</h2>
+								</li>
+								<li>
+									<Link to={'/checkout'}>
+										<Button
+											variant="contained"
+											type="button"
+											disabled={productData.length === 0}>
+											Proceed to Checkout
+										</Button>
+									</Link>
+								</li>
+							</ul>
+						</Stack>
 					</main>
 				</Stack>
 			</Grid>
