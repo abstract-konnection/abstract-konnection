@@ -1,10 +1,11 @@
 import axios from 'axios';
 
 import { CLEAR_AFTER_LOGOUT } from '.';
+const CLOSE_ORDER = 'CLOSE_ORDER';
 const initialState = {
-	cartItems: localStorage.getItem('cartItems')
-		? JSON.parse(localStorage.getItem('cartItems'))
-		: [],
+  cartItems: localStorage.getItem('cartItems')
+    ? JSON.parse(localStorage.getItem('cartItems'))
+    : [],
 };
 
 export const ADD_CART_ITEM = 'ADD_CART_ITEM';
@@ -36,30 +37,20 @@ const removeCartItem = (product) => {
     },
   };
 };
-// export const updateCartItems = (id, qty) => {
-// 	return async (dispatch, getState) => {
-// 		try {
-// 			const { data: updated } = await axios.put(`/api/products/${id}`);
-// 			dispatch(updateCartItem(data, qty));
-// 		} catch (error) {
-// 			console.log('Add to cart thunk:', error);
-// 		}
-// 	};
-// };
 
 export const addCartItems = (id, qty) => {
-	return async (dispatch, getState) => {
-		try {
-			const { data } = await axios.get(`/api/products/${id}`);
-			dispatch(addCartItem(data, qty));
-			localStorage.setItem(
-				'cartItems',
-				JSON.stringify(getState().cartItem.cartItems)
-			);
-		} catch (error) {
-			console.log('Add to cart thunk:', error);
-		}
-	};
+  return async (dispatch, getState) => {
+    try {
+      const { data } = await axios.get(`/api/products/${id}`);
+      dispatch(addCartItem(data, qty));
+      localStorage.setItem(
+        'cartItems',
+        JSON.stringify(getState().cartItem.cartItems)
+      );
+    } catch (error) {
+      console.log('Add to cart thunk:', error);
+    }
+  };
 };
 
 export const removeCartItems = (id) => {
@@ -108,6 +99,10 @@ export const cartReducer = (state = initialState, action) => {
         ],
       };
     case CLEAR_AFTER_LOGOUT:
+      return {
+        cartItems: [],
+      };
+    case CLOSE_ORDER:
       return {
         cartItems: [],
       };

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { CLEAR_AFTER_LOGOUT } from '.';
 
 const FETCH_OPEN_ORDER = 'FETCH_OPEN_ORDER';
+const CLOSE_ORDER = 'CLOSE_ORDER';
 
 const _fetchOpenCartItems = (orders) => ({
   type: FETCH_OPEN_ORDER,
@@ -19,8 +20,8 @@ const _fetchOpenCartItems = (orders) => ({
 //     }
 //   }
 // }
-  
-  // item.productId, Number(e.target.value))
+
+// item.productId, Number(e.target.value))
 
 export const fetchOpenCartItems = (userId) => {
   return async (dispatch) => {
@@ -31,6 +32,7 @@ export const fetchOpenCartItems = (userId) => {
           authorization: token,
         },
       });
+      //map over orders to get the products array and the quantity of product bought
       const orderWithProducts = orders.map((order) => {
         return {
           title: order.product.title,
@@ -53,6 +55,8 @@ export default (state = [], action) => {
     case FETCH_OPEN_ORDER:
       return action.orders;
     case CLEAR_AFTER_LOGOUT:
+      return [];
+    case CLOSE_ORDER:
       return [];
     default:
       return state;

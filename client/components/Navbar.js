@@ -10,7 +10,13 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 
-const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
+const Navbar = ({
+  handleClick,
+  isLoggedIn,
+  isAdmin,
+  dbCartItems,
+  localStorageCart,
+}) => (
   <Box sx={{ flexGrow: 1 }}>
     <AppBar position="static">
       <Toolbar>
@@ -82,6 +88,8 @@ const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
     isAdmin: !!state.auth.admin,
+    dbCartItems: state.dbCartItems,
+    localStorageCart: state.cartItem.cartItems,
   };
 };
 
