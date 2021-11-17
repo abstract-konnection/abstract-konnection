@@ -30,6 +30,9 @@ export const closeOrder = (userId) => {
 					}
 				);
 				dispatch(_closeOrder(updated));
+				localStorage.removeItem('cartItems');
+			} else {
+				localStorage.removeItem('cartItems');
 			}
 		} catch (error) {
 			console.log('Close order thunk: ', error);
