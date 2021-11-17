@@ -9,7 +9,6 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import Badge from '@mui/material/Badge';
 
 const Navbar = ({
   handleClick,
@@ -35,9 +34,7 @@ const Navbar = ({
               <Button color="inherit">Home</Button>
             </Link>
             <Link to="/cart" style={{ color: '#FFF' }}>
-              <Badge badgeContent={dbCartItems.length} color="secondary">
-                <Button color="inherit">Cart</Button>
-              </Badge>
+              <Button color="inherit">Cart</Button>
             </Link>
             <Button color="inherit" onClick={handleClick}>
               Logout
@@ -49,9 +46,7 @@ const Navbar = ({
               <Button color="inherit">Home</Button>
             </Link>
             <Link to="/cart" style={{ color: '#FFF' }}>
-              <Badge badgeContent={dbCartItems.length} color="secondary">
-                <Button color="inherit">Cart</Button>
-              </Badge>
+              <Button color="inherit">Cart</Button>
             </Link>
             <Button color="inherit" onClick={handleClick}>
               Logout
@@ -75,11 +70,9 @@ const Navbar = ({
               </Button>
             </Link>
             <Link to="/cart">
-              <Badge badgeContent={localStorageCart.length} color="secondary">
-                <Button color="inherit" style={{ color: '#FFF' }}>
-                  Cart
-                </Button>
-              </Badge>
+              <Button color="inherit" style={{ color: '#FFF' }}>
+                Cart
+              </Button>
             </Link>
           </div>
         )}
