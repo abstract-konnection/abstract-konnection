@@ -9,6 +9,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Toolbar from '@mui/material/Toolbar';
 import AdminPostProduct from './AdminPostProduct';
+import { CircularProgress } from '@mui/material';
 
 // const Item = styled(Paper)(({ theme }) => ({
 //   ...theme.typography.body2,
@@ -32,56 +33,80 @@ function Copyright() {
 }
 const theme = createTheme();
 export class AdminAllProducts extends React.Component {
-	componentDidMount() {
-		this.props.fetchProducts();
+	constructor() {
+		super();
+		this.state = {
+			isLoading: false,
+		};
+	}
+	async componentDidMount() {
+		this.setState({ isLoading: true });
+		await this.props.fetchProducts();
+		this.setState({ isLoading: false });
 	}
 	render() {
 		const products = this.props.allProducts || [];
 		return (
 			<div>
-				<Typography
-					component="h1"
-					variant="h3"
-					align="center"
-					color="text.primary"
-					gutterBottom>
-					Administrator View
-				</Typography>
-				<ThemeProvider theme={theme}>
-					<AdminPostProduct />
-					<Grid
-						container
-						spacing={0}
-						alignItems="center"
-						justifyContent="center">
-						{products.length > 0 ? (
-							products.map((product) => {
-								return (
-									<div key={product.id} id="products-view">
-										{/* <Item> */}
-										<Link
-											to={`/admin/products/${product.id}`}
-											style={{ textDecoration: 'none', color: 'black' }}>
-											<img src={product.imageURL} />
-											{/* <h3>Title: {product.title}</h3> */}
-										</Link>
-										{/* <h4>Price: ${product.price}</h4> */}
-										{/* <Button
+				{this.state.isLoading === true ? (
+					<div>
+						<main>
+							<Grid
+								container
+								spacing={0}
+								alignItems="center"
+								justifyContent="center">
+								<CircularProgress color="secondary" />
+							</Grid>
+						</main>
+					</div>
+				) : (
+					<div>
+						<Typography
+							component="h1"
+							variant="h3"
+							align="center"
+							color="text.primary"
+							gutterBottom>
+							Administrator View
+						</Typography>
+						<ThemeProvider theme={theme}>
+							<AdminPostProduct />
+							<Grid
+								container
+								spacing={0}
+								alignItems="center"
+								justifyContent="center">
+								{products.length > 0 ? (
+									products.map((product) => {
+										return (
+											<div key={product.id} id="products-view">
+												{/* <Item> */}
+												<Link
+													to={`/admin/products/${product.id}`}
+													style={{ textDecoration: 'none', color: 'black' }}>
+													<img src={product.imageURL} />
+													{/* <h3>Title: {product.title}</h3> */}
+												</Link>
+												{/* <h4>Price: ${product.price}</h4> */}
+												{/* <Button
                       // onClick={() => } // add logic to dispatch thunk creator to add item to cart
                       variant="contained"
                     >
                       Add To Cart
                     </Button> */}
-										{/* </Item> */}
-									</div>
-								);
-							})
-						) : (
-							<h3>No Products currently exist</h3>
-						)}
-					</Grid>
-					<Copyright />
-				</ThemeProvider>
+												{/* </Item> */}
+											</div>
+										);
+									})
+								) : (
+									<h3>No Products currently exist</h3>
+								)}
+							</Grid>
+							<Copyright />
+						</ThemeProvider>
+					</div>
+				)}
 			</div>
 		);
 	}
