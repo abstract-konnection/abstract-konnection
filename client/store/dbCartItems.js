@@ -2,6 +2,7 @@ import axios from 'axios';
 import { CLEAR_AFTER_LOGOUT } from '.';
 
 const FETCH_OPEN_ORDER = 'FETCH_OPEN_ORDER';
+const CLOSE_ORDER = 'CLOSE_ORDER';
 
 const _fetchOpenCartItems = (orders) => ({
   type: FETCH_OPEN_ORDER,
@@ -54,6 +55,8 @@ export default (state = [], action) => {
     case FETCH_OPEN_ORDER:
       return action.orders;
     case CLEAR_AFTER_LOGOUT:
+      return [];
+    case CLOSE_ORDER:
       return [];
     default:
       return state;
