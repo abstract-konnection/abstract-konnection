@@ -105,3 +105,8 @@ div#home-component {
 .same-as-selected {
 	background-color: rgba(0, 0, 0, 0.1);
 }
+
+img#admin-products-view {
+  width: 100px;
+  height: 100px;
+}
