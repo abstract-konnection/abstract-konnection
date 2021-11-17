@@ -68,51 +68,86 @@ export default function Cart(props) {
 
 	return (
 		<div>
-			<div>
-				<h1>Your Cart</h1>
-				{productData.length === 0 ? (
-					<div>
-						<h3>Your cart is currently empty.</h3>
-						<Link to="/">Go to Products</Link>
-					</div>
-				) : (
-					<ul>
-						{productData.map((item) => (
-							<li key={item.productId}>
+			<Grid>
+				<Typography variant="h3" align="center">
+					Your Cart
+				</Typography>
+				<Stack
+					sx={{ pt: 4 }}
+					direction="row"
+					spacing={2}
+					justifyContent="center">
+					<main>
+						<div>
+							{productData.length === 0 ? (
 								<div>
-									<div>
-										<img src={item.imageURL} alt={item.title}></img>
-									</div>
-									<div>
-										<Link to={`/products/${item.productId}`}>{item.title}</Link>
-									</div>
-									<div>
-										<Grid>
-											<Stack sx={{ pt: 4 }} direction="row" spacing={1}>
-												<Box direction="row">
-													<Button
-														variant="contained"
-														size="small"
-														disabled={item.qty <= 1}
-														onClick={() =>
-															handleChange(item.productId, Number(--item.qty))
-														}>
-														-
-													</Button>
-													<Typography>{item.qty}</Typography>
-													<Button
-														variant="contained"
-														size="small"
-														disabled={item.qty >= item.quantity}
-														onClick={() =>
-															handleChange(item.productId, Number(++item.qty))
-														}>
-														+
-													</Button>
-												</Box>
-											</Stack>
-										</Grid>
-										{/* <select
+									<Typography variant="h5" align="center">
+										Your cart is currently empty.
+									</Typography>
+									<Link
+										to="/"
+										color="inherit"
+										style={{
+											justifyContent: 'center',
+										}}>
+										<Typography variant="h5" align="center">
+											Go to Products
+										</Typography>
+									</Link>
+								</div>
+							) : (
+								<ul>
+									<main>
+										{productData.map((item) => (
+											<li key={item.productId}>
+												<div>
+													<div>
+														<img src={item.imageURL} alt={item.title}></img>
+													</div>
+													<div>
+														<Link
+															to={`/products/${item.productId}`}
+															color="inherit"
+															style={{
+																color: '#FFF',
+																justifyContent: 'center',
+															}}>
+															{item.title}
+														</Link>
+													</div>
+													<div>
+														<Grid>
+															<Stack sx={{ pt: 4 }} direction="row" spacing={1}>
+																<Box direction="row">
+																	<Button
+																		variant="contained"
+																		size="small"
+																		disabled={item.qty <= 1}
+																		onClick={() =>
+																			handleChange(
+																				item.productId,
+																				Number(--item.qty)
+																			)
+																		}>
+																		-
+																	</Button>
+																	<Typography>{item.qty}</Typography>
+																	<Button
+																		variant="contained"
+																		size="small"
+																		disabled={item.qty >= item.quantity}
+																		onClick={() =>
+																			handleChange(
+																				item.productId,
+																				Number(++item.qty)
+																			)
+																		}>
+																		+
+																	</Button>
+																</Box>
+															</Stack>
+														</Grid>
+														{/* <select
 											value={item.qty}
 											onChange={(e) => handleChange(e, item.productId)}>
 											{[...Array(item.quantity).keys()].map((e) => (
@@ -121,41 +156,46 @@ export default function Cart(props) {
 												</option>
 											))}
 										</select> */}
-									</div>
-									<div>Price: ${item.price}</div>
-									<button onClick={() => removeFromCart(item.productId)}>
-										Remove From Cart
-									</button>
-								</div>
-							</li>
-						))}
-					</ul>
-				)}
-			</div>
-			<div>
-				<div>
-					<ul>
-						<li>
-							<h2>
-								Subtotal ( {productData.length}
-								{/* {productData.reduce((a, c) => a + Number(c.qty), 0)}{' '} */}
-								{productData.length === 1 ? ' item' : ' items'}) : $
-								{productData.reduce(
-									(a, c) => a + Number(c.price) * Number(c.qty),
-									0
-								)}
-							</h2>
-						</li>
-						<li>
-							<Link to={'/checkout'}>
-								<button type="button" disabled={productData.length === 0}>
-									Proceed to Checkout
-								</button>
-							</Link>
-						</li>
-					</ul>
-				</div>
-			</div>
+													</div>
+													<div>Price: ${item.price}</div>
+													<button
+														onClick={() => removeFromCart(item.productId)}>
+														Remove From Cart
+													</button>
+												</div>
+											</li>
+										))}
+									</main>
+								</ul>
+							)}
+						</div>
+						<div>
+							<div>
+								<ul>
+									<li>
+										<h2>
+											Subtotal ( {productData.length}
+											{/* {productData.reduce((a, c) => a + Number(c.qty), 0)}{' '} */}
+											{productData.length === 1 ? ' item' : ' items'}) : $
+											{productData.reduce(
+												(a, c) => a + Number(c.price) * Number(c.qty),
+												0
+											)}
+										</h2>
+									</li>
+									<li>
+										<Link to={'/checkout'}>
+											<button type="button" disabled={productData.length === 0}>
+												Proceed to Checkout
+											</button>
+										</Link>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</main>
+				</Stack>
+			</Grid>
 		</div>
 	);
 }
