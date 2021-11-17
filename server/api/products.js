@@ -22,7 +22,7 @@ const getPagingData = (data, page, limit) => {
 
 router.get('/', async (req, res, next) => {
 	try {
-		const { page, size, title } = req.query;
+		const { page, size, artist } = req.query;
 		const { limit, offset } = getPagination(page, size);
 
 

@@ -29,7 +29,7 @@ export class AllProducts extends React.Component {
     }
   }
   render() {
-    const products = this.props.allProducts || [];
+    const products = this.props.allProducts.products || [];
     console.log(products);
     return (
       <div>
