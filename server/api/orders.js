@@ -39,7 +39,7 @@ router.post('/users/:userId', requireToken, async (req, res, next) => {
           totalPrice: 0,
           email: user.email,
         });
-        // order.setUser(req.params.userId);
+        order.setUser(req.params.userId);
         res.send(order);
       } else {
         res.send(openOrder);

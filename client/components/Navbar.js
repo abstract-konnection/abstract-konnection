@@ -35,7 +35,9 @@ const Navbar = ({
               <Button color="inherit">Home</Button>
             </Link>
             <Link to="/cart" style={{ color: '#FFF' }}>
-              <Button color="inherit">Cart</Button>
+              <Badge badgeContent={dbCartItems.length} color="secondary">
+                <Button color="inherit">Cart</Button>
+              </Badge>
             </Link>
             <Button color="inherit" onClick={handleClick}>
               Logout
