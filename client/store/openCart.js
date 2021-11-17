@@ -51,6 +51,8 @@ export const populateOpenOrder = (order) => {
         dispatch(_createOpenOrder(order));
         //remove the items on localStorage because items should be
         //populated in db now?
+      } else {
+        dispatch(_createOpenOrder(order));
       }
     } catch (err) {
       console.error('Could not update cart', err);
