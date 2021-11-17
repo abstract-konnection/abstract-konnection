@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import { setProducts } from '../store/product';
 import { addCartItems } from '../store/cart';
 import { styled } from '@mui/material/styles';
+import { createOpenOrder } from '../store/openCart';
 import { Paper, Grid, Button } from '@mui/material';
 import AdminUpdateProduct from './AdminUpdateProduct';
+import { me } from '../store/openCart';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body,
@@ -32,16 +34,28 @@ class SingleProduct extends Component {
     }
   }
 
-  async addToCart() {
+  addToCart() {
     try {
       const id = this.props.match.params.id;
       const qty = this.state.qty;
-      await this.props.addCart(id, qty);
+      this.props.addCart(id, qty);
       // this.props.history.push(`/cart/${id}?qty=${this.state.qty}`);
+      this.props.history.push(`/cart`);
     } catch (error) {
       console.log('addCart', error);
     }
   }
+  // async addToCart() {
+  // 	try {
+  // 		const id = this.props.match.params.id;
+  // 		const qty = this.state.qty;
+  // 		await this.props.addCart(id, qty);
+  // 		this.props.me();
+  // 		// this.props.history.push(`/cart/${id}?qty=${this.state.qty}`);
+  // 	} catch (error) {
+  // 		console.log('addCart', error);
+  // 	}
+  // }
 
   render() {
     const product = this.props.product || {};
@@ -90,11 +104,20 @@ class SingleProduct extends Component {
 
 const mapStateToProps = (state) => ({
   product: state.product,
+  userObject: state.auth,
+  isLoggedIn: !!state.auth.id,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   loadSingleProduct: (id) => dispatch(setProducts(id)),
   addCart: (id, qty) => dispatch(addCartItems(id, qty)),
+  createOpenOrder: (id) => dispatch(createOpenOrder(id)),
 });
+
+// const mapDispatchToProps = (dispatch) => ({
+// 	loadSingleProduct: (id) => dispatch(setProducts(id)),
+// 	addCart: (id, qty) => dispatch(addCartItems(id, qty)),
+// 	me: () => dispatch(me()),
+// });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct);

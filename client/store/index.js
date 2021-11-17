@@ -10,6 +10,7 @@ import checkOutReducer from './checkout';
 import openCartReducer from './openCart';
 import usersReducer from './users';
 import ordersReducer from './order';
+import dbCartItems from './dbCartItems';
 
 const reducer = combineReducers({
   auth,
@@ -20,6 +21,7 @@ const reducer = combineReducers({
   orders: ordersReducer,
   openOrder: openCartReducer,
   cartItem: cartReducer,
+  dbCartItems: dbCartItems,
 });
 
 const middleware = composeWithDevTools(

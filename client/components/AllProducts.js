@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchProducts } from '../store/products';
+import { fetchOpenCartItems } from '../store/dbCartItems';
 import { createOpenOrder } from '../store/openCart';
 import { Link } from 'react-router-dom';
 import { Grid } from '@mui/material';
@@ -26,6 +27,14 @@ export class AllProducts extends React.Component {
     this.props.fetchProducts();
     if (this.props.isLoggedIn) {
       this.props.createOpenOrder(this.props.userObject.id);
+    }
+  }
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.openOrder.id !== this.props.openOrder.id &&
+      this.props.isLoggedIn
+    ) {
+      this.props.fetchOpenCartItems(this.props.userObject.id);
     }
   }
   render() {
@@ -69,11 +78,15 @@ const mapState = (state) => ({
   allProducts: state.allProducts,
   userObject: state.auth,
   isLoggedIn: !!state.auth.id,
+  openOrder: state.openOrder,
+  isLoading: !state.allProducts.length,
+  dbCartItems: state.dbCartItems,
 });
 
 const mapDispatch = (dispatch) => ({
   fetchProducts: () => dispatch(fetchProducts()),
   createOpenOrder: (userId) => dispatch(createOpenOrder(userId)),
+  fetchOpenCartItems: (userId) => dispatch(fetchOpenCartItems(userId)),
 });
 
 export default connect(mapState, mapDispatch)(AllProducts);

@@ -39,7 +39,7 @@ router.post('/users/:userId', requireToken, async (req, res, next) => {
           totalPrice: 0,
           email: user.email,
         });
-        order.setUser(req.params.userId);
+        order.setUser(Number(req.params.userId));
         res.send(order);
       } else {
         res.send(openOrder);
@@ -47,6 +47,22 @@ router.post('/users/:userId', requireToken, async (req, res, next) => {
     } else {
       res.status(403).send('You are not the user associated with this cart');
     }
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put('/users/:userId', requireToken, async (req, res, next) => {
+  console.log('in the correct route');
+  try {
+    const order = await Order.findOne({
+      //find the open order that matches with user id and status is open
+      where: {
+        status: 'open',
+        userId: req.params.userId,
+      },
+    });
+    res.send(await order.update({ status: 'close' }));
   } catch (err) {
     next(err);
   }
