@@ -33,10 +33,10 @@ const createProduct = (product) => {
 };
 
 //thunk
-export const fetchProducts = (page, size) => {
+export const fetchProducts = (params) => {
 	return async (dispatch) => {
 		try {
-			const { data } = await axios.get(`/api/products/?page=${page}&size=${size}`);
+			const { data } = await axios.get(`/api/products/?page=${params.page}&size=${params.pageSize}`);
 			dispatch(getAllProducts(data));
 		} catch (error) {
 			console.log('Fetch All Products thunk: ', error);

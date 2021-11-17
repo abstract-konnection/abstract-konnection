@@ -51,10 +51,29 @@ export class AllProducts extends React.Component {
     }
   }
 
+  // Sets up a Dispatch by reading the current state and sending it's props to the thunk.
   setupFetchProductsDispatch() {
     const { page, pageSize } = this.state;
-    this.props.fetchProducts(page, pageSize);
+    const params = this.fetchPageParams(page, pageSize);
+
+    this.props.fetchProducts(params);
+
   }
+
+  // Will check if the parameters exist and are defined. Then return an object to send to dispatch
+  fetchPageParams(page, pageSize) {
+    let params = {};
+
+    if (page) {
+      params["page"] = page;
+    }
+    if (pageSize) {
+      params["pageSize"] = pageSize;
+    }
+    return params;
+  }
+
+
 
   render() {
     const products = this.props.allProducts.products || [];
@@ -103,7 +122,7 @@ const mapState = (state) => ({
 });
 
 const mapDispatch = (dispatch) => ({
-  fetchProducts: (page, size) => dispatch(fetchProducts(page, size)),
+  fetchProducts: (params) => dispatch(fetchProducts(params)),
   createOpenOrder: (userId) => dispatch(createOpenOrder(userId)),
   fetchOpenCartItems: (userId) => dispatch(fetchOpenCartItems(userId)),
 });
