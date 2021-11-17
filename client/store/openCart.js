@@ -8,6 +8,7 @@ const SET_AUTH = 'SET_AUTH';
 
 import { CLEAR_AFTER_LOGOUT } from '.';
 const CREATE_OPEN_ORDER = 'CREATE_OPEN_ORDER';
+const CLOSE_ORDER = 'CLOSE_ORDER'
 
 const setAuth = (auth) => ({ type: SET_AUTH, auth });
 
@@ -16,10 +17,6 @@ const _createOpenOrder = (cart) => ({
 	cart,
 });
 
-const _fetOpenOrder = (cart) => ({
-	type: CREATE_OPEN_ORDER,
-	cart,
-});
 
 export const me = () => async (dispatch) => {
 	const token = window.localStorage.getItem(TOKEN);
