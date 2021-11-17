@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { setProducts } from '../store/product';
 import { addCartItems } from '../store/cart';
 import { styled } from '@mui/material/styles';
+import { createOpenOrder } from '../store/openCart';
 import { Paper, Grid, Button } from '@mui/material';
 import AdminUpdateProduct from './AdminUpdateProduct';
 
@@ -32,11 +33,11 @@ class SingleProduct extends Component {
     }
   }
 
-  async addToCart() {
+  addToCart() {
     try {
       const id = this.props.match.params.id;
       const qty = this.state.qty;
-      await this.props.addCart(id, qty);
+      this.props.addCart(id, qty);
       // this.props.history.push(`/cart/${id}?qty=${this.state.qty}`);
       // this.props.history.push(`/cart`);
     } catch (error) {
@@ -91,11 +92,14 @@ class SingleProduct extends Component {
 
 const mapStateToProps = (state) => ({
   product: state.product,
+  userObject: state.auth,
+  isLoggedIn: !!state.auth.id,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   loadSingleProduct: (id) => dispatch(setProducts(id)),
   addCart: (id, qty) => dispatch(addCartItems(id, qty)),
+  createOpenOrder: (id) => dispatch(createOpenOrder(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct);

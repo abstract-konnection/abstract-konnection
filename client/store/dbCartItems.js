@@ -19,8 +19,8 @@ const _fetchOpenCartItems = (orders) => ({
 //     }
 //   }
 // }
-  
-  // item.productId, Number(e.target.value))
+
+// item.productId, Number(e.target.value))
 
 export const fetchOpenCartItems = (userId) => {
   return async (dispatch) => {
@@ -31,6 +31,7 @@ export const fetchOpenCartItems = (userId) => {
           authorization: token,
         },
       });
+      //map over orders to get the products array and the quantity of product bought
       const orderWithProducts = orders.map((order) => {
         return {
           title: order.product.title,

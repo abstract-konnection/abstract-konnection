@@ -39,7 +39,7 @@ router.post('/users/:userId', requireToken, async (req, res, next) => {
           totalPrice: 0,
           email: user.email,
         });
-        order.setUser(req.params.userId);
+        order.setUser(Number(req.params.userId));
         res.send(order);
       } else {
         res.send(openOrder);
@@ -51,41 +51,3 @@ router.post('/users/:userId', requireToken, async (req, res, next) => {
     next(err);
   }
 });
-
-// router.put('/users/:userId', requireToken, async (req, res, next) => {
-//     try {
-//       const order = await Order.findOne({
-//         //find the open order that matches with user id and status is open
-//         where: {
-//           status: 'open',
-//           userId: req.params.userId,
-//         },
-//       });
-//       /* checks if the user on token matches the user param before
-//       creating cart */
-//       if (req.user.id === Number(req.params.userId)) {
-//         if (!openOrder) {
-//           //only get back email of user to associate with order
-//           const user = await User.findOne({
-//             where: {
-//               id: req.params.userId,
-//             },
-//             attributes: ['email'],
-//           });
-//           const order = await Order.create({
-//             status: 'open',
-//             totalPrice: 0,
-//             email: user.email,
-//           });
-//           order.setUser(req.params.userId);
-//           res.send(order);
-//         } else {
-//           res.send(openOrder);
-//         }
-//       } else {
-//         res.status(403).send('You are not the user associated with this cart');
-//       }
-//     } catch (err) {
-//       next(err);
-//     }
-//   });

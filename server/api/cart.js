@@ -24,11 +24,12 @@ router.post('/:orderId/:productId', async (req, res, next) => {
       //to calculate the updated totalPrice in the order model
       //i need to get the price of an existing product before amount gets updated
       const oldProductTotalPrice = alreadyInCart.totalPrice;
-      await alreadyInCart.update(req.body);
       order.update({
         totalPrice:
-          order.totalPrice + (alreadyInCart.totalPrice - oldProductTotalPrice),
+          order.totalPrice - oldProductTotalPrice + req.body.totalPrice,
       });
+      await alreadyInCart.update(req.body);
+
       res.send(alreadyInCart);
     }
   } catch (err) {
@@ -43,6 +44,15 @@ router.delete('/:orderId/:productId', async (req, res, next) => {
         id: req.params.orderId,
       },
     });
+    //get the product totalPrice from Order_products table to
+    //update order totalPrice
+    const orderDetail = await Order_Products.findOne({
+      where: {
+        orderId: req.params.orderId,
+        productId: req.params.productId,
+      },
+    });
+    order.update({ totalPrice: order.totalPrice - orderDetail.totalPrice });
     order.removeProduct(Number(req.params.productId));
   } catch (err) {
     next(err);

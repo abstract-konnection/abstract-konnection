@@ -22,7 +22,7 @@ export default function Cart(props) {
   const { cartItems } = cart;
   const dispatch = useDispatch();
   const isLoggedIn = !!auth.id;
-  const productData = dbCart.length ? dbCart : cartItems;
+  const productData = cartItems.length ? cartItems : dbCart;
 
   const handleChange = async (itemId, qty) => {
     if (isLoggedIn) {
@@ -50,9 +50,9 @@ export default function Cart(props) {
 
   const removeFromCart = async (id) => {
     if (isLoggedIn) {
-      await dispatch(removeCartItems(id));
-      await dispatch(deleteFromOpenOrder(order, id));
-      await dispatch(fetchOpenCartItems(auth.id));
+      dispatch(removeCartItems(id));
+      dispatch(deleteFromOpenOrder(order, id));
+      // await dispatch(fetchOpenCartItems(auth.id));
       await dispatch(me());
     } else {
       await dispatch(removeCartItems(id));

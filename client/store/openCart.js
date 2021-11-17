@@ -41,12 +41,11 @@ export const populateOpenOrder = (order) => {
       const cartItems = localStorage.getItem('cartItems')
         ? JSON.parse(localStorage.getItem('cartItems'))
         : [];
-
       if (cartItems.length) {
         const res = await Promise.all([
           cartItems.map((product) => {
             axios.post(`/api/cart/${order.id}/${product.productId}`, {
-              quantity: product.qty,
+              quantity: Number(product.qty),
               totalPrice: product.price * Number(product.qty),
               orderId: order.id,
               productId: product.productId,
@@ -55,8 +54,6 @@ export const populateOpenOrder = (order) => {
         ]);
 
         dispatch(_createOpenOrder(order));
-        //remove the items on localStorage because items should be
-        //populated in db now?
       } else {
         dispatch(_createOpenOrder(order));
       }
@@ -72,7 +69,7 @@ export const createOpenOrder = (userId) => {
       const token = localStorage.getItem('token');
       /* sending post data with user token on header to make sure 
       the right order is being matched with the right user */
-      const { data: order } = await axios.post(
+      const { data } = await axios.post(
         `api/orders/users/${userId}`,
         {},
         {
@@ -81,7 +78,7 @@ export const createOpenOrder = (userId) => {
           },
         }
       );
-      dispatch(populateOpenOrder(order));
+      dispatch(populateOpenOrder(data));
     } catch (err) {
       console.error('Could not get an open order:', err);
     }
@@ -106,7 +103,7 @@ export default (state = {}, action) => {
     case CREATE_OPEN_ORDER:
       //returning back open order, NOT the order_products table.
       return action.cart;
-    //returning back open order, NOT the order_products table.
+
     case DELETE_FROM_OPEN_ORDER:
       return action.cart;
     case SET_AUTH:

@@ -37,7 +37,7 @@ router.get('/:userId/cart', async (req, res, next) => {
         model: Product,
       },
     });
-
+    //this returns the open order with the PRODUCTS IN AN ARRAY
     res.send(dbCartItems);
   } catch (err) {
     next(err);
