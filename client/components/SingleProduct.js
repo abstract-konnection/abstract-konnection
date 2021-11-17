@@ -38,6 +38,7 @@ class SingleProduct extends Component {
       const qty = this.state.qty;
       await this.props.addCart(id, qty);
       // this.props.history.push(`/cart/${id}?qty=${this.state.qty}`);
+      this.props.history.push(`/cart`);
     } catch (error) {
       console.log('addCart', error);
     }

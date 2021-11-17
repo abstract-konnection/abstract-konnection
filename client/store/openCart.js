@@ -87,7 +87,7 @@ export default (state = {}, action) => {
       return action.cart;
     //returning back open order, NOT the order_products table.
     case SET_AUTH:
-      return action.auth;
+      return {};
     case CLEAR_AFTER_LOGOUT:
       return {};
     default:
