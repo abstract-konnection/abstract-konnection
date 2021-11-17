@@ -150,36 +150,38 @@ export default function Cart(props) {
 															direction="row"
 															spacing={2}
 															justifyContent="center">
-															<InputLabel
-																color="success"
-																variant="standard"
-																htmlFor="uncontrolled-native">
-																Quantity
-															</InputLabel>
-															<Select
-																size="small"
-																sx={{ width: '7ch', height: '3ch' }}
-																value={item.qty}
-																onChange={(e) =>
-																	handleChange(
-																		item.productId,
-																		Number(e.target.value)
-																	)
-																}>
-																{[...Array(item.quantity).keys()].map((e) => (
-																	<MenuItem
-																		size="small"
-																		key={e + 1}
-																		value={e + 1}>
-																		{e + 1}
-																	</MenuItem>
-																))}
-															</Select>
+															<Box>
+																<InputLabel
+																	color="success"
+																	variant="standard"
+																	htmlFor="uncontrolled-native">
+																	Quantity
+																</InputLabel>
+																<Select
+																	size="small"
+																	sx={{ width: '7ch', height: '3ch' }}
+																	value={item.qty}
+																	onChange={(e) =>
+																		handleChange(
+																			item.productId,
+																			Number(e.target.value)
+																		)
+																	}>
+																	{[...Array(item.quantity).keys()].map((e) => (
+																		<MenuItem
+																			size="small"
+																			key={e + 1}
+																			value={e + 1}>
+																			{e + 1}
+																		</MenuItem>
+																	))}
+																</Select>
+															</Box>
 															<Button
+																size="small"
 																variant="contained"
-																startIcon={<DeleteIcon />}
 																onClick={() => removeFromCart(item.productId)}>
-																Remove From Cart
+																<DeleteIcon />
 															</Button>
 														</Stack>
 														{/* <Button

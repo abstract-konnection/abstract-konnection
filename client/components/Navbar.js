@@ -71,6 +71,11 @@ const Navbar = ({
 							<Button color="inherit" style={{ color: '#FFF' }}>
 								<HomeIcon />
 							</Button>
+							<Link to="/cart">
+								<Button color="inherit" style={{ color: '#FFF' }}>
+									<ShoppingCartIcon />
+								</Button>
+							</Link>
 						</Link>
 						<Link to="/login">
 							<Button color="inherit" style={{ color: '#FFF' }}>
@@ -80,11 +85,6 @@ const Navbar = ({
 						<Link to="/signup">
 							<Button color="inherit" style={{ color: '#FFF' }}>
 								Sign Up
-							</Button>
-						</Link>
-						<Link to="/cart">
-							<Button color="inherit" style={{ color: '#FFF' }}>
-								<ShoppingCartIcon />
 							</Button>
 						</Link>
 					</div>
