@@ -21,15 +21,25 @@ function Review(props) {
 			</Typography>
 			<List disablePadding>
 				{isLoggedIn
-					? props.dbCartItems.map((product) => (
-							<ListItem key={product.productId} sx={{ py: 1, px: 0 }}>
-								<ListItemText primary={product.title} />
-								<Typography variant="body2">
-									${product.price} x {product.qty}(items) = $
-									{product.price * product.qty}
-								</Typography>
-							</ListItem>
-					  ))
+					? props.dbCartItems.length === 0
+						? props.cartItems.map((product) => (
+								<ListItem key={product.productId} sx={{ py: 1, px: 0 }}>
+									<ListItemText primary={product.title} />
+									<Typography variant="body2">
+										${product.price} * {product.qty}(items) = $
+										{product.price * product.qty}
+									</Typography>
+								</ListItem>
+						  ))
+						: props.dbCartItems.map((product) => (
+								<ListItem key={product.productId} sx={{ py: 1, px: 0 }}>
+									<ListItemText primary={product.title} />
+									<Typography variant="body2">
+										${product.price} x {product.qty}(items) = $
+										{product.price * product.qty}
+									</Typography>
+								</ListItem>
+						  ))
 					: props.cartItems.map((product) => (
 							<ListItem key={product.productId} sx={{ py: 1, px: 0 }}>
 								<ListItemText primary={product.title} />
@@ -43,10 +53,18 @@ function Review(props) {
 				<ListItem sx={{ py: 1, px: 0 }}>
 					<ListItemText primary="Total" />
 					{isLoggedIn ? (
-						<Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-							({props.dbCartItems.reduce((a, c) => a + Number(c.qty), 0)} items)
-							: ${props.dbCartItems.reduce((a, c) => a + c.price * c.qty, 0)}
-						</Typography>
+						props.dbCartItems.length === 0 ? (
+							<Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
+								({props.cartItems.reduce((a, c) => a + Number(c.qty), 0)} items)
+								: ${props.cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
+							</Typography>
+						) : (
+							<Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
+								({props.dbCartItems.reduce((a, c) => a + Number(c.qty), 0)}{' '}
+								items) : $
+								{props.dbCartItems.reduce((a, c) => a + c.price * c.qty, 0)}
+							</Typography>
+						)
 					) : (
 						<Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
 							({props.cartItems.reduce((a, c) => a + Number(c.qty), 0)} items) :
