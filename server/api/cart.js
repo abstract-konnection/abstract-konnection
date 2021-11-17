@@ -26,7 +26,7 @@ router.post('/:orderId/:productId', async (req, res, next) => {
       //to calculate the updated totalPrice in the order model
       //i need to get the price of an existing product before amount gets updated
       const oldProductTotalPrice = alreadyInCart.totalPrice;
-      order.update({
+      await order.update({
         totalPrice:
           order.totalPrice - oldProductTotalPrice + req.body.totalPrice,
       });
