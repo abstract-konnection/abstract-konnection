@@ -217,7 +217,7 @@ export default function Cart(props) {
 								</ul>
 							)}
 						</div>
-						<Stack
+						{/* <Stack
 							sx={{ pt: 4 }}
 							direction="row"
 							spacing={2}
@@ -227,7 +227,7 @@ export default function Cart(props) {
 									<h2>
 										Subtotal ( {productData.length}
 										{/* {productData.reduce((a, c) => a + Number(c.qty), 0)}{' '} */}
-										{productData.length === 1 ? ' item' : ' items'}) : $
+						{/* {productData.length === 1 ? ' item' : ' items'}) : $
 										{productData.reduce(
 											(a, c) => a + Number(c.price) * Number(c.qty),
 											0
@@ -244,8 +244,8 @@ export default function Cart(props) {
 										</Button>
 									</Link>
 								</li>
-							</ul>
-						</Stack>
+							</ul> */}
+						{/* </Stack> */}
 					</main>
 				</Stack>
 			</Grid>
