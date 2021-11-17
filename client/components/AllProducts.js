@@ -4,9 +4,11 @@ import { fetchProducts } from '../store/products';
 import { fetchOpenCartItems } from '../store/dbCartItems';
 import { createOpenOrder } from '../store/openCart';
 import { Link } from 'react-router-dom';
-import { CircularProgress, Grid, LinearProgress } from '@mui/material';
+import { Grid, Pagination, CircularProgress } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
+import store from '../store';
+import '../../public/AllProducts.css'
 import Mission from './Mission';
 
 function Copyright() {
@@ -24,15 +26,32 @@ function Copyright() {
 const theme = createTheme();
 
 export class AllProducts extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
     this.state = {
+      products: [],
+
+      page: 1,
+      count: 0,
+      pageSize: 5,
+
       isLoading: false,
     };
+
+    this.setupFetchProductsDispatch = this.setupFetchProductsDispatch.bind(this);
+    this.handlePageChange = this.handlePageChange.bind(this);
   }
+
+
   async componentDidMount() {
     this.setState({ isLoading: true });
-    await this.props.fetchProducts();
+
+    // Setup the product dispatch
+    await this.setupFetchProductsDispatch();
+
+    //await this.props.fetchProducts();
+
     this.setState({ isLoading: false });
     if (this.props.isLoggedIn) {
       this.props.createOpenOrder(this.props.userObject.id);
@@ -45,11 +64,47 @@ export class AllProducts extends React.Component {
     ) {
       this.props.fetchOpenCartItems(this.props.userObject.id);
     }
-  }
-  render() {
-    const products = this.props.allProducts || [];
 
+  }
+
+  // Sets up a Dispatch by reading the current state and sending it's props to the thunk.
+  setupFetchProductsDispatch() {
+    const { page, pageSize } = this.state;
+    const params = this.fetchPageParams(page, pageSize);
+
+    // Send the Dispatch for the Product range
+    this.props.fetchProducts(params);
+  }
+
+  // Will check if the parameters exist and are defined. Then return an object to send to dispatch
+  // Do not bind this - it would cause a "can't call setState on a component that is not yet mounted."
+  fetchPageParams(page, pageSize) {
+    let params = {};
+
+    if (page) {
+      params["page"] = page - 1;
+    }
+    if (pageSize) {
+      params["pageSize"] = pageSize;
+    }
+    return params;
+  }
+
+  handlePageChange(event, value) {
+    this.setState({page: value},
+      () => {
+        this.setupFetchProductsDispatch();
+      });
+  }
+
+
+
+  render() {
+    const products = this.props.allProducts.products || [];
+    console.log("Returned AllProducts Dispatch: ", this.props.allProducts);
+    const {totalPages, page} = this.props.allProducts;
     return (
+
       <div>
         {this.state.isLoading === true ? (
           <div>
@@ -68,6 +123,21 @@ export class AllProducts extends React.Component {
         ) : (
           <ThemeProvider theme={theme}>
             <Mission />
+            <div className="parent">
+              <Pagination
+                className="child"
+                  count={totalPages}
+                  page={page}
+                  siblingCount={1}
+                  boundaryCount={1}
+                  variant="outlined"
+                  shape="rounded"
+                  onChange={this.handlePageChange}
+                  sx={{
+                    margin: 0
+                  }}
+              />
+             </div>
             <Grid
               container
               spacing={0}
@@ -110,7 +180,7 @@ const mapState = (state) => ({
 });
 
 const mapDispatch = (dispatch) => ({
-  fetchProducts: () => dispatch(fetchProducts()),
+  fetchProducts: (params) => dispatch(fetchProducts(params)),
   createOpenOrder: (userId) => dispatch(createOpenOrder(userId)),
   fetchOpenCartItems: (userId) => dispatch(fetchOpenCartItems(userId)),
 });

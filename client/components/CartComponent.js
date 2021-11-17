@@ -20,7 +20,7 @@ import {
 	InputLabel,
 	Select,
 } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/delete';
+//import DeleteIcon from '@mui/icons-material/delete';
 
 export default function Cart(props) {
 	const id = props.match.params.id;
@@ -181,7 +181,7 @@ export default function Cart(props) {
 																size="small"
 																variant="contained"
 																onClick={() => removeFromCart(item.productId)}>
-																<DeleteIcon />
+																{/* <DeleteIcon /> */}Remove
 															</Button>
 														</Stack>
 														{/* <Button

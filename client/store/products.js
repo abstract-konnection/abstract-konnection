@@ -33,10 +33,10 @@ const createProduct = (product) => {
 };
 
 //thunk
-export const fetchProducts = () => {
+export const fetchProducts = (params) => {
 	return async (dispatch) => {
 		try {
-			const { data } = await axios.get('/api/products');
+			const { data } = await axios.get(`/api/products/?page=${params.page}&size=${params.pageSize}`);
 			dispatch(getAllProducts(data));
 		} catch (error) {
 			console.log('Fetch All Products thunk: ', error);
@@ -129,3 +129,6 @@ export default function productsReducer(state = [], action) {
 			return state;
 	}
 }
+
+// axios.get(`http://localhost:3333/blog/${anyvar}`)
+// http://localhost:8080/api/products?page=1&size=12
