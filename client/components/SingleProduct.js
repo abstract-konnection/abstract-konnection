@@ -4,7 +4,7 @@ import { setProducts } from '../store/product';
 import { addCartItems } from '../store/cart';
 import { styled } from '@mui/material/styles';
 import { createOpenOrder } from '../store/openCart';
-import { Paper, Grid, Button } from '@mui/material';
+import { Paper, Grid, Button, Box, Stack } from '@mui/material';
 import AdminUpdateProduct from './AdminUpdateProduct';
 import { me } from '../store/openCart';
 import { CircularProgress } from '@mui/material';
@@ -89,27 +89,39 @@ class SingleProduct extends Component {
 								{product.quantity > 0 && (
 									<>
 										<div>
-											<div> Qty</div>
+											<div> Quantity </div>
 											<div>
-												<select
-													value={this.state.qty}
-													onChange={(e) =>
-														this.setState({ qty: e.target.value })
-													}>
-													{[...Array(product.quantity).keys()].map((e) => (
-														<option key={e + 1} value={e + 1}>
-															{e + 1}
-														</option>
-													))}
-												</select>
+												<main>
+													<select
+														value={this.state.qty}
+														onChange={(e) =>
+															this.setState({ qty: e.target.value })
+														}>
+														{[...Array(product.quantity).keys()].map((e) => (
+															<option key={e + 1} value={e + 1}>
+																{e + 1}
+															</option>
+														))}
+													</select>
+												</main>
 											</div>
 										</div>
-										<Button
-											variant="contained"
-											size="large"
-											onClick={this.addToCart}>
-											Add to Cart
-										</Button>
+										<Grid>
+											<Box>
+												<Stack
+													sx={{ pt: 4 }}
+													direction="row"
+													spacing={2}
+													justifyContent="center">
+													<Button
+														variant="contained"
+														size="large"
+														onClick={this.addToCart}>
+														Add to Cart
+													</Button>
+												</Stack>
+											</Box>
+										</Grid>
 									</>
 								)}
 							</Item>
