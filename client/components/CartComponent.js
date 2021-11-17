@@ -79,6 +79,20 @@ export default function Cart(props) {
 
 	return (
 		<div>
+			<h2>
+				Subtotal ( {productData.length}
+				{/* {productData.reduce((a, c) => a + Number(c.qty), 0)}{' '} */}
+				{productData.length === 1 ? ' item' : ' items'}) : $
+				{productData.reduce((a, c) => a + Number(c.price) * Number(c.qty), 0)}
+			</h2>
+			<Link to={'/checkout'}>
+				<Button
+					variant="contained"
+					type="button"
+					disabled={productData.length === 0}>
+					Proceed to Checkout
+				</Button>
+			</Link>
 			<Grid>
 				<Typography variant="h3" align="center">
 					Your Cart
