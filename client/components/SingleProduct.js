@@ -112,7 +112,6 @@ const mapDispatchToProps = (dispatch) => ({
   loadSingleProduct: (id) => dispatch(setProducts(id)),
   addCart: (id, qty) => dispatch(addCartItems(id, qty)),
   createOpenOrder: (id) => dispatch(createOpenOrder(id)),
-  product: state.product,
 });
 
 // const mapDispatchToProps = (dispatch) => ({
