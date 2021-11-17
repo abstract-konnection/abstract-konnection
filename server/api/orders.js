@@ -51,3 +51,19 @@ router.post('/users/:userId', requireToken, async (req, res, next) => {
     next(err);
   }
 });
+
+router.put('/users/:userId', requireToken, async (req, res, next) => {
+  console.log('in the correct route');
+  try {
+    const order = await Order.findOne({
+      //find the open order that matches with user id and status is open
+      where: {
+        status: 'open',
+        userId: req.params.userId,
+      },
+    });
+    res.send(await order.update({ status: 'close' }));
+  } catch (err) {
+    next(err);
+  }
+});

@@ -2,9 +2,9 @@ import axios from 'axios';
 
 import { CLEAR_AFTER_LOGOUT } from '.';
 const initialState = {
-  cartItems: localStorage.getItem('cartItems')
-    ? JSON.parse(localStorage.getItem('cartItems'))
-    : [],
+	cartItems: localStorage.getItem('cartItems')
+		? JSON.parse(localStorage.getItem('cartItems'))
+		: [],
 };
 
 export const ADD_CART_ITEM = 'ADD_CART_ITEM';
@@ -38,18 +38,18 @@ const removeCartItem = (product) => {
 };
 
 export const addCartItems = (id, qty) => {
-  return async (dispatch, getState) => {
-    try {
-      const { data } = await axios.get(`/api/products/${id}`);
-      dispatch(addCartItem(data, qty));
-      localStorage.setItem(
-        'cartItems',
-        JSON.stringify(getState().cartItem.cartItems)
-      );
-    } catch (error) {
-      console.log('Add to cart thunk:', error);
-    }
-  };
+	return async (dispatch, getState) => {
+		try {
+			const { data } = await axios.get(`/api/products/${id}`);
+			dispatch(addCartItem(data, qty));
+			localStorage.setItem(
+				'cartItems',
+				JSON.stringify(getState().cartItem.cartItems)
+			);
+		} catch (error) {
+			console.log('Add to cart thunk:', error);
+		}
+	};
 };
 
 export const removeCartItems = (id) => {
