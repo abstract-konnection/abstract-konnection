@@ -45,14 +45,6 @@ export const populateOpenOrder = (order) => {
       if (cartItems.length) {
         const res = await Promise.all([
           cartItems.map((product) => {
-            console.log(
-              'i am the product',
-              product,
-              'quantity',
-              product.qty,
-              'totalprice',
-              product.price * Number(product.qty)
-            );
             axios.post(`/api/cart/${order.id}/${product.productId}`, {
               quantity: product.qty,
               totalPrice: product.price * Number(product.qty),
@@ -117,6 +109,7 @@ export default (state = {}, action) => {
       return action.cart;
     case SET_AUTH:
       return {};
+
     case CLEAR_AFTER_LOGOUT:
       return {};
     default:
