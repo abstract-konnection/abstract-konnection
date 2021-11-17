@@ -8,18 +8,11 @@ import { useState } from 'react';
 import { connect } from 'react-redux';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import { closeOrder } from '../store/order';
 
 function Review(props) {
-	const [status, setStatus] = useState('closed');
 	const auth = useSelector((state) => state.auth);
-	const dispatch = useDispatch();
 	const isLoggedIn = !!auth.id;
-
-	// useEffect(() => {
-	// 	if (auth.id) {
-	// 		dispatch(closeOrder(auth.id));
-	// 	}
-	// });
 
 	return (
 		<React.Fragment>
