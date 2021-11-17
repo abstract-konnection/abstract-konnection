@@ -23,8 +23,21 @@ function Copyright() {
 const theme = createTheme();
 
 export class AllProducts extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      products: [],
+
+      page: 1,
+      count: 0,
+      pageSize: 3
+    };
+
+    this.setupFetchProductsDispatch = this.setupFetchProductsDispatch.bind(this);
+  }
   componentDidMount() {
-    this.props.fetchProducts();
+    this.setupFetchProductsDispatch();
     if (this.props.isLoggedIn) {
       this.props.createOpenOrder(this.props.userObject.id);
     }
@@ -37,9 +50,15 @@ export class AllProducts extends React.Component {
       this.props.fetchOpenCartItems(this.props.userObject.id);
     }
   }
+
+  setupFetchProductsDispatch() {
+    const { page, pageSize } = this.state;
+    this.props.fetchProducts(page, pageSize);
+  }
+
   render() {
     const products = this.props.allProducts.products || [];
-    console.log(products);
+    console.log(this.props.allProducts);
     return (
       <div>
         <ThemeProvider theme={theme}>
@@ -84,7 +103,7 @@ const mapState = (state) => ({
 });
 
 const mapDispatch = (dispatch) => ({
-  fetchProducts: () => dispatch(fetchProducts()),
+  fetchProducts: (page, size) => dispatch(fetchProducts(page, size)),
   createOpenOrder: (userId) => dispatch(createOpenOrder(userId)),
   fetchOpenCartItems: (userId) => dispatch(fetchOpenCartItems(userId)),
 });
