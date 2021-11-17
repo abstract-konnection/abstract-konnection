@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { Grid } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import Home from './Home';
+import Mission from './Mission';
 
 function Copyright() {
   return (
@@ -43,7 +43,7 @@ export class AllProducts extends React.Component {
 
     return (
       <div>
-        <Home />
+        <Mission />
         <ThemeProvider theme={theme}>
           <Grid
             container
