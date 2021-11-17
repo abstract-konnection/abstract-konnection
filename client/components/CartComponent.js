@@ -9,6 +9,7 @@ import {
 } from '../store/openCart';
 import { Link } from 'react-router-dom';
 import { me } from '../store/openCart';
+import { Paper, Grid, Button, Box, Stack, Typography } from '@mui/material';
 
 export default function Cart(props) {
 	const id = props.match.params.id;
@@ -86,21 +87,31 @@ export default function Cart(props) {
 										<Link to={`/products/${item.productId}`}>{item.title}</Link>
 									</div>
 									<div>
-										<button
-											disabled={item.qty <= 1}
-											onClick={() =>
-												handleChange(item.productId, Number(--item.qty))
-											}>
-											-
-										</button>
-										<h3>{item.qty}</h3>
-										<button
-											disabled={item.qty >= item.quantity}
-											onClick={() =>
-												handleChange(item.productId, Number(++item.qty))
-											}>
-											+
-										</button>
+										<Grid>
+											<Stack sx={{ pt: 4 }} direction="row" spacing={1}>
+												<Box direction="row">
+													<Button
+														variant="contained"
+														size="small"
+														disabled={item.qty <= 1}
+														onClick={() =>
+															handleChange(item.productId, Number(--item.qty))
+														}>
+														-
+													</Button>
+													<Typography>{item.qty}</Typography>
+													<Button
+														variant="contained"
+														size="small"
+														disabled={item.qty >= item.quantity}
+														onClick={() =>
+															handleChange(item.productId, Number(++item.qty))
+														}>
+														+
+													</Button>
+												</Box>
+											</Stack>
+										</Grid>
 										{/* <select
 											value={item.qty}
 											onChange={(e) => handleChange(e, item.productId)}>
