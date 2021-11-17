@@ -45,6 +45,8 @@ export default function OrderConfirmation() {
 	useEffect(() => {
 		if (auth.id) {
 			dispatch(closeOrder(auth.id));
+		} else {
+			window.localStorage.removeItem('cartItems');
 		}
 	});
 	return (
