@@ -18,6 +18,7 @@ import Review from './Review';
 import { saveAddress } from '../store/checkout';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
+import OrderConfirmation from './OrderConfirmation';
 
 function Copyright() {
 	return (
@@ -102,11 +103,7 @@ export default function Checkout() {
 								<Typography variant="h5" gutterBottom>
 									Thank you for your order.
 								</Typography>
-								<Typography variant="subtitle1">
-									Your order number is #2001539. We have emailed your order
-									confirmation, and will send you an update when your order has
-									shipped.
-								</Typography>
+								<OrderConfirmation />
 							</React.Fragment>
 						) : (
 							<React.Fragment>

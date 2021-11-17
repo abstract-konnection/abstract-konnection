@@ -41,6 +41,7 @@ export const authenticate = (formData, method) => async (dispatch) => {
 
 export const logout = () => {
   window.localStorage.removeItem(TOKEN);
+  window.localStorage.removeItem('cartItems');
   history.push('/login');
   return {
     type: CLEAR_AFTER_LOGOUT,
