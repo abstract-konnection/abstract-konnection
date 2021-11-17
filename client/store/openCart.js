@@ -45,7 +45,7 @@ export const populateOpenOrder = (order) => {
         const res = await Promise.all([
           cartItems.map((product) => {
             axios.post(`/api/cart/${order.id}/${product.productId}`, {
-              quantity: Number(product.qty),
+              quantity: product.qty,
               totalPrice: product.price * Number(product.qty),
               orderId: order.id,
               productId: product.productId,

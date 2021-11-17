@@ -18,7 +18,9 @@ router.post('/:orderId/:productId', async (req, res, next) => {
     const order = await Order.findByPk(req.params.orderId);
     if (!alreadyInCart) {
       const orderProduct = await Order_Products.create(req.body);
-      order.update({ totalPrice: order.totalPrice + orderProduct.totalPrice });
+      await order.update({
+        totalPrice: order.totalPrice + orderProduct.totalPrice,
+      });
       res.send(orderProduct);
     } else {
       //to calculate the updated totalPrice in the order model
