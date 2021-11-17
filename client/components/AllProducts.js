@@ -8,7 +8,7 @@ import { Grid, Pagination } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import store from '../store';
-
+import '../../public/AllProducts.css'
 
 
 function Copyright() {
@@ -80,7 +80,7 @@ export class AllProducts extends React.Component {
   }
 
   handlePageChange(event, value) {
-    this.setState({page: value + 1},
+    this.setState({page: value},
       () => {
         this.setupFetchProductsDispatch();
       });
@@ -93,29 +93,37 @@ export class AllProducts extends React.Component {
     console.log("Returned AllProducts Dispatch: ", this.props.allProducts);
     const {totalPages, page} = this.props.allProducts;
 
-
+    console.log("page: ", page);
 
     return (
+
       <div>
+
+
         <ThemeProvider theme={theme}>
-          <Grid
-            container
-            spacing={0}
-            alignItems="center"
-            justifyContent="center"
-          >
-        <div>
+        <div className="parent">
           <Pagination
-            className="my-3"
-            count={totalPages - 1}
+          className="child"
+            count={totalPages}
             page={page}
             siblingCount={1}
             boundaryCount={1}
             variant="outlined"
             shape="rounded"
             onChange={this.handlePageChange}
+            sx={{
+              margin: 0
+            }}
           />
         </div>
+          <Grid
+            container
+            spacing={0}
+            alignItems="center"
+            justifyContent="center"
+          >
+
+
             {products.length > 0 ? (
               products.map((product) => {
                 return (
@@ -133,9 +141,12 @@ export class AllProducts extends React.Component {
             ) : (
               <h3>No Products currently exist</h3>
             )}
+
           </Grid>
           <Copyright />
+
         </ThemeProvider>
+
       </div>
     );
   }
