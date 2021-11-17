@@ -4,7 +4,17 @@ import { setProducts } from '../store/product';
 import { addCartItems } from '../store/cart';
 import { styled } from '@mui/material/styles';
 import { createOpenOrder } from '../store/openCart';
-import { Paper, Grid, Button, Box, Stack } from '@mui/material';
+import {
+	Paper,
+	Grid,
+	Button,
+	Box,
+	Stack,
+	MenuItem,
+	Select,
+	Typography,
+	InputLabel,
+} from '@mui/material';
 import AdminUpdateProduct from './AdminUpdateProduct';
 import { me } from '../store/openCart';
 import { CircularProgress } from '@mui/material';
@@ -89,21 +99,24 @@ class SingleProduct extends Component {
 								{product.quantity > 0 && (
 									<>
 										<div>
-											<div> Quantity </div>
+											{/* <Typography variant="body1"> Quantity: </Typography> */}
+											<InputLabel
+												variant="standard"
+												htmlFor="uncontrolled-native">
+												Quantity
+											</InputLabel>
 											<div>
-												<main>
-													<select
-														value={this.state.qty}
-														onChange={(e) =>
-															this.setState({ qty: e.target.value })
-														}>
-														{[...Array(product.quantity).keys()].map((e) => (
-															<option key={e + 1} value={e + 1}>
-																{e + 1}
-															</option>
-														))}
-													</select>
-												</main>
+												<Select
+													value={this.state.qty}
+													onChange={(e) =>
+														this.setState({ qty: e.target.value })
+													}>
+													{[...Array(product.quantity).keys()].map((e) => (
+														<MenuItem key={e + 1} value={e + 1}>
+															{e + 1}
+														</MenuItem>
+													))}
+												</Select>
 											</div>
 										</div>
 										<Grid>
