@@ -10,6 +10,11 @@ const initialState = {
 
 export const ADD_CART_ITEM = 'ADD_CART_ITEM';
 export const REMOVE_CART_ITEM = 'REMOVE_CART_ITEM';
+export const CLOSE_GUEST_ORDER = 'CLOSE_GUEST_ORDER'
+
+const _closeGuestOrder = () => ({
+	type: CLOSE_ORDER,
+});
 
 const addCartItem = (product, qty) => {
   return {
@@ -37,6 +42,17 @@ const removeCartItem = (product) => {
     },
   };
 };
+
+export const closeGuestOrder = () => {
+	return async (dispatch) => {
+        try{
+        dispatch(_closeGuestOrder());
+        localStorage.removeItem('cartItems');
+    } catch(error){ 
+        console.log('close guest order', error)
+    }
+    }
+}
 
 export const addCartItems = (id, qty) => {
   return async (dispatch, getState) => {

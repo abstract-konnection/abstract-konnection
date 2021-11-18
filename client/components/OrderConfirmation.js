@@ -18,6 +18,8 @@ import Review from './Review';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { closeOrder } from '../store/order';
+import { me } from '../store/openCart';
+import { closeGuestOrder } from '../store/cart';
 
 function Copyright() {
 	return (
@@ -46,6 +48,7 @@ export default function OrderConfirmation() {
 		if (auth.id) {
 			dispatch(closeOrder(auth.id));
 		} else {
+			dispatch(closeGuestOrder());
 			window.localStorage.removeItem('cartItems');
 		}
 	});

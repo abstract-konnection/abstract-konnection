@@ -9,20 +9,20 @@ import { Grid, Pagination, CircularProgress, FormControl, InputLabel,
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import store from '../store';
-import '../../public/AllProducts.css'
+import '../../public/AllProducts.css';
 import Mission from './Mission';
 
 function Copyright() {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {'Copyright © '}
-      <a href="https://abstract-konnection.herokuapp.com/" target="_blank">
-        Abstract Konnection
-      </a>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
+	return (
+		<Typography variant="body2" color="text.secondary" align="center">
+			{'Copyright © '}
+			<a href="https://abstract-konnection.herokuapp.com/" target="_blank">
+				Abstract Konnection
+			</a>{' '}
+			{new Date().getFullYear()}
+			{'.'}
+		</Typography>
+	);
 }
 const theme = createTheme();
 
@@ -206,18 +206,17 @@ export class AllProducts extends React.Component {
 }
 
 const mapState = (state) => ({
-  allProducts: state.allProducts,
-  userObject: state.auth,
-  isLoggedIn: !!state.auth.id,
-  openOrder: state.openOrder,
-  isLoading: !state.allProducts.length,
-  dbCartItems: state.dbCartItems,
+	allProducts: state.allProducts,
+	userObject: state.auth,
+	isLoggedIn: !!state.auth.id,
+	openOrder: state.openOrder,
+	dbCartItems: state.dbCartItems,
 });
 
 const mapDispatch = (dispatch) => ({
-  fetchProducts: (params) => dispatch(fetchProducts(params)),
-  createOpenOrder: (userId) => dispatch(createOpenOrder(userId)),
-  fetchOpenCartItems: (userId) => dispatch(fetchOpenCartItems(userId)),
+	fetchProducts: (params) => dispatch(fetchProducts(params)),
+	createOpenOrder: (userId) => dispatch(createOpenOrder(userId)),
+	fetchOpenCartItems: (userId) => dispatch(fetchOpenCartItems(userId)),
 });
 
 export default connect(mapState, mapDispatch)(AllProducts);
