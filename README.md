@@ -13,6 +13,22 @@ name as well as title of the piece. Please feel free to click on an image to see
 You will see that we sell art pieces by lesser known artists, who may have been born just a few years ago! Here at abstract connection, we believe that purchasing good art should be accessible to everyone. Thanks to our donors, we are able to sell our art pieces at a reduced price and is still able to fairly compensate the
 artist"
 
+## Built Using
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" title="JavaScript"><img src="https://github.com/get-icon/geticon/raw/master/icons/javascript.svg" alt="JavaScript" width="21px" height="21px"></a> Javascript  
+<a href="https://nodejs.org/" title="Node.js"><img src="https://github.com/get-icon/geticon/raw/master/icons/nodejs-icon.svg" alt="Node.js" width="21px" height="21px"></a> Node.js  
+<a href="https://expressjs.com/" title="Express"><img src="https://github.com/get-icon/geticon/raw/master/icons/express.svg" alt="Express" width="21px" height="21px"></a> Express  
+<a href="https://reactjs.org/" title="React"><img src="https://github.com/get-icon/geticon/raw/master/icons/react.svg" alt="React" width="21px" height="21px"></a> React  
+<a href="https://redux.js.org/" title="Redux"><img src="https://github.com/get-icon/geticon/raw/master/icons/redux.svg" alt="Redux" width="21px" height="21px"></a> Redux   
+<a href="https://www.postgresql.org/" title="PostgreSQL"><img src="https://github.com/get-icon/geticon/raw/master/icons/postgresql.svg" alt="PostgreSQL" width="21px" height="21px"></a> PostgreSQL    
+<a href="https://sequelize.org/master/"  src ="https://sequelize.org/master/manual/asset/logo-small.png" style="text-decoration:none" title="sequelize">:books:</a> Sequelize     
+<a href="https://material-ui.com/" title="Material UI"><img src="https://github.com/get-icon/geticon/raw/master/icons/material-ui.svg" alt="Material UI" width="21px" height="21px"></a> MaterialUI  
+<a href="https://webpack.js.org/" title="webpack"><img src="https://github.com/get-icon/geticon/raw/master/icons/webpack.svg" alt="webpack" width="21px" height="21px"></a> Webpack   
+<a href="https://babeljs.io/" title="Babel"><img src="https://github.com/get-icon/geticon/raw/master/icons/babel.svg" alt="Babel" width="21px" height="21px"></a> Babel  
+<a href="https://www.npmjs.com/" title="npm"><img src="https://github.com/get-icon/geticon/raw/master/icons/npm.svg" alt="npm" width="21px" height="21px"></a> NPM  
+<a href="https://www.npmjs.com/package/bcrypt" style="text-decoration:none" title="bcrypt">:lock:</a> Bcrypt  
+<a href="https://jwt.io/" style="text-decoration:none" title="JWT">:lock:</a>JWT
+
+
 ## Docs
 
 We have added some documentation and added it to Notion. This is the link:
