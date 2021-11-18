@@ -33,10 +33,7 @@ function Copyright() {
 	);
 }
 const theme = createTheme();
-export class AdminMainView extends React.Component {
-	componentDidMount() {
-		this.props.fetchProducts();
-	}
+export default class AdminMainView extends React.Component {
 	render() {
 		const products = this.props.allProducts || [];
 		return (
@@ -93,13 +90,3 @@ export class AdminMainView extends React.Component {
 		);
 	}
 }
-
-const mapState = ({ allProducts }) => ({
-	allProducts,
-});
-
-const mapDispatch = (dispatch) => ({
-	fetchProducts: () => dispatch(fetchProducts()),
-});
-
-export default connect(mapState, mapDispatch)(AdminMainView);
