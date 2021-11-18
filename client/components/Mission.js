@@ -66,8 +66,17 @@ export default class Mission extends React.Component {
               <br />
               name as well as title of the piece. Please feel free to click on
               an image to see more details on the artwork.
-              {/* <br />
-              {'"a benevolent smile"'} */}
+              <br />
+              <br />
+              You will see that we sell art pieces by lesser known artists, who
+              may have been born just a few years ago! Here at abstract
+              <br />
+              connection, we believe that purchasing good art should be
+              accessible to everyone. Thanks to our donors, we are able to sell
+              our art pieces
+              <br />
+              at a reduced price and is still able to fairly compensate the
+              artist. We hope you enjoy
             </Typography>
           </CardContent>
           {/* <CardActions>
