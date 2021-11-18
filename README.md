@@ -2,6 +2,8 @@
 
 Welcome to Abstract Konnection, a mock e-commerce web app! 
 
+![basic_website_display](https://user-images.githubusercontent.com/68929977/142471688-c35cb934-863e-4e62-be56-7c16a1663107.gif)
+
 ### Mission Statement
 "Here at Abstract Konnection, we believe that artists have the ability to influence social change.
 Artists come in every shape and size regardless of age, ethnicity, race, socioeconomic status, gender, sexual orientation and religion.
