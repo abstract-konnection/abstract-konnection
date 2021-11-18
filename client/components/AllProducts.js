@@ -4,7 +4,8 @@ import { fetchProducts } from '../store/products';
 import { fetchOpenCartItems } from '../store/dbCartItems';
 import { createOpenOrder } from '../store/openCart';
 import { Link } from 'react-router-dom';
-import { Grid, Pagination, CircularProgress } from '@mui/material';
+import { Grid, Pagination, CircularProgress, FormControl, InputLabel,
+        Select, MenuItem, Card, CardContent } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import store from '../store';
@@ -30,19 +31,17 @@ export class AllProducts extends React.Component {
     super(props);
 
     this.state = {
-      products: [],
-
       page: 1,
       count: 0,
-      pageSize: 5,
+      pageSize: 10,
 
       isLoading: false,
     };
 
     this.setupFetchProductsDispatch = this.setupFetchProductsDispatch.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
+    this.handleDisplayCount = this.handleDisplayCount.bind(this);
   }
-
 
   async componentDidMount() {
     this.setState({ isLoading: true });
@@ -50,13 +49,12 @@ export class AllProducts extends React.Component {
     // Setup the product dispatch
     await this.setupFetchProductsDispatch();
 
-    //await this.props.fetchProducts();
-
     this.setState({ isLoading: false });
     if (this.props.isLoggedIn) {
       this.props.createOpenOrder(this.props.userObject.id);
     }
   }
+
   componentDidUpdate(prevProps) {
     if (
       prevProps.openOrder.id !== this.props.openOrder.id &&
@@ -82,10 +80,10 @@ export class AllProducts extends React.Component {
     let params = {};
 
     if (page) {
-      params["page"] = page - 1;
+      params.page = page - 1;
     }
     if (pageSize) {
-      params["pageSize"] = pageSize;
+      params.pageSize = pageSize;
     }
     return params;
   }
@@ -97,12 +95,20 @@ export class AllProducts extends React.Component {
       });
   }
 
+  handleDisplayCount(event) {
+    this.setState({
+      pageSize: event.target.value,
+      page: 1
+    },
+    () => {this.setupFetchProductsDispatch();})
+  }
+
 
 
   render() {
     const products = this.props.allProducts.products || [];
-    console.log("Returned AllProducts Dispatch: ", this.props.allProducts);
     const {totalPages, page} = this.props.allProducts;
+    const {pageSize} = this.state;
     return (
 
       <div>
@@ -123,48 +129,77 @@ export class AllProducts extends React.Component {
         ) : (
           <ThemeProvider theme={theme}>
             <Mission />
-            <div className="parent">
-              <Pagination
-                className="child"
-                  count={totalPages}
-                  page={page}
-                  siblingCount={1}
-                  boundaryCount={1}
-                  variant="outlined"
-                  shape="rounded"
-                  onChange={this.handlePageChange}
-                  sx={{
-                    margin: 0
-                  }}
-              />
-             </div>
-            <Grid
-              container
-              spacing={0}
-              alignItems="center"
-              justifyContent="center"
-            >
-              {products.length > 0 ? (
-                products.map((product) => {
-                  return (
-                    <div key={product.id} id="products-view">
-                      {/* <Item> */}
-                      <Link
-                        to={`/products/${product.id}`}
-                        style={{ textDecoration: 'none', color: 'black' }}
-                      >
-                        <img src={product.imageURL} />
-                      </Link>
-                    </div>
-                  );
-                })
-              ) : (
-                <h3>No Products currently exist</h3>
-              )}
-            </Grid>
-            <Copyright />
+          <Card>
+            <CardContent>
+              <div className="parent">
+                  <Pagination
+                    className="child"
+                      count={totalPages}
+                      page={page}
+                      siblingCount={1}
+                      boundaryCount={1}
+                      variant="outlined"
+                      shape="rounded"
+                      onChange={this.handlePageChange}
+                      sx={{
+                        margin: 0
+                      }}
+                  />
+                  <FormControl sx={{
+                    minWidth: 100,
+                    mt: 4,
+                    ml: 1
+                    }}>
+                    <InputLabel id="simple-select-label">Display</InputLabel>
+                    <Select
+                      labelId="simple-select-label"
+                      id="simple-select"
+                      value={pageSize}
+                      label="Display"
+                      onChange={this.handleDisplayCount}
+                      sx={{height: 30}}
+                    >
+                      <MenuItem value={5}>5</MenuItem>
+                      <MenuItem value={10}>10</MenuItem>
+                      <MenuItem value={20}>20</MenuItem>
+                    </Select>
+                  </FormControl>
+                </div>
+              <Grid
+                container
+                spacing={0}
+                alignItems="center"
+                justifyContent="center"
+              >
+                {products.length > 0 ? (
+                  products.map((product) => {
+                    return (
+                      <div key={product.id} id="products-view">
+                        {/* <Item> */}
+                        <Link
+                          to={`/products/${product.id}`}
+                          style={{ textDecoration: 'none', color: 'black' }}
+                        >
+                          <img src={product.imageURL} />
+                        </Link>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <h3>No Products currently exist</h3>
+                )}
+              </Grid>
+            </CardContent>
+          </Card>
           </ThemeProvider>
         )}
+        <div>
+          <Card>
+            <CardContent>
+              <Copyright />
+            </CardContent>
+          </Card>
+        </div>
       </div>
     );
   }
