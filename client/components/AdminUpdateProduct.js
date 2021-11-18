@@ -112,9 +112,9 @@ class UpdateProduct extends Component {
 								/>
 							</div>
 							<div>
-								<label htmlFor="completed">Image Url:</label>
+								<label htmlFor="imageURL">Image Url:</label>
 								<input
-									name="completed"
+									name="imageURL"
 									onChange={handleChange}
 									value={imageURL}
 									required

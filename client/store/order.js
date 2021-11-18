@@ -8,6 +8,7 @@ const _closeOrder = (cart) => ({
 	cart,
 });
 
+
 const getAllOrders = (orders) => ({
 	type: GET_ORDERS,
 	orders,

@@ -32,11 +32,23 @@ const createProduct = (product) => {
 	};
 };
 
+export const fetchProductsAdmin = () => {
+	return async (dispatch) => {
+		try {
+			const { data } = await axios.get('/api/products/');
+			dispatch(getAllProducts(data));
+		} catch (error) {
+			console.log('Fetch All Admin Products thunk: ', error);
+		}
+	};
+};
 //thunk
 export const fetchProducts = (params) => {
 	return async (dispatch) => {
 		try {
-			const { data } = await axios.get(`/api/products/?page=${params.page}&size=${params.pageSize}`);
+			const { data } = await axios.get(
+				`/api/products/?page=${params.page}&size=${params.pageSize}`
+			);
 			dispatch(getAllProducts(data));
 		} catch (error) {
 			console.log('Fetch All Products thunk: ', error);
