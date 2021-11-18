@@ -20,6 +20,7 @@ https://www.notion.so/774f54bf9c31477da5a5f1fbd5e13b13?v=2eeb24407e05408b84e407d
 #### :shopping_cart: Add items to cart as a guest user and have it persist after browser refresh
 #### :shopping: Add items to cart as a logged-in user and have it persist after logging out
 #### :paintbrush: Have cart auto populate with cart items if you log in **after** adding to cart
+#### :page_with_curl: Pagination for product display
 
 ## Installation
 1. Clone this repo:
