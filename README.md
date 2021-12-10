@@ -56,11 +56,11 @@ git@github.com:abstract-konnection/abstract-konnection.git
 ## Contributors
 Daryl Ramirez 
 #### :octocat: <a href="https://github.com/darylramirez">GitHub</a>
-#### :link: <a href="linkedin.com/in/darylramirez">LinkedIn</a>
+#### :link: <a href="https://www.linkedin.com/in/darylramirez/">LinkedIn</a>
 
 Kah Yan Lee
 #### :octocat: <a href="https://github.com/kahyanlee6">GitHub</a>
-#### :link: <a href="linkedin.com/in/kahyan-lee">LinkedIn</a>
+#### :link: <a href="https://www.linkedin.com/in/kahyan-lee/">LinkedIn</a>
 
 Kayla Killian
 #### :octocat: <a href="https://github.com/KaylaK1">GitHub</a>
