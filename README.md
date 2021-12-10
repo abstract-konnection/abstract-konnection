@@ -33,7 +33,7 @@ artist"
 ## Docs
 
 We have added some documentation and added it to Notion. This is the link:
-https://www.notion.so/774f54bf9c31477da5a5f1fbd5e13b13?v=2eeb24407e05408b84e407d1c0330cee
+https://holly-pawpaw-a30.notion.site/Team-Home-9486036418bf49259cfb3a5c70091e9e
 
 ## Features for Mimimum Viable Product:
 #### :shopping_cart: Add items to cart as a guest user and have it persist after browser refresh
