@@ -64,4 +64,4 @@ Kah Yan Lee
 
 Kayla Killian
 #### :octocat: <a href="https://github.com/KaylaK1">GitHub</a>
-
+#### :link: <a href="https://www.linkedin.com/in/kayla-killian/">LinkedIn</a>
