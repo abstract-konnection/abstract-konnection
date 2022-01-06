@@ -21,7 +21,7 @@ artist"
 <a href="https://reactjs.org/" title="React"><img src="https://github.com/get-icon/geticon/raw/master/icons/react.svg" alt="React" width="21px" height="21px"></a> React  
 <a href="https://redux.js.org/" title="Redux"><img src="https://github.com/get-icon/geticon/raw/master/icons/redux.svg" alt="Redux" width="21px" height="21px"></a> Redux   
 <a href="https://www.postgresql.org/" title="PostgreSQL"><img src="https://github.com/get-icon/geticon/raw/master/icons/postgresql.svg" alt="PostgreSQL" width="21px" height="21px"></a> PostgreSQL    
-<a href="https://sequelize.org/master/"  src ="https://sequelize.org/master/manual/asset/logo-small.png" style="text-decoration:none" title="sequelize">:books:</a> Sequelize     
+<a href="https://sequelize.org/master/"  src ="https://sequelize.org/master/manual/asset/logo-small.png" style="text-decoration:none" title="sequelize"><img src="https://www.svgrepo.com/show/354333/sequelize.svg" alt="React" width="21px" height="21px"></a> Sequelize     
 <a href="https://material-ui.com/" title="Material UI"><img src="https://github.com/get-icon/geticon/raw/master/icons/material-ui.svg" alt="Material UI" width="21px" height="21px"></a> MaterialUI  
 <a href="https://webpack.js.org/" title="webpack"><img src="https://github.com/get-icon/geticon/raw/master/icons/webpack.svg" alt="webpack" width="21px" height="21px"></a> Webpack   
 <a href="https://babeljs.io/" title="Babel"><img src="https://github.com/get-icon/geticon/raw/master/icons/babel.svg" alt="Babel" width="21px" height="21px"></a> Babel  
